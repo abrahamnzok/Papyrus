@@ -25,6 +25,7 @@ public class ClipBoard {
      */
     public void setClipboard(String text) {
         // TODO implement here
+        this.clipboard = text;
     }
 
     /**
@@ -32,7 +33,7 @@ public class ClipBoard {
      */
     public String getClipboard() {
         // TODO implement here
-        return "";
+        return this.clipboard;
     }
 
 }

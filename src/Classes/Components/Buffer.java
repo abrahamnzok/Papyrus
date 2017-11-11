@@ -25,6 +25,7 @@ public class Buffer {
      * @param text
      */
     public void setText(String text) {
+        this.text = text;
     }
 
     /**
@@ -32,7 +33,7 @@ public class Buffer {
      */
     public String getText() {
         // TODO implement here
-        return "";
+        return this.text;
     }
 
 
