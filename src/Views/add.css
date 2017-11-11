@@ -1,0 +1,22 @@
+.generalBackground{
+    -fx-background-color: #2b3848;
+}
+
+Button{
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+    /* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
+    -fx-background-color: #364657;
+    -fx-text-fill: whitesmoke;
+    -fx-font: roboto;
+}
+
+TextArea {
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+    -fx-font: 18px Arial;
+}
+
+TextArea .content {
+    -fx-background-color: #f2f3e8;
+}
