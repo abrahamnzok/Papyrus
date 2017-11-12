@@ -3,8 +3,6 @@ package Classes.ConcreteInvoker;
 import Interfaces.Command.Command;
 import Interfaces.Invoker.Invoker;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -42,7 +40,6 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param command
-     * @return
      */
     public void setCommand(Command command ) {
         // TODO implement here
