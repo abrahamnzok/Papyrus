@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-public class clientInvoker extends Application implements Invoker {
+import java.util.*;
+
+public class ClientInvoker extends Application implements Invoker {
 
     @FXML
     private Button copyButton;
@@ -21,11 +23,10 @@ public class clientInvoker extends Application implements Invoker {
     @FXML
     private TextArea textarea;
 
-    private Command command;
     /**
      * Default constructor
      */
-    public clientInvoker() {
+    public ClientInvoker() {
     }
 
     @Override
@@ -47,10 +48,10 @@ public class clientInvoker extends Application implements Invoker {
 
     /**
      * @param command
-     * @return
      */
     public void setCommand(Command command ) {
         // TODO implement here
+        command.execute();
     }
 
 }

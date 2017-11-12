@@ -1,3 +1,10 @@
 .DS_Store
 out/
-*.class
+.idea/.stickyStorage
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/Papyrus.iml
+.idea/workspace.xml
+.idea/uiDesigner.xml

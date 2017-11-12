@@ -13,7 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../Views/index.fxml"));
         Scene s = new Scene(root, 1080, 720);
         s.getStylesheets().add(Main.class.getResource("../Views/add.css").toExternalForm());
-        primaryStage.setTitle("Papyrus - TextEditor");
+        primaryStage.setTitle("Papyrus");
         primaryStage.setScene(s);
         primaryStage.show();
     }
