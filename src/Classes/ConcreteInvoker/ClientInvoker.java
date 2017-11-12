@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
-public class clientInvoker extends Application implements Invoker {
+public class ClientInvoker extends Application implements Invoker {
 
     @FXML
     private Button copyButton;
@@ -25,11 +25,10 @@ public class clientInvoker extends Application implements Invoker {
     @FXML
     private TextArea textarea;
 
-    private Command command;
     /**
      * Default constructor
      */
-    public clientInvoker() {
+    public ClientInvoker() {
     }
 
     @Override
@@ -47,6 +46,7 @@ public class clientInvoker extends Application implements Invoker {
      */
     public void setCommand(Command command ) {
         // TODO implement here
+        command.execute();
     }
 
 }
