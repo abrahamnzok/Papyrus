@@ -2,9 +2,6 @@ package Classes.Components;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.*;
@@ -45,5 +42,4 @@ public class BufferTest {
         this.buffer.setText(s);
         assertFalse(this.buffer.getText().isEmpty());
     }
-
 }
