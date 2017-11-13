@@ -2,7 +2,7 @@ package Classes.ConcreteReceiver;
 
 import Classes.Components.Buffer;
 import Classes.Components.ClipBoard;
-import Classes.Components.Selection;
+import Classes.Components.Ranger;
 import Interfaces.Receiver.Receiver;
 /**
  *
@@ -21,7 +21,7 @@ public class BoardReceiver implements Receiver {
     /**
      *
      */
-    private Selection selector;
+    private Ranger ranger;
 
 
     /**
@@ -30,16 +30,16 @@ public class BoardReceiver implements Receiver {
     public BoardReceiver() {
         this.buffer = new Buffer();
         this.clipboard = new ClipBoard();
-        this.selector = new Selection();
+        this.ranger = new Ranger();
     }
 
     /**
-     * @param buffer, clipboard, selection
+     * @param buffer, clipboard, ranger
      */
-    public BoardReceiver(Buffer buffer, ClipBoard clipboard, Selection selection) {
+    public BoardReceiver(Buffer buffer, ClipBoard clipboard, Ranger ranger) {
         this.buffer = buffer;
         this.clipboard = clipboard;
-        this.selector = selection;
+        this.ranger = ranger;
     }
 
 
@@ -86,6 +86,19 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * @param start which the starting point of the selection
+     * @param end   which is the ending point of the selection
+     */
+    @Override
+    public void select(int start, int end) {
+        this.ranger.range(start, end);
+        this.ranger.setSelection(
+                this.buffer.getText().substring(
+                        this.ranger.getSpaceBegin(),
+                        this.ranger.getSpaceEnd()));
+    }
+
+    /**
      */
     @Override
     public Buffer getBufferClone() throws CloneNotSupportedException {
@@ -95,8 +108,8 @@ public class BoardReceiver implements Receiver {
     /**
      */
     @Override
-    public Selection getSelectionClone() throws CloneNotSupportedException {
-        return (Selection) this.selector.clone();
+    public Ranger getRangerClone() throws CloneNotSupportedException {
+        return (Ranger) this.ranger.clone();
     }
 
     /**

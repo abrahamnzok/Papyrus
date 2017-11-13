@@ -2,7 +2,7 @@ package Classes.ConcreteReceiver;
 
 import Classes.Components.Buffer;
 import Classes.Components.ClipBoard;
-import Classes.Components.Selection;
+import Classes.Components.Ranger;
 import Interfaces.Receiver.Receiver;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,23 +15,23 @@ import static org.junit.Assert.*;
 public class BoardReceiverTest {
     private Buffer buffer;
     private ClipBoard clipBoard;
-    private Selection selection;
+    private Ranger ranger;
     private Receiver receiver;
 
     @Before
     public void setUp() throws Exception {
         this.buffer = new Buffer();
         this.clipBoard = new ClipBoard();
-        this.selection = new Selection();
-        this.receiver = new BoardReceiver(this.buffer, this.clipBoard, this.selection);
+        this.ranger = new Ranger();
+        this.receiver = new BoardReceiver(this.buffer, this.clipBoard, this.ranger);
     }
 
     @Test
     public void cut() throws Exception {
         String cut = "I need to cut text";
         this.buffer.setText(cut);
-        this.selection.makeSelection(0, 11);
-        String selection = this.selection.getSelection();
+        this.ranger.range(0, 11);
+        String selection = this.ranger.getSelection();
         this.receiver.cut();
         assertTrue("We have to check if the buffer/clipBoard is changed ",
                 this.buffer.getText().contains(cut.substring(12,cut.length()-1)) &&
@@ -41,8 +41,8 @@ public class BoardReceiverTest {
     public void cutNothing() throws Exception {
         String cut = "I need to cut text";
         this.buffer.setText(cut);
-        this.selection.makeSelection(1, 2);
-        String selected = this.selection.getSelection();
+        this.ranger.range(1, 2);
+        String selected = this.ranger.getSelection();
         this.receiver.cut();
         assertTrue("In case we try to cut nothing then we should ensure the buffer's state is unchanged and the clipBoard is empty",
                 this.buffer.getText().contains(cut) && this.clipBoard.getClipboard().isEmpty());
@@ -53,10 +53,10 @@ public class BoardReceiverTest {
     public void cutEverything() throws Exception {
         String cut = "I need to cut everything";
         this.buffer.setText(cut);
-        this.selection.makeSelection(0, cut.length()-1);
-        String selected = this.selection.getSelection();
+        this.ranger.range(0, cut.length()-1);
+        String selected = this.ranger.getSelection();
         this.receiver.cut();
-        assertTrue("We want to cut everything then we should expect the buffer to be empty and the clipboard to contain the selection",
+        assertTrue("We want to cut everything then we should expect the buffer to be empty and the clipboard to contain the ranger",
                 this.buffer.getText().isEmpty() && this.clipBoard.getClipboard().contains(cut));
     }
 
@@ -64,8 +64,8 @@ public class BoardReceiverTest {
     public void multipleCuts() throws Exception {
         String cut = "cut";
         this.buffer.setText(cut);
-        this.selection.makeSelection(0, cut.length()-1);
-        String selected = this.selection.getSelection();
+        this.ranger.range(0, cut.length()-1);
+        String selected = this.ranger.getSelection();
 
         this.receiver.cut();
         this.receiver.cut();
@@ -128,7 +128,7 @@ public class BoardReceiverTest {
     public void cutNPaste() throws Exception {
         String bufferState = "Test";
         this.buffer.setText(bufferState);
-        this.selection.makeSelection(0, 4);
+        this.ranger.range(0, 4);
         this.receiver.cut();
         String clipboard = this.clipBoard.getClipboard();
         this.receiver.paste();
@@ -179,7 +179,7 @@ public class BoardReceiverTest {
     public void copy() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
-        this.selection.makeSelection(0, 1);
+        this.ranger.range(0, 1);
         this.receiver.copy();
         assertTrue("We want to test the first behaviour of copying",
                 this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().contains("I"));
@@ -189,7 +189,7 @@ public class BoardReceiverTest {
     public void multipleCopies() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
-        this.selection.makeSelection(0, 1);
+        this.ranger.range(0, 1);
         this.receiver.copy();
         this.receiver.copy();
         this.receiver.copy();
@@ -201,8 +201,8 @@ public class BoardReceiverTest {
     public void copyCutMultiplePastes() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
-        this.selection.makeSelection(0, 1);
-        String selected = this.selection.getSelection();
+        this.ranger.range(0, 1);
+        String selected = this.ranger.getSelection();
         this.receiver.copy();
         this.receiver.cut();
         this.receiver.paste();
@@ -258,7 +258,6 @@ public class BoardReceiverTest {
         this.receiver.delete(positionToHigh);
         assertTrue("We don't want to delete when position in to high",
                 this.buffer.getText().equals(bufferState));
-
     }
 
     @Test
@@ -276,5 +275,82 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferState);
         this.receiver.delete(0);
         assertTrue("Make sure to start at 1 !!", !this.buffer.getText().contains("I"));
+    }
+
+    @Test
+    public void makeSelection() throws Exception {
+        int begin = 5;
+        int end = 10;
+        this.ranger.range(begin, end);
+        assertTrue(this.ranger.getSpaceBegin() != this.ranger.getSpaceEnd());
+
+    }
+
+    @Test
+    public void makeSelectionNegative() throws Exception {
+        int start = 10;
+        int finish = 1;
+        this.ranger.range(start, finish);
+        assertEquals(start- finish, Math.abs(this.ranger.getSpaceEnd() - this.ranger.getSpaceBegin()));
+    }
+
+    @Test
+    public void makeFirstSelection() throws Exception {
+        String s = "Try to select me";
+        this.buffer.setText(s);
+        int begin = 0;
+        int end = 14;
+        String selected = s.substring(begin, end);
+        this.receiver.select(begin, end);
+        assertEquals(selected, this.ranger.getSelection());
+
+    }
+
+    @Test
+    public void makeSelectionInverse() throws Exception {
+        String s = "Try to select me";
+        this.buffer.setText(s);
+        int beginInverse = 14;
+        int endInverse = 0;
+        String selectedInverse = s.substring(endInverse, beginInverse);
+        this.receiver.select(beginInverse, endInverse);
+        assertEquals(selectedInverse, this.ranger.getSelection());
+
+    }
+
+    @Test
+    public void makeSelectionAvoidEmpty1() throws Exception {
+        String bufferState = "I want to try to copy everything except this  ";
+        this.buffer.setText(bufferState);
+        String selected = bufferState.substring(0, 44);
+        this.receiver.select(0, 44);
+        assertEquals(selected, this.ranger.getSelection());
+    }
+
+    @Test
+    public void makeSelectionAvoidEmpty2() throws Exception {
+        String bufferState = "Testing is great";
+        this.buffer.setText(bufferState);
+        String selected = bufferState.substring(7, 8);
+        this.receiver.select(7, 8);
+        assertEquals("",this.ranger.getSelection());
+    }
+
+    @Test
+    public void makeSelectionWithSomeMultipleEmptyChars() throws Exception {
+        String bufferState = "Testing  is the   keystone of development";
+        this.buffer.setText(bufferState);
+        String selected = bufferState.substring(7, 18);
+        this.receiver.select(7, 18);
+        assertEquals(selected,this.ranger.getSelection());
+    }
+
+    @Test
+    public void makeSelectionAvoidEmpty3() throws Exception {
+        String bufferState = "I want to try to copy everything except this";
+        String selected = bufferState.substring(1, 2);
+        System.out.println(selected);
+        this.ranger.range(1, 2);
+        assertFalse(this.ranger.getSelection().equals(bufferState));
     }
 }

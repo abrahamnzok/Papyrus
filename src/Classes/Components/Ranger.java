@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class Selection {
+public class Ranger {
     /**
      *
      */
@@ -24,7 +24,8 @@ public class Selection {
     /**
      * Default constructor
      */
-    public Selection() {
+    public Ranger() {
+        this.selection = "";
     }
 
     /**
@@ -32,10 +33,15 @@ public class Selection {
      * @param spaceEnd  
      *
      */
-    public void makeSelection(int spaceBegin , int spaceEnd ) {
+    public void range(int spaceBegin , int spaceEnd ) {
         // TODO implement here
-        this.spaceBegin = spaceBegin;
-        this.spaceEnd = spaceEnd;
+        if(spaceBegin > spaceEnd){
+            this.spaceBegin = spaceEnd;
+            this.spaceEnd = spaceBegin;
+        }else{
+            this.spaceBegin = spaceBegin;
+            this.spaceEnd = spaceEnd;
+        }
     }
 
     /**
@@ -51,13 +57,19 @@ public class Selection {
         return this.spaceEnd;
     }
 
-    /**
-     * @param selection
-     */
-
     public void setSelection(String selection){
-        this.selection = selection;
+        if(!this.isEmptyChar(selection)) {
+            this.selection = selection;
+        }
     }
+
+    protected boolean isEmptyChar(String empty) {
+        return empty.contains(" ");
+    }
+
+    protected void filterEmptyChars(String selection){
+    }
+
     /**
      * @return
      */
