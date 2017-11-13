@@ -4,6 +4,7 @@ import Classes.Components.Buffer;
 import Classes.Components.ClipBoard;
 import Classes.Components.Selection;
 import Interfaces.Receiver.Receiver;
+
 /**
  * 
  */
@@ -32,6 +33,16 @@ public class BoardReceiver implements Receiver {
         this.clipboard = new ClipBoard();
         this.selector = new Selection();
     }
+
+    /**
+     * Constructor with all params
+     */
+    public BoardReceiver(Buffer buffer, ClipBoard clipboard, Selection selection) {
+        this.buffer = buffer;
+        this.clipboard = clipboard;
+        this.selector = selection;
+    }
+
 
     /**
      */

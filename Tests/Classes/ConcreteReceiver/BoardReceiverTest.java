@@ -23,7 +23,7 @@ public class BoardReceiverTest {
         this.buffer = new Buffer();
         this.clipBoard = new ClipBoard();
         this.selection = new Selection();
-        this.receiver = new BoardReceiver();
+        this.receiver = new BoardReceiver(this.buffer, this.clipBoard, this.selection);
     }
 
     @Test
