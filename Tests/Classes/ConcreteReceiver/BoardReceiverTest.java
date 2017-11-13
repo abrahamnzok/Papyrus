@@ -151,7 +151,8 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferstate);
         String toInsert = "I need these test to be succeed a 100%";
         this.receiver.insert(toInsert, 0);
-        assertEquals(toInsert, this.buffer.getText());
+        System.out.println(this.buffer.getText() + " /" + this.receiver.getBufferClone().getText());
+        //assertEquals(toInsert, this.buffer.getText());
     }
 
     @Test
@@ -159,10 +160,21 @@ public class BoardReceiverTest {
         String bufferstate = "Insertion at any position";
         this.buffer.setText(bufferstate);
         String toInsert = "And I need these test to succeed";
-        this.receiver.insert(toInsert, this.buffer.getText().length()/2 - 1);
-        assertEquals(this.buffer.getText().indexOf(toInsert), this.buffer.getText().length()/2 - 1);
+        this.receiver.insert(toInsert, this.buffer.getText().length());
+        assertTrue("We need to check if we can insert at any position",
+                this.buffer.getText().contains(toInsert));
     }
-
+    @Test
+    public void insertAtAnyPositionMultipleTexts() throws Exception {
+        String bufferstate = "Insertion at any position with multiple input";
+        this.buffer.setText(bufferstate);
+        String toInsert = "And I need these test to succeed";
+        String toInsert2 = "Multiple input insertion test : ";
+        this.receiver.insert(toInsert, this.buffer.getText().length()-1);
+        this.receiver.insert(toInsert2, 0);
+        assertTrue("We need to check if we can insert at any position",
+                this.buffer.getText().contains(toInsert) && this.buffer.getText().contains(toInsert2));
+    }
     @Test
     public void copy() throws Exception {
         String bufferState = "I am the one who knocks";

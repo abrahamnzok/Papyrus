@@ -66,4 +66,9 @@ public class Selection {
         return this.selection;
     }
 
+    @Override
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
+
 }

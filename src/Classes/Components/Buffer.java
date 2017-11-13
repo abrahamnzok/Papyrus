@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class Buffer {
+public class Buffer implements Cloneable {
 
     /**
      * 
@@ -32,6 +32,11 @@ public class Buffer {
     public String getText() {
         // TODO implement here
         return this.text;
+    }
+
+    @Override
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
     }
 
 

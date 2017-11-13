@@ -5,6 +5,8 @@ import Classes.Components.ClipBoard;
 import Classes.Components.Selection;
 import Interfaces.Receiver.Receiver;
 
+import java.awt.datatransfer.Clipboard;
+
 /**
  * 
  */
@@ -35,7 +37,7 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * Constructor with all params
+     * @param buffer, clipboard, selection
      */
     public BoardReceiver(Buffer buffer, ClipBoard clipboard, Selection selection) {
         this.buffer = buffer;
@@ -64,8 +66,8 @@ public class BoardReceiver implements Receiver {
     @Override
     public void insert(String text, int position) {
         String currentText = this.buffer.getText();
-        //String newText = new StringBuilder(currentText).insert(position, text).toString();
-        this.buffer.setText(text);
+        String newText = new StringBuilder(currentText).insert(position, text).toString();
+        this.buffer.setText(newText);
         //System.out.println(this.buffer.getText());
     }
 
@@ -77,8 +79,32 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * @param text The text to delete or character to delete
+     * @param position position of the text or character to delete
      */
     @Override
-    public void delete() {
+    public void delete(String text, int position) {
     }
+
+    /**
+     */
+    @Override
+    public Buffer getBufferClone() throws CloneNotSupportedException {
+        return (Buffer) this.buffer.clone();
+    }
+
+    /**
+     */
+    @Override
+    public Selection getSelectionClone() throws CloneNotSupportedException {
+        return (Selection) this.selector.clone();
+    }
+
+    /**
+     */
+    @Override
+    public ClipBoard getClipboardClone() throws CloneNotSupportedException {
+        return (ClipBoard) this.clipboard.clone();
+    }
+
 }
