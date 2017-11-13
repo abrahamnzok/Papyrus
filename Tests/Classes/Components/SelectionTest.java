@@ -7,17 +7,18 @@ import static org.junit.Assert.*;
 public class SelectionTest {
 
     private Selection selection;
+    private Buffer buffer;
 
     @Before
     public void setUp() throws Exception {
         this.selection = new Selection();
+        this.buffer = new Buffer();
     }
 
     @Test
     public void makePosition() throws Exception {
         int begin = 5;
         int end = 10;
-
         this.selection.makeSelection(begin, end);
         assertTrue(this.selection.getSpaceBegin() != this.selection.getSpaceEnd());
 
@@ -35,11 +36,10 @@ public class SelectionTest {
     @Test
     public void makeSelection() throws Exception {
         String s = "Try to select me";
-
+        this.buffer.setText(s);
         int begin = 0;
         int end = 14;
         String selected = s.substring(begin, end);
-
         this.selection.makeSelection(begin, end);
         assertEquals(selected, this.selection.getSelection());
 

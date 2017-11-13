@@ -39,7 +39,7 @@ public class Insert implements Command {
 
 
     public String getTextToInsert() {
-        return textToInsert;
+        return this.textToInsert;
     }
 
     public void setTextToInsert(String textToInsert) {
@@ -47,7 +47,7 @@ public class Insert implements Command {
     }
 
     public int getPosition() {
-        return position;
+        return this.position;
     }
 
     public void setPosition(int position) {

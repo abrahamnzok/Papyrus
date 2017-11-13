@@ -14,6 +14,11 @@ public class Selection {
     /**
      *
      */
+    private String selection;
+
+    /**
+     *
+     */
     private int spaceEnd;
 
     /**
@@ -22,7 +27,6 @@ public class Selection {
     public Selection() {
     }
 
-
     /**
      * @param spaceBegin  
      * @param spaceEnd  
@@ -30,6 +34,8 @@ public class Selection {
      */
     public void makeSelection(int spaceBegin , int spaceEnd ) {
         // TODO implement here
+        this.spaceBegin = spaceBegin;
+        this.spaceEnd = spaceEnd;
     }
 
     /**
@@ -37,20 +43,27 @@ public class Selection {
      */
     public int getSpaceBegin() {
         // TODO implement here
-        return 0;
+        return this.spaceBegin;
     }
 
     public int getSpaceEnd() {
         // TODO implement here
-        return 0;
+        return this.spaceEnd;
     }
 
+    /**
+     * @param selection
+     */
+
+    public void setSelection(String selection){
+        this.selection = selection;
+    }
     /**
      * @return
      */
     public String getSelection() {
         // TODO implement here
-        return null;
+        return this.selection;
     }
 
 }
