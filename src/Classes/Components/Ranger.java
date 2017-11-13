@@ -58,7 +58,7 @@ public class Ranger {
     }
 
     public void setSelection(String selection){
-        if(!this.isEmptyChar(selection)) {
+        if(!this.isEmptyChar(selection) || this.getSpaceBegin() != this.getSpaceEnd()) {
             this.selection = this.filterEmptyChars(selection);
         }
     }

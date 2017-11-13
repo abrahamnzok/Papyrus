@@ -92,6 +92,11 @@ public class BoardReceiver implements Receiver {
     @Override
     public void select(int start, int end) {
         this.ranger.range(start, end);
+        if(this.ranger.getSpaceEnd() >= this.buffer.getText().length()){
+            int newStart = this.ranger.getSpaceBegin();
+            int newEnd = this.buffer.getText().length();
+            this.ranger.range(newStart, newEnd);
+        }
         this.ranger.setSelection(
                 this.buffer.getText().substring(
                         this.ranger.getSpaceBegin(),

@@ -90,6 +90,13 @@ public class RangerTest {
         this.ranger.setSelection(this.ranger.filterEmptyChars(s));
         assertEquals(result, this.ranger.getSelection());
     }
+    @Test
+    public void checkingForMultipleEmptyChars3() throws Exception {
+        String s = "     A    ";
+        String result = "A";
+        this.ranger.setSelection(this.ranger.filterEmptyChars(s));
+        assertEquals(result, this.ranger.getSelection());
+    }
 
     @Test
     public void filterEmptyChars() throws Exception {

@@ -288,11 +288,54 @@ public class BoardReceiverTest {
     }
 
     @Test
+    public void makeNoSelection() throws Exception {
+        String bufferState = "Trying to select at 0?";
+        this.buffer.setText(bufferState);
+        int begin = 0;
+        int end = 0;
+        this.receiver.select(begin, end);
+        assertTrue(this.ranger.getSelection().isEmpty());
+    }
+
+    @Test
+    public void makeNoSelection1() throws Exception {
+        String bufferState = "Trying to select at 5?";
+        this.buffer.setText(bufferState);
+        int begin = 5;
+        int end = 5;
+        this.receiver.select(begin, end);
+        assertTrue(this.ranger.getSelection().isEmpty());
+    }
+
+    @Test
     public void makeSelectionNegative() throws Exception {
         int start = 10;
         int finish = 1;
         this.ranger.range(start, finish);
         assertEquals(start- finish, Math.abs(this.ranger.getSpaceEnd() - this.ranger.getSpaceBegin()));
+    }
+
+    @Test
+    public void makeSelectionOutOfBoundaries() throws Exception {
+        String bufferState = "I need to copy this and only this";
+        this.buffer.setText(bufferState);
+        int start = 0;
+        int finish = bufferState.length() +  10;
+        this.receiver.select(start, finish);
+        assertEquals("We check we select only what we have and we don't break boundaries",
+                bufferState, this.ranger.getSelection());
+    }
+
+    @Test
+    public void makeSelectionOutOfBoundaries1() throws Exception {
+        String bufferState = "I need to copy this and only what is expected";
+        this.buffer.setText(bufferState);
+        String result = "only what is expected";
+        int start = bufferState.length() +  10;
+        int finish = 24 ;
+        this.receiver.select(start, finish);
+        assertEquals("Another protection from selecting out of boundaries",
+                result, this.ranger.getSelection());
     }
 
     @Test
@@ -331,9 +374,9 @@ public class BoardReceiverTest {
     public void makeSelectionAvoidEmpty2() throws Exception {
         String bufferState = "Testing is great";
         this.buffer.setText(bufferState);
-        String selected = bufferState.substring(7, 8);
+        String selected = bufferState.substring(7, 8).trim();
         this.receiver.select(7, 8);
-        assertEquals("",this.ranger.getSelection());
+        assertEquals(selected,this.ranger.getSelection());
     }
 
     @Test
