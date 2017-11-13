@@ -223,7 +223,7 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferState);
         this.selection.makeSelection(0, 1);
         String selected = this.selection.getSelection();
-        this.receiver.delete();
+        //this.receiver.delete();
         assertTrue("We want to check that the buffer doesn't contain I",
                 !this.buffer.getText().contains(selected));
     }

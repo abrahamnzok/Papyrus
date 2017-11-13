@@ -31,10 +31,12 @@ public class InsertTest {
         ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
         Mockito.verify(this.insert).setTextToInsert(argumentCaptor.capture());
     }
+
     @Test
     public void setTextToInsert() throws Exception {
+        Insert insertObj = new Insert();
         String insert = "Insert this text";
-        this.insert.setTextToInsert(insert);
-        assertEquals(insert, this.insert.getTextToInsert());
+        insertObj.setTextToInsert(insert);
+        assertEquals(insert, insertObj.getTextToInsert());
     }
 }
