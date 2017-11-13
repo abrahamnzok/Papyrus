@@ -8,18 +8,16 @@ import java.util.*;
 public class Buffer {
 
     /**
-     * Default constructor
-     */
-    public Buffer() {
-
-    }
-
-    /**
      * 
      */
     private String text;
 
-
+    /**
+     * Default constructor
+     */
+    public Buffer() {
+        this.text = "";
+    }
 
     /**
      * @param text

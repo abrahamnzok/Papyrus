@@ -2,7 +2,7 @@ package Classes.ConcreteCommands;
 
 import Interfaces.Receiver.Receiver;
 import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 

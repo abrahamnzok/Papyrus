@@ -10,10 +10,9 @@ import java.util.*;
  */
 public class Insert implements Command {
 
-    /**
-     *
-     */
     private Receiver receiver;
+    private String textToInsert;
+    private int position;
 
     /**
      * Default constructor
@@ -21,20 +20,39 @@ public class Insert implements Command {
     public Insert() {
     }
 
+    public Insert(Receiver receiver, String textToInsert, int position){
+        this.receiver = receiver;
+        this.textToInsert = textToInsert;
+        this.position = position;
+    }
 
-    /**
-     */
     public void execute() {
-        // TODO implement here
+        this.receiver.insert(this.textToInsert, this.position);
     }
 
     /**
      * @param r 
      * @return
      */
-    public Void setReceiver(Receiver r) {
-        // TODO implement here
-        return null;
+    public void setReceiver(Receiver r) {
+        this.receiver = r;
+    }
+
+
+    public String getTextToInsert() {
+        return textToInsert;
+    }
+
+    public void setTextToInsert(String textToInsert) {
+        this.textToInsert = textToInsert;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
 
