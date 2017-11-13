@@ -68,7 +68,6 @@ public class BoardReceiver implements Receiver {
         String currentText = this.buffer.getText();
         String newText = new StringBuilder(currentText).insert(position, text).toString();
         this.buffer.setText(newText);
-        //System.out.println(this.buffer.getText());
     }
 
     /**
