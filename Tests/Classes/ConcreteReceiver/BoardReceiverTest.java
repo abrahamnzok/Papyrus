@@ -151,20 +151,16 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferstate);
         String toInsert = "I need these test to be succeed a 100%";
         this.receiver.insert(toInsert, 0);
-        assertTrue("We want to insert at position 0",
-                this.buffer.getText().contains(toInsert));
+        assertEquals(toInsert, this.buffer.getText());
     }
 
     @Test
     public void insertAtAnyPosition() throws Exception {
         String bufferstate = "Insertion at any position";
         this.buffer.setText(bufferstate);
-        //System.out.println(bufferstate.charAt(bufferstate.length()/2));
-        String toInsert = "And I need these test to be succeed";
-        this.receiver.insert(toInsert, this.buffer.getText().length()/2);
-        assertTrue("We want to insert at position 12",
-                this.buffer.getText().indexOf(toInsert) == this.buffer.getText().length()/2);
-
+        String toInsert = "And I need these test to succeed";
+        this.receiver.insert(toInsert, this.buffer.getText().length()/2 - 1);
+        assertEquals(this.buffer.getText().indexOf(toInsert), this.buffer.getText().length()/2 - 1);
     }
 
     @Test

@@ -4,9 +4,6 @@ import Classes.Components.Buffer;
 import Classes.Components.ClipBoard;
 import Classes.Components.Selection;
 import Interfaces.Receiver.Receiver;
-
-import java.util.*;
-
 /**
  * 
  */

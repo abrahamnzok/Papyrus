@@ -20,10 +20,9 @@ public class Insert implements Command {
     public Insert() {
     }
 
-    public Insert(Receiver receiver, String textToInsert, int position){
-        this.receiver = receiver;
+    public Insert(String textToInsert, int position){
         this.textToInsert = textToInsert;
-        this.position = position;
+        this.position = (int) position;
     }
 
     public void execute() {

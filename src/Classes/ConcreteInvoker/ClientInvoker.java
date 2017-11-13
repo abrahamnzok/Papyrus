@@ -24,7 +24,7 @@ public class ClientInvoker extends Application implements Invoker {
     @FXML
     private TextArea textarea;
 
-    Receiver engine;
+    private Receiver engine;
 
     @Override
     public void start(Stage stage){
@@ -39,8 +39,9 @@ public class ClientInvoker extends Application implements Invoker {
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
             //Call insert command by taking the next character typed after the caret
             int carretPosition = textarea.getCaretPosition();
-            Insert insert = new Insert(this.engine, "" + newValue.charAt(carretPosition), carretPosition);
-            insert.execute();
+            Insert insert = new Insert(Character.toString(newValue.charAt(carretPosition)), carretPosition);
+            insert.setReceiver(this.engine);
+            this.setCommand(insert);
             /*
              TODO Gerer la suppression de texte avec retour arrière et delete (ou clique droit supprimer),
              Si on supprime un truc actuellement renvoie une erreur si on reesaie d'entrer un caractère (index out of bound)
