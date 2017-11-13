@@ -53,9 +53,9 @@ public class BoardReceiver implements Receiver {
     @Override
     public void insert(String text, int position) {
         String currentText = this.buffer.getText();
-        String newText = new StringBuilder(currentText).insert(position, text).toString();
-        this.buffer.setText(newText);
-        System.out.println(this.buffer.getText());
+        //String newText = new StringBuilder(currentText).insert(position, text).toString();
+        this.buffer.setText(text);
+        //System.out.println(this.buffer.getText());
     }
 
     /**

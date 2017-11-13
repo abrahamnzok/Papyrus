@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+
+import static junit.framework.TestCase.assertEquals;
+
 public class InsertTest {
     private Receiver receiver;
     private Insert insert;
@@ -19,5 +22,19 @@ public class InsertTest {
         this.insert.setReceiver(this.receiver);
         ArgumentCaptor<Receiver> argumentCaptor = ArgumentCaptor.forClass(Receiver.class);
         Mockito.verify(this.insert).setReceiver(argumentCaptor.capture());
+    }
+
+    @Test
+    public void getTextToInsert() throws Exception {
+        String insert = "Insert this text";
+        this.insert.setTextToInsert(insert);
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+        Mockito.verify(this.insert).setTextToInsert(argumentCaptor.capture());
+    }
+    @Test
+    public void setTextToInsert() throws Exception {
+        String insert = "Insert this text";
+        this.insert.setTextToInsert(insert);
+        assertEquals(insert, this.insert.getTextToInsert());
     }
 }
