@@ -59,15 +59,16 @@ public class Ranger {
 
     public void setSelection(String selection){
         if(!this.isEmptyChar(selection)) {
-            this.selection = selection;
+            this.selection = this.filterEmptyChars(selection);
         }
     }
 
     protected boolean isEmptyChar(String empty) {
-        return empty.contains(" ");
+        return empty.equals(" ");
     }
 
-    protected void filterEmptyChars(String selection){
+    protected String filterEmptyChars(String selection){
+        return selection.trim();
     }
 
     /**

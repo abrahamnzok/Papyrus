@@ -67,9 +67,28 @@ public class RangerTest {
     }
 
     @Test
-    public void checkingForMultipleEmptyChars() throws Exception {
-        String s = "     ";
-        assertEquals(true, this.ranger.isEmptyChar(s));
+    public void checkingForMultipleEmptyChars0() throws Exception {
+        String s = "     A B C        ";
+        String result = "A B C";
+        this.ranger.setSelection(this.ranger.filterEmptyChars(s));
+        assertEquals(result, this.ranger.getSelection());
+    }
+
+    @Test
+    public void checkingForMultipleEmptyChars1() throws Exception {
+        String s = "     A B   C        ";
+        String result = "A B   C";
+        this.ranger.setSelection(this.ranger.filterEmptyChars(s));
+        assertEquals(result, this.ranger.getSelection());
+    }
+
+
+    @Test
+    public void checkingForMultipleEmptyChars2() throws Exception {
+        String s = "     A      B ";
+        String result = "A      B";
+        this.ranger.setSelection(this.ranger.filterEmptyChars(s));
+        assertEquals(result, this.ranger.getSelection());
     }
 
     @Test

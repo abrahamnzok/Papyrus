@@ -267,14 +267,15 @@ public class BoardReceiverTest {
         this.receiver.delete(bufferState.length()-1);
         this.receiver.delete((bufferState.length()-1)/2);
         int lengthBeforeDelete = bufferState.length() - 2;
-        assertEquals(lengthBeforeDelete, this.buffer.getText().length());
+        assertEquals("We make sure that we can delete at any position",
+                lengthBeforeDelete, this.buffer.getText().length());
     }
     @Test
     public void correctPosition0() throws Exception {
         String bufferState = "I need we need to delete this s";
         this.buffer.setText(bufferState);
         this.receiver.delete(0);
-        assertTrue("Make sure to start at 1 !!", !this.buffer.getText().contains("I"));
+        assertTrue("Make sure we do not delete at 0!!", !this.buffer.getText().contains("I"));
     }
 
     @Test
@@ -300,7 +301,7 @@ public class BoardReceiverTest {
         this.buffer.setText(s);
         int begin = 0;
         int end = 14;
-        String selected = s.substring(begin, end);
+        String selected = s.substring(begin, 13);
         this.receiver.select(begin, end);
         assertEquals(selected, this.ranger.getSelection());
 
@@ -312,10 +313,9 @@ public class BoardReceiverTest {
         this.buffer.setText(s);
         int beginInverse = 14;
         int endInverse = 0;
-        String selectedInverse = s.substring(endInverse, beginInverse);
+        String selectedInverse = s.substring(endInverse, 13);
         this.receiver.select(beginInverse, endInverse);
         assertEquals(selectedInverse, this.ranger.getSelection());
-
     }
 
     @Test
@@ -340,7 +340,7 @@ public class BoardReceiverTest {
     public void makeSelectionWithSomeMultipleEmptyChars() throws Exception {
         String bufferState = "Testing  is the   keystone of development";
         this.buffer.setText(bufferState);
-        String selected = bufferState.substring(7, 18);
+        String selected = "is the";
         this.receiver.select(7, 18);
         assertEquals(selected,this.ranger.getSelection());
     }
