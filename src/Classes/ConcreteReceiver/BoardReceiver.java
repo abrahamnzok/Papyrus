@@ -39,14 +39,12 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void cut() {
-
     }
 
     /**
      */
     @Override
     public void paste() {
-
     }
 
     /**
@@ -69,6 +67,5 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void delete() {
-
     }
 }
