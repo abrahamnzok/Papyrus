@@ -22,7 +22,7 @@ public class Insert implements Command {
 
     public Insert(String textToInsert, int position){
         this.textToInsert = textToInsert;
-        this.position = (int) position;
+        this.position = position;
     }
 
     public void execute() {
