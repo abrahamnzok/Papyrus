@@ -125,7 +125,7 @@ public class BoardReceiverTest {
     }
 
     @Test
-    public void cutNpaste() throws Exception {
+    public void cutNPaste() throws Exception {
         String bufferState = "Test";
         this.buffer.setText(bufferState);
         this.selection.makeSelection(0, 4);
@@ -140,7 +140,6 @@ public class BoardReceiverTest {
         while(m.find())
             matches++;
 
-        System.out.println(matches);
         assertTrue("We want to cut and paste",
                 matches == 3 && this.clipBoard.getClipboard().contains(clipboard));
     }
@@ -151,8 +150,8 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferstate);
         String toInsert = "I need these test to be succeed a 100%";
         this.receiver.insert(toInsert, 0);
-        System.out.println(this.buffer.getText() + " /" + this.receiver.getBufferClone().getText());
-        //assertEquals(toInsert, this.buffer.getText());
+        //System.out.println(this.buffer.getText() + " /" + this.receiver.getBufferClone().getText());
+        assertEquals(toInsert, this.buffer.getText());
     }
 
     @Test
@@ -164,6 +163,7 @@ public class BoardReceiverTest {
         assertTrue("We need to check if we can insert at any position",
                 this.buffer.getText().contains(toInsert));
     }
+
     @Test
     public void insertAtAnyPositionMultipleTexts() throws Exception {
         String bufferstate = "Insertion at any position with multiple input";
@@ -186,7 +186,7 @@ public class BoardReceiverTest {
     }
 
     @Test
-    public void multiplecopies() throws Exception {
+    public void multipleCopies() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
         this.selection.makeSelection(0, 1);
@@ -198,7 +198,7 @@ public class BoardReceiverTest {
     }
 
     @Test
-    public void copycutmultiplepastes() throws Exception {
+    public void copyCutMultiplePastes() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
         this.selection.makeSelection(0, 1);
@@ -219,13 +219,55 @@ public class BoardReceiverTest {
 
     @Test
     public void delete() throws Exception {
-        String bufferState = "I need We need";
+        String bufferState = "I need we need to delete that s";
         this.buffer.setText(bufferState);
-        this.selection.makeSelection(0, 1);
-        String selected = this.selection.getSelection();
-        //this.receiver.delete();
-        assertTrue("We want to check that the buffer doesn't contain I",
-                !this.buffer.getText().contains(selected));
+        int lengthBeforeDelete  = this.buffer.getText().length()-1;
+        this.receiver.delete(lengthBeforeDelete);
+        assertTrue("We want to check that the buffer doesn't contain s char",
+                this.receiver.getBufferClone().getText().length() == lengthBeforeDelete &&
+                        !this.receiver.getBufferClone().getText().contains("s"));
     }
+    @Test
+    public void deleteNothing() throws Exception {
+        String bufferState = "";
+        this.buffer.setText(bufferState);
+        this.receiver.delete(bufferState.length());
+        this.receiver.delete(bufferState.length());
+        assertTrue("We cannot allow deletion if buffer is empty",
+                this.receiver.getBufferClone().getText().isEmpty());
+    }
+    @Test
+    public void deleteEverything() throws Exception {
+        String bufferState = "Moi";
+        this.buffer.setText(bufferState);
+        int i = bufferState.length()-1;
+        while (i > 0){
+            this.receiver.delete(i);
+            i--;
+        }
+        assertTrue("We want to check if we can delete the whole text in the buffer",
+                this.buffer.getText().isEmpty());
+    }
+    @Test
+    public void deleteButPositionTooHigh() throws Exception {
+        String bufferState = "We need to check consecutive delete and we need to see if the buffer is empty at the end";
+        this.buffer.setText(bufferState);
+        int positionToHigh = bufferState.length() + 5;
+        this.receiver.delete(positionToHigh);
+        assertTrue("We don't want to delete when position in to high",
+                this.buffer.getText().equals(bufferState));
+
+    }
+
+    @Test
+    public void deleteAtAnyPosition() throws Exception {
+        String bufferState = "I need we need to delete this s";
+        this.buffer.setText(bufferState);
+        this.receiver.delete(bufferState.length()-1);
+        this.receiver.delete((bufferState.length()-1)/2);
+        int lengthBeforeDelete = bufferState.length() - 2;
+        assertEquals(lengthBeforeDelete, this.buffer.getText().length());
+    }
+
 
 }

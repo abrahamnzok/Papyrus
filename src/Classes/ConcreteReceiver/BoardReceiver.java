@@ -4,25 +4,22 @@ import Classes.Components.Buffer;
 import Classes.Components.ClipBoard;
 import Classes.Components.Selection;
 import Interfaces.Receiver.Receiver;
-
-import java.awt.datatransfer.Clipboard;
-
 /**
- * 
+ *
  */
 public class BoardReceiver implements Receiver {
     /**
-     * 
+     *
      */
     private Buffer buffer;
 
     /**
-     * 
+     *
      */
     private ClipBoard clipboard;
 
     /**
-     * 
+     *
      */
     private Selection selector;
 
@@ -78,11 +75,15 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * @param text The text to delete or character to delete
      * @param position position of the text or character to delete
      */
     @Override
-    public void delete(String text, int position) {
+    public void delete(int position) {
+        if(!this.buffer.getText().isEmpty() && position < this.buffer.getText().length()){
+            String newText = (new StringBuilder(this.buffer.getText()).delete(position-1, position)).toString();
+            this.buffer.setText(newText);
+            System.out.println(this.buffer.getText());
+        }
     }
 
     /**

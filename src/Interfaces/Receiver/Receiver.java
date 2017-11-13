@@ -7,7 +7,7 @@ import Classes.Components.Selection;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public interface Receiver {
 
@@ -34,7 +34,7 @@ public interface Receiver {
 
     /**
     */
-    public void delete(String text, int position);
+    public void delete(int position);
 
     /**
      */

@@ -6,10 +6,12 @@ import Interfaces.Receiver.Receiver;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class Delete implements Command {
 
+
+    private int position;
     /**
      *
      */
@@ -19,20 +21,23 @@ public class Delete implements Command {
     /**
      * Default constructor
      */
-    public Delete() {
+    public Delete(int position) {
+        this.position = position;
     }
 
     /**
      */
     public void execute() {
         // TODO implement here
+        this.receiver.delete(this.position);
     }
 
     /**
-     * @param r 
+     * @param r
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
+        this.receiver = r;
     }
 
 
