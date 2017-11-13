@@ -221,11 +221,12 @@ public class BoardReceiverTest {
     public void delete() throws Exception {
         String bufferState = "I need we need to delete that s";
         this.buffer.setText(bufferState);
-        int lengthBeforeDelete  = this.buffer.getText().length()-1;
-        this.receiver.delete(lengthBeforeDelete);
+        int lengthBeforeDelete  = this.buffer.getText().length() - 1;
+        this.receiver.delete(bufferState.length()-1);
         assertTrue("We want to check that the buffer doesn't contain s char",
                 this.receiver.getBufferClone().getText().length() == lengthBeforeDelete &&
                         !this.receiver.getBufferClone().getText().contains("s"));
+
     }
     @Test
     public void deleteNothing() throws Exception {
@@ -245,6 +246,7 @@ public class BoardReceiverTest {
             this.receiver.delete(i);
             i--;
         }
+        this.receiver.delete(i);
         assertTrue("We want to check if we can delete the whole text in the buffer",
                 this.buffer.getText().isEmpty());
     }
@@ -268,6 +270,11 @@ public class BoardReceiverTest {
         int lengthBeforeDelete = bufferState.length() - 2;
         assertEquals(lengthBeforeDelete, this.buffer.getText().length());
     }
-
-
+    @Test
+    public void correctPosition0() throws Exception {
+        String bufferState = "I need we need to delete this s";
+        this.buffer.setText(bufferState);
+        this.receiver.delete(0);
+        assertTrue("Make sure to start at 1 !!", !this.buffer.getText().contains("I"));
+    }
 }

@@ -75,14 +75,13 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * @param position position of the text or character to delete
+     * @param position position of character to delete
      */
     @Override
     public void delete(int position) {
         if(!this.buffer.getText().isEmpty() && position < this.buffer.getText().length()){
-            String newText = (new StringBuilder(this.buffer.getText()).delete(position-1, position)).toString();
+            String newText = (new StringBuilder(this.buffer.getText()).deleteCharAt(position)).toString();
             this.buffer.setText(newText);
-            System.out.println(this.buffer.getText());
         }
     }
 
