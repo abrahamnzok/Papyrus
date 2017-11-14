@@ -216,7 +216,18 @@ public class BoardReceiverTest {
         String toInsert = "And I need these test to succeed";
         this.receiver.insert(toInsert, this.buffer.getText().length()-1);
         assertTrue("We cannot break boundaries when inserting",
-                !this.buffer.getText().contains(toInsert) && this.buffer.isEmpty());
+                this.buffer.isEmpty());
+    }
+
+    @Test
+    public void insertionOnTheEdge() throws Exception {
+        String bufferstate = "I need money";
+        this.buffer.setText(bufferstate);
+        String toInsert = "And I need these test to succeed";
+        this.receiver.insert(toInsert, this.buffer.getText().length());
+        assertTrue("We cannot break boundaries when inserting",
+                this.buffer.getText().contains(toInsert));
+
     }
 
     @Test

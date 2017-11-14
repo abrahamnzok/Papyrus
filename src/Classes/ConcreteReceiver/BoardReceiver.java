@@ -49,7 +49,7 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void insert(String text, int position) {
-        if(position <= this.buffer.length()) {
+        if(position <= this.buffer.length() && position >= 0) {
             String currentText = this.buffer.getText();
             String newText = new StringBuilder(currentText).insert(position, text).toString();
             this.buffer.setText(newText);
