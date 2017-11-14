@@ -1,23 +1,21 @@
 package Classes.ConcreteCommands;
 
-import Classes.Components.Buffer;
 import Interfaces.Receiver.Receiver;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
 import static org.junit.Assert.*;
 
 public class PasteTest {
     private Receiver receiver;
-    private Buffer buffer;
     private Paste paste;
+    private Paste nonmocked;
     @Before
     public void setUp() throws Exception {
-        this.buffer = Mockito.mock(Buffer.class);
         this.receiver = Mockito.mock(Receiver.class);
         this.paste = Mockito.mock(Paste.class);
+        this.nonmocked = new Paste();
     }
 
     @Test
@@ -31,5 +29,28 @@ public class PasteTest {
         this.paste.setReceiver(this.receiver);
         ArgumentCaptor<Receiver> argumentCaptor = ArgumentCaptor.forClass(Receiver.class);
         Mockito.verify(this.paste).setReceiver(argumentCaptor.capture());
+    }
+    @Test
+    public void setPosition() throws Exception {
+        this.paste.setPaste(12);
+        ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        Mockito.verify(this.paste).setPaste(argumentCaptor.capture());
+    }
+
+    @Test
+    public void setNegativePosition() throws Exception {
+        this.nonmocked.setPaste(-12);
+        assertEquals(true, this.nonmocked.isNegative());
+    }
+
+    @Test
+    public void setPaste() throws Exception {
+        this.nonmocked.setPaste(12);
+        assertEquals(12, this.nonmocked.getPaste());
+    }
+
+    @Test
+    public void getPasteWithoutSettingIt() throws Exception {
+        assertTrue(this.nonmocked.getPaste() == 0);
     }
 }
