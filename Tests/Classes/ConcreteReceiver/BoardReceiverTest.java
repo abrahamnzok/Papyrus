@@ -173,8 +173,26 @@ public class BoardReceiverTest {
         this.receiver.paste(this.buffer.length());
         assertTrue("We want paste when there is nothing in clipboard",
                 this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().isEmpty());
+    }
 
-
+    @Test
+    public void pasteWhenSelecting() throws Exception {
+        String bufferState = "Test for paste when selecting";
+        String result = "Testing for paste when selecting";
+        this.buffer.setText(bufferState);
+        this.clipBoard.setClipboard("ing");
+        this.receiver.select(0,4);
+        this.receiver.paste(4);
+        assertEquals("We want paste when there is a selection going on",
+                result, this.buffer.getText());
+    }
+    @Test
+    public void pasteWhenNothingInClipBoard() throws Exception {
+        String bufferState = "Test for paste when clipboard is empty";
+        this.buffer.setText(bufferState);
+        this.receiver.paste(4);
+        assertEquals("We want paste when clipboard is empty",
+                bufferState.length(), this.buffer.length());
     }
 
     @Test
@@ -249,6 +267,15 @@ public class BoardReceiverTest {
         assertTrue("We want to test the first behaviour of copying",
                 this.buffer.getText().contains(bufferState) &&
                         this.clipBoard.getClipboard().contains(this.ranger.getSelection()));
+    }
+
+    @Test
+    public void copyWhenSelectionIsEmpty() throws Exception {
+        String bufferState = "I am the one who knocks";
+        this.buffer.setText(bufferState);
+        this.receiver.copy();
+        assertEquals("We want to test the first behaviour of copying", bufferState,this.buffer.getText());
+        assertTrue(this.clipBoard.isEmpty());
     }
 
     @Test

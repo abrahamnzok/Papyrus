@@ -92,7 +92,9 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void paste(int position) {
-        this.insert(this.clipboard.getClipboard(), position);
+        if(!this.clipboard.isEmpty()) {
+            this.insert(this.clipboard.getClipboard(), position);
+        }
     }
 
     /**

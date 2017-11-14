@@ -30,7 +30,6 @@ public class ClipBoard implements Cloneable {
      * @return text stored in clipboard
      */
     public String getClipboard() {
-        // TODO implement here
         return this.clipboard;
     }
 
