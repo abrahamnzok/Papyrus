@@ -51,7 +51,7 @@ public class ClientInvoker extends Application implements Invoker {
     }
 
     /**
-     * @param command
+     * @param command to execute
      */
     public void setCommand(Command command ) {
         // TODO implement here

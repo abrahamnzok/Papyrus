@@ -24,6 +24,7 @@ public class Paste implements Command {
      * Default constructor
      */
     public Paste() {
+        this.position = 0;
     }
 
     /**
@@ -41,8 +42,25 @@ public class Paste implements Command {
         this.receiver = r;
     }
 
+    /**
+     *  @param position where to paste
+     */
     public void setPaste(int position){
         this.position = position;
+    }
+
+    /**
+     * @return position where we pasted
+     */
+    public int getPaste(){
+        return this.position;
+    }
+
+    /**
+     * @return position where we pasted
+     */
+    public boolean isNegative(){
+        return this.position < 0;
     }
 
 
