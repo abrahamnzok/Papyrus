@@ -5,15 +5,16 @@ package Classes.Components;
 public class ClipBoard implements Cloneable {
 
     /**
+     *
+     */
+    private String clipboard;
+
+    /**
      * Default constructor
      */
     public ClipBoard() {
+        this.clipboard = "";
     }
-
-    /**
-     * 
-     */
-    private String clipboard;
 
 
 
@@ -31,6 +32,13 @@ public class ClipBoard implements Cloneable {
     public String getClipboard() {
         // TODO implement here
         return this.clipboard;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isEmpty(){
+        return this.getClipboard().isEmpty();
     }
 
     @Override

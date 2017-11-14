@@ -42,19 +42,6 @@ public class BoardReceiver implements Receiver {
         this.ranger = ranger;
     }
 
-
-    /**
-     */
-    @Override
-    public void cut() {
-    }
-
-    /**
-     */
-    @Override
-    public void paste() {
-    }
-
     /**
      * Insert a text (string) in the buffer at the defined position
      * @param text The text to insert
@@ -68,24 +55,6 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     */
-    @Override
-    public void copy() {
-
-    }
-
-    /**
-     * @param position position of character to delete
-     */
-    @Override
-    public void delete(int position) {
-        if(!this.buffer.getText().isEmpty() && position < this.buffer.getText().length()){
-            String newText = (new StringBuilder(this.buffer.getText()).deleteCharAt(position)).toString();
-            this.buffer.setText(newText);
-        }
-    }
-
-    /**
      * @param start which the starting point of the selection
      * @param end   which is the ending point of the selection
      */
@@ -93,14 +62,46 @@ public class BoardReceiver implements Receiver {
     public void select(int start, int end) {
         this.ranger.range(start, end);
         if(this.ranger.getSpaceEnd() >= this.buffer.getText().length()){
-            int newStart = this.ranger.getSpaceBegin();
-            int newEnd = this.buffer.getText().length();
-            this.ranger.range(newStart, newEnd);
+            this.ranger.range(this.ranger.getSpaceBegin(), this.buffer.getText().length());
         }
-        this.ranger.setSelection(
-                this.buffer.getText().substring(
-                        this.ranger.getSpaceBegin(),
-                        this.ranger.getSpaceEnd()));
+        this.ranger.setSelection(this.buffer.getText().substring(this.ranger.getSpaceBegin(), this.ranger.getSpaceEnd()));
+    }
+
+    /**
+     */
+    @Override
+    public void copy() {
+        this.clipboard.setClipboard(this.ranger.getSelection());
+    }
+
+    /**
+     */
+    @Override
+    public void cut() {
+        if(!this.ranger.isEmpty()) {
+            String bufferState = (new StringBuilder(this.buffer.getText()).delete(
+                    this.ranger.getSpaceBegin(), this.ranger.getSpaceEnd()).toString());
+            this.clipboard.setClipboard(this.ranger.getSelection());
+            this.buffer.setText(bufferState);
+        }
+    }
+
+    /**
+     */
+    @Override
+    public void paste(int position) {
+    }
+
+
+    /**
+     * @param position position of character to delete
+     */
+    @Override
+    public void delete(int position) {
+        if(!this.buffer.isEmpty() && position < this.buffer.getText().length()){
+            String newText = (new StringBuilder(this.buffer.getText()).deleteCharAt(position)).toString();
+            this.buffer.setText(newText);
+        }
     }
 
     /**

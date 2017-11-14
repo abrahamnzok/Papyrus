@@ -34,6 +34,14 @@ public class Buffer implements Cloneable {
         return this.text;
     }
 
+    /**
+     *
+     */
+    public boolean isEmpty() {
+        // TODO implement here
+        return this.getText().isEmpty();
+    }
+
     @Override
     public Object clone()throws CloneNotSupportedException{
         return super.clone();

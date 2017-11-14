@@ -18,6 +18,12 @@ public class InsertTest {
     }
 
     @Test
+    public void execute() throws Exception {
+        this.receiver.insert("Checking if insert in called", 12);
+        Mockito.verify(this.receiver, Mockito.times(1)).insert("Checking if insert in called", 12);
+    }
+
+    @Test
     public void setReceiver() throws Exception {
         this.insert.setReceiver(this.receiver);
         ArgumentCaptor<Receiver> argumentCaptor = ArgumentCaptor.forClass(Receiver.class);

@@ -30,31 +30,45 @@ public class BoardReceiverTest {
     public void cut() throws Exception {
         String cut = "I need to cut text";
         this.buffer.setText(cut);
-        this.ranger.range(0, 11);
+        this.receiver.select(13, cut.length());
         String selection = this.ranger.getSelection();
         this.receiver.cut();
         assertTrue("We have to check if the buffer/clipBoard is changed ",
-                this.buffer.getText().contains(cut.substring(12,cut.length()-1)) &&
+                this.buffer.getText().contains("I need to cut") &&
                 this.clipBoard.getClipboard().contains(selection));
+
     }
+
     @Test
     public void cutNothing() throws Exception {
         String cut = "I need to cut text";
         this.buffer.setText(cut);
-        this.ranger.range(1, 2);
-        String selected = this.ranger.getSelection();
+        this.receiver.select(1, 2);
         this.receiver.cut();
         assertTrue("In case we try to cut nothing then we should ensure the buffer's state is unchanged and the clipBoard is empty",
-                this.buffer.getText().contains(cut) && this.clipBoard.getClipboard().isEmpty());
+                this.buffer.getText().contains(cut) &&
+                        this.clipBoard.isEmpty() &&
+                        this.ranger.isEmpty());
     }
 
+    @Test
+    public void cutOutOfBoundaries() throws Exception {
+        String cut = "I need to cut text";
+        this.buffer.setText(cut);
+        this.receiver.select(1, 10);
+        this.receiver.cut();
+        this.receiver.cut();
+        assertTrue("In case we try to cut out of Boundaries, We only need to cut what we have",
+                this.buffer.getText().contains("I") &&
+                        this.clipBoard.getClipboard().contains(this.ranger.getSelection()) &&
+                        !this.ranger.getSelection().isEmpty());
+    }
 
     @Test
     public void cutEverything() throws Exception {
         String cut = "I need to cut everything";
         this.buffer.setText(cut);
-        this.ranger.range(0, cut.length()-1);
-        String selected = this.ranger.getSelection();
+        this.receiver.select(0, cut.length());
         this.receiver.cut();
         assertTrue("We want to cut everything then we should expect the buffer to be empty and the clipboard to contain the ranger",
                 this.buffer.getText().isEmpty() && this.clipBoard.getClipboard().contains(cut));
@@ -64,16 +78,44 @@ public class BoardReceiverTest {
     public void multipleCuts() throws Exception {
         String cut = "cut";
         this.buffer.setText(cut);
-        this.ranger.range(0, cut.length()-1);
-        String selected = this.ranger.getSelection();
-
+        this.receiver.select(0, cut.length());
+        String selectedToCut = this.ranger.getSelection();
         this.receiver.cut();
         this.receiver.cut();
-
-        String bufferState = this.buffer.getText();
-
         assertTrue("We want to avoid cut when you cannot cut",
-                this.buffer.getText().equals(bufferState) && this.clipBoard.getClipboard().contains(selected));
+                this.buffer.getText().isEmpty() && this.clipBoard.getClipboard().contains(selectedToCut));
+
+    }
+
+    @Test
+    public void cuttingWithoutSelecting() throws Exception {
+        String cut = "We need to multiply profits and cut taxes";
+        this.buffer.setText(cut);
+        this.receiver.cut();
+        assertTrue("We want to avoid to cut without selecting",
+                this.buffer.getText().equals(cut) &&
+                        this.clipBoard.getClipboard().isEmpty() &&
+                        this.ranger.getSelection().isEmpty()
+        );
+
+    }
+
+    @Test
+    public void selectsAndCuts() throws Exception {
+        String cut = "We need to multiply profits and cut taxes";
+        this.buffer.setText(cut);
+        this.receiver.select(11, 28);
+        this.receiver.cut();
+        this.receiver.select(0, 14);
+        this.receiver.cut();
+        String resultBuffer = " cut taxes";
+        String selection = "We need to and";
+        String finalClipboard = "We need to and";
+        assertTrue("We want to avoid cut when you cannot cut",
+                this.buffer.getText().equals(resultBuffer) &&
+                        this.clipBoard.getClipboard().equals(finalClipboard) &&
+                        this.ranger.getSelection().equals(selection)
+        );
 
     }
 
@@ -83,7 +125,7 @@ public class BoardReceiverTest {
         String bufferState = "Test for paste";
         String clipboard = "Hope it works";
         this.buffer.setText(bufferState);
-        this.receiver.paste();
+        this.receiver.paste(0);
         assertTrue("We want to test first paste ",
                 this.buffer.getText().contains(clipboard) && this.clipBoard.getClipboard().contains(clipboard));
     }
@@ -92,10 +134,10 @@ public class BoardReceiverTest {
     public void multiplePaste() throws Exception {
         String bufferState = "Hope it works Test for multiple pastes Hope it works Hope it works";
         String clipboard = "Hope it works";
-        this.buffer.setText(clipboard);
-        this.receiver.paste();
-        this.receiver.paste();
-        this.receiver.paste();
+        this.buffer.setText(bufferState);
+        this.receiver.paste(0);
+        this.receiver.paste(0);
+        this.receiver.paste(0);
 
         Matcher m = Pattern.compile("\\bHope\\b").matcher(this.buffer.getText());
 
@@ -114,9 +156,9 @@ public class BoardReceiverTest {
         String bufferState = "Test for paste nothing";
         String clipboard = "";
 
-        this.receiver.paste();
-        this.receiver.paste();
-        this.receiver.paste();
+        this.receiver.paste(0);
+        this.receiver.paste(0);
+        this.receiver.paste(0);
 
         assertTrue("We want paste when there is nothing in clipboard",
                 this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().contains(clipboard));
@@ -131,10 +173,10 @@ public class BoardReceiverTest {
         this.ranger.range(0, 4);
         this.receiver.cut();
         String clipboard = this.clipBoard.getClipboard();
-        this.receiver.paste();
-        this.receiver.paste();
-        this.receiver.paste();
-        String result = "Test Test Test";
+        this.receiver.paste(0);
+        this.receiver.paste(0);
+        this.receiver.paste(0);
+        //String result = "TestTestTest";
         Matcher m = Pattern.compile("\\bTest\\b").matcher(this.buffer.getText());
         int matches = 0;
         while(m.find())
@@ -179,22 +221,39 @@ public class BoardReceiverTest {
     public void copy() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
-        this.ranger.range(0, 1);
+        this.receiver.select(0, 3);
         this.receiver.copy();
         assertTrue("We want to test the first behaviour of copying",
-                this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().contains("I"));
+                this.buffer.getText().contains(bufferState) &&
+                        this.clipBoard.getClipboard().contains(this.ranger.getSelection()));
     }
 
     @Test
     public void multipleCopies() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
-        this.ranger.range(0, 1);
+        this.receiver.select(0, 1);
+        this.receiver.copy();
+        this.receiver.select(5, bufferState.length());
+        this.receiver.copy();
+        String result = this.ranger.getSelection();
         this.receiver.copy();
         this.receiver.copy();
+        assertEquals("We want to test multi copying behaviour",
+                result,this.clipBoard.getClipboard());
+    }
+
+    @Test
+    public void copyNothing() throws Exception {
+        String bufferState = "I am the one who knocks";
+        this.buffer.setText(bufferState);
+        this.receiver.select(1, 1);
         this.receiver.copy();
-        assertTrue("We want to test the first behaviour of copying",
-                this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().contains("I"));
+        System.out.println(this.clipBoard);
+        /*String result = this.ranger.getSelection();
+        assertEquals("Since we cannot select an empty string or character, let's try to copy nothing",
+                result,this.clipBoard.getClipboard());
+                */
     }
 
     @Test
@@ -205,8 +264,8 @@ public class BoardReceiverTest {
         String selected = this.ranger.getSelection();
         this.receiver.copy();
         this.receiver.cut();
-        this.receiver.paste();
-        this.receiver.paste();
+        this.receiver.paste(0);
+        this.receiver.paste(0);
         Matcher m = Pattern.compile("\\bI\\b").matcher(this.buffer.getText());
         int matches = 0;
         while(m.find())
