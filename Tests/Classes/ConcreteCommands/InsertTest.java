@@ -1,5 +1,6 @@
 package Classes.ConcreteCommands;
 
+import Classes.Components.Buffer;
 import Interfaces.Receiver.Receiver;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +12,12 @@ import static junit.framework.TestCase.assertEquals;
 public class InsertTest {
     private Receiver receiver;
     private Insert insert;
+    private Buffer buffer;
     @Before
     public void setUp() throws Exception {
         this.insert = Mockito.mock(Insert.class);
         this.receiver = Mockito.mock(Receiver.class);
+        this.buffer = new Buffer();
     }
 
     @Test

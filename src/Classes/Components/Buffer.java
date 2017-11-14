@@ -37,6 +37,14 @@ public class Buffer implements Cloneable {
     /**
      *
      */
+    public int length() {
+        // TODO implement here
+        return this.getText().length();
+    }
+
+    /**
+     *
+     */
     public boolean isEmpty() {
         // TODO implement here
         return this.getText().isEmpty();

@@ -170,20 +170,11 @@ public class BoardReceiverTest {
     public void cutNPaste() throws Exception {
         String bufferState = "Test";
         this.buffer.setText(bufferState);
-        this.ranger.range(0, 4);
+        this.receiver.select(0, bufferState.length());
         this.receiver.cut();
-        String clipboard = this.clipBoard.getClipboard();
         this.receiver.paste(0);
-        this.receiver.paste(0);
-        this.receiver.paste(0);
-        //String result = "TestTestTest";
-        Matcher m = Pattern.compile("\\bTest\\b").matcher(this.buffer.getText());
-        int matches = 0;
-        while(m.find())
-            matches++;
-
-        assertTrue("We want to cut and paste",
-                matches == 3 && this.clipBoard.getClipboard().contains(clipboard));
+        assertEquals("We want to cut and paste",
+                bufferState, this.buffer.getText());
     }
 
     @Test
@@ -202,6 +193,7 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferstate);
         String toInsert = "And I need these test to succeed";
         this.receiver.insert(toInsert, this.buffer.getText().length());
+        System.out.println(this.buffer.getText());
         assertTrue("We need to check if we can insert at any position",
                 this.buffer.getText().contains(toInsert));
     }
@@ -211,12 +203,22 @@ public class BoardReceiverTest {
         String bufferstate = "Insertion at any position with multiple input";
         this.buffer.setText(bufferstate);
         String toInsert = "And I need these test to succeed";
-        String toInsert2 = "Multiple input insertion test : ";
-        this.receiver.insert(toInsert, this.buffer.getText().length()-1);
-        this.receiver.insert(toInsert2, 0);
+        this.receiver.insert(toInsert, bufferstate.length());
         assertTrue("We need to check if we can insert at any position",
-                this.buffer.getText().contains(toInsert) && this.buffer.getText().contains(toInsert2));
+                this.buffer.getText().contains(toInsert));
+
     }
+
+    @Test
+    public void insertionOutOfBoundaries() throws Exception {
+        String bufferstate = "";
+        this.buffer.setText(bufferstate);
+        String toInsert = "And I need these test to succeed";
+        this.receiver.insert(toInsert, this.buffer.getText().length()-1);
+        assertTrue("We cannot break boundaries when inserting",
+                !this.buffer.getText().contains(toInsert) && this.buffer.isEmpty());
+    }
+
     @Test
     public void copy() throws Exception {
         String bufferState = "I am the one who knocks";

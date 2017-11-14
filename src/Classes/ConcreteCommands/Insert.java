@@ -21,8 +21,9 @@ public class Insert implements Command {
     }
 
     public Insert(String textToInsert, int position){
+        this.setPosition(position);
         this.textToInsert = textToInsert;
-        this.position = position;
+        this.position = this.getPosition() ;
     }
 
     public void execute() {
@@ -37,21 +38,42 @@ public class Insert implements Command {
         this.receiver = r;
     }
 
-
+    /**
+     * @return textToInsert
+     */
     public String getTextToInsert() {
         return this.textToInsert;
     }
 
+    /**
+     * @param textToInsert text that we need to insert
+     * @return
+     */
     public void setTextToInsert(String textToInsert) {
         this.textToInsert = textToInsert;
     }
 
+    /**
+     * @return the position of where to insert
+     */
     public int getPosition() {
         return this.position;
     }
 
+    /**
+     * @param position where to insert a text
+     */
     public void setPosition(int position) {
-        this.position = position;
+        if(!this.isNegative()) {
+            this.position = position;
+        }
+    }
+
+    /**
+     * @return boolean
+     */
+    public boolean isNegative(){
+        return this.position < 0;
     }
 
 

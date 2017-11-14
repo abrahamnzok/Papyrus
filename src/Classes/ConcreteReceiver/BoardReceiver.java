@@ -49,9 +49,11 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void insert(String text, int position) {
-        String currentText = this.buffer.getText();
-        String newText = new StringBuilder(currentText).insert(position, text).toString();
-        this.buffer.setText(newText);
+        if(position <= this.buffer.length()) {
+            String currentText = this.buffer.getText();
+            String newText = new StringBuilder(currentText).insert(position, text).toString();
+            this.buffer.setText(newText);
+        }
     }
 
     /**
@@ -90,8 +92,8 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void paste(int position) {
+        this.insert(this.clipboard.getClipboard(), position);
     }
-
 
     /**
      * @param position position of character to delete
