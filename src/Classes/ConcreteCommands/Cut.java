@@ -27,6 +27,7 @@ public class Cut implements Command {
      */
     public void execute() {
         // TODO implement here
+        this.receiver.cut();
     }
 
     /**
@@ -34,6 +35,7 @@ public class Cut implements Command {
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
+        this.receiver = r;
     }
 
 }
