@@ -17,7 +17,8 @@ public class DeleteTest {
 
     @Test
     public void execute() throws Exception {
-        Mockito.verify(this.receiver, Mockito.times(1)).copy();
+        this.receiver.delete(0);
+        Mockito.verify(this.receiver, Mockito.times(1)).delete(0);
     }
 
     @Test

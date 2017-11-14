@@ -19,6 +19,7 @@ public class CutTest {
 
     @Test
     public void execute() throws Exception {
+        this.receiver.cut();
         Mockito.verify(this.receiver, Mockito.times(1)).cut();
     }
 

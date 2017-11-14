@@ -18,6 +18,7 @@ public class CopyTest {
 
     @Test
     public void execute() throws Exception {
+        this.receiver.copy();
         Mockito.verify(this.receiver, Mockito.times(1)).copy();
     }
 

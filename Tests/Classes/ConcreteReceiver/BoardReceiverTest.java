@@ -125,6 +125,7 @@ public class BoardReceiverTest {
         String bufferState = "Test for paste";
         String clipboard = "Hope it works";
         this.buffer.setText(bufferState);
+        this.clipBoard.setClipboard(clipboard);
         this.receiver.paste(0);
         assertTrue("We want to test first paste ",
                 this.buffer.getText().contains(clipboard) && this.clipBoard.getClipboard().contains(clipboard));
@@ -132,36 +133,46 @@ public class BoardReceiverTest {
 
     @Test
     public void multiplePaste() throws Exception {
-        String bufferState = "Hope it works Test for multiple pastes Hope it works Hope it works";
-        String clipboard = "Hope it works";
+        String bufferState = "Test for multiple pastes";
         this.buffer.setText(bufferState);
+        String clipboard = "Hope it works";
+        this.clipBoard.setClipboard(clipboard);
         this.receiver.paste(0);
-        this.receiver.paste(0);
-        this.receiver.paste(0);
-
+        this.receiver.paste(this.buffer.length()/2);
+        this.receiver.paste(this.buffer.length()/4);
         Matcher m = Pattern.compile("\\bHope\\b").matcher(this.buffer.getText());
-
         int matches = 0;
         while(m.find())
             matches++;
-
-        System.out.println(matches);
         assertTrue("We want to test multiple paste",
-                matches == 3 && this.clipBoard.getClipboard().contains(clipboard));
+                matches == 2 && this.clipBoard.getClipboard().contains(clipboard));
+    }
 
+    @Test
+    public void multiplePaste1() throws Exception {
+        String bufferState = "Test for multiple pastes";
+        this.buffer.setText(bufferState);
+        String clipboard = "Hope it works";
+        int lengthResult = this.buffer.length() + 3 * clipboard.length();
+        this.clipBoard.setClipboard(clipboard);
+        this.receiver.paste(0);
+        this.receiver.paste(this.buffer.length()/2);
+        this.receiver.paste(this.buffer.length()/4);
+        assertEquals("We want to test multiple paste",
+                lengthResult, this.buffer.length());
     }
 
     @Test
     public void pasteNothing() throws Exception {
         String bufferState = "Test for paste nothing";
+        this.buffer.setText(bufferState);
         String clipboard = "";
-
-        this.receiver.paste(0);
-        this.receiver.paste(0);
-        this.receiver.paste(0);
-
+        this.clipBoard.setClipboard(clipboard);
+        this.receiver.paste(12);
+        this.receiver.paste(14);
+        this.receiver.paste(this.buffer.length());
         assertTrue("We want paste when there is nothing in clipboard",
-                this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().contains(clipboard));
+                this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().isEmpty());
 
 
     }
@@ -193,7 +204,6 @@ public class BoardReceiverTest {
         this.buffer.setText(bufferstate);
         String toInsert = "And I need these test to succeed";
         this.receiver.insert(toInsert, this.buffer.getText().length());
-        System.out.println(this.buffer.getText());
         assertTrue("We need to check if we can insert at any position",
                 this.buffer.getText().contains(toInsert));
     }
@@ -273,20 +283,21 @@ public class BoardReceiverTest {
     public void copyCutMultiplePastes() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
-        this.ranger.range(0, 1);
+        this.receiver.select(0, 1);
         String selected = this.ranger.getSelection();
         this.receiver.copy();
         this.receiver.cut();
+        int finalLength = this.buffer.length() + this.ranger.getSelection().length() * 4;
+        String clipboard = this.clipBoard.getClipboard();
         this.receiver.paste(0);
         this.receiver.paste(0);
-        Matcher m = Pattern.compile("\\bI\\b").matcher(this.buffer.getText());
-        int matches = 0;
-        while(m.find())
-            matches++;
-        System.out.println(matches);
-        assertTrue("We want to test the first behaviour of copying",
-                matches == 2 && this.buffer.getText().contains(selected) && this.clipBoard.getClipboard().contains(selected));
+        this.receiver.paste(0);
+        this.receiver.paste(0);
 
+        assertTrue("We want to test the first behaviour of copying",
+                        finalLength == this.buffer.length() &&
+                        this.buffer.getText().contains(selected) &&
+                        this.clipBoard.getClipboard().contains(clipboard));
     }
 
     @Test
