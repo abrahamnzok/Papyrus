@@ -1,7 +1,5 @@
 package Classes.Components;
 
-import java.util.*;
-
 /**
  * 
  */
@@ -20,7 +18,7 @@ public class Buffer implements Cloneable {
     }
 
     /**
-     * @param text
+     * @param text contained inside the buffer
      */
     public void setText(String text) {
         this.text = text;

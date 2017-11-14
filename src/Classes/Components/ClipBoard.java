@@ -19,7 +19,7 @@ public class ClipBoard implements Cloneable {
 
 
     /**
-     * @param text 
+     * @param text to store in the clipboard
      */
     public void setClipboard(String text) {
         // TODO implement here
@@ -27,7 +27,7 @@ public class ClipBoard implements Cloneable {
     }
 
     /**
-     * @return
+     * @return text stored in clipboard
      */
     public String getClipboard() {
         // TODO implement here
@@ -35,7 +35,7 @@ public class ClipBoard implements Cloneable {
     }
 
     /**
-     * @return
+     * @return true if clipboard is empty, false otherwise
      */
     public boolean isEmpty(){
         return this.getClipboard().isEmpty();

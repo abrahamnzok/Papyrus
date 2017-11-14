@@ -1,10 +1,6 @@
 package Classes.Components;
 
-import java.util.*;
 
-/**
- * 
- */
 public class Ranger {
     /**
      *
@@ -29,12 +25,11 @@ public class Ranger {
     }
 
     /**
-     * @param spaceBegin  
-     * @param spaceEnd  
+     * @param spaceBegin  starting point of selection
+     * @param spaceEnd  ending point of selection
      *
      */
     public void range(int spaceBegin , int spaceEnd ) {
-        // TODO implement here
         if(spaceBegin > spaceEnd){
             this.spaceBegin = spaceEnd;
             this.spaceEnd = spaceBegin;
@@ -45,15 +40,16 @@ public class Ranger {
     }
 
     /**
-     * @return
+     * @return starting point of selection
      */
     public int getSpaceBegin() {
-        // TODO implement here
         return this.spaceBegin;
     }
 
+    /**
+     * @return ending point of selection
+     */
     public int getSpaceEnd() {
-        // TODO implement here
         return this.spaceEnd;
     }
 
@@ -72,13 +68,15 @@ public class Ranger {
     }
 
     /**
-     * @return
+     * @return selection which the selected text
      */
     public String getSelection() {
-        // TODO implement here
         return this.selection;
     }
 
+    /**
+     * @return true if selection is empty an string
+     */
     public boolean isEmpty() {
         return this.getSelection().isEmpty();
     }
