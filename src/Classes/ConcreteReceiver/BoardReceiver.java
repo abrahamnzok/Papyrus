@@ -107,8 +107,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * @param start
-     * @param end
+     * @param start starting point of the selection
+     * @param end end point of the selection
      */
     private void clear(int start, int end) {
         if(!this.buffer.isEmpty() && start <= this.buffer.length() && end <= this.buffer.length()){
