@@ -81,10 +81,8 @@ public class BoardReceiver implements Receiver {
     @Override
     public void cut() {
         if(!this.ranger.isEmpty()) {
-            String bufferState = (new StringBuilder(this.buffer.getText()).delete(
-                    this.ranger.getSpaceBegin(), this.ranger.getSpaceEnd()).toString());
-            this.clipboard.setClipboard(this.ranger.getSelection());
-            this.buffer.setText(bufferState);
+            this.copy();
+            this.clear(this.ranger.getSpaceBegin(), this.ranger.getSpaceEnd());
         }
     }
 
@@ -102,8 +100,19 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void delete(int position) {
-        if(!this.buffer.isEmpty() && position < this.buffer.getText().length()){
+        if(!this.buffer.isEmpty() && position < this.buffer.length()){
             String newText = (new StringBuilder(this.buffer.getText()).deleteCharAt(position)).toString();
+            this.buffer.setText(newText);
+        }
+    }
+
+    /**
+     * @param start
+     * @param end
+     */
+    private void clear(int start, int end) {
+        if(!this.buffer.isEmpty() && start <= this.buffer.length() && end <= this.buffer.length()){
+            String newText = (new StringBuilder(this.buffer.getText()).delete(start, end)).toString();
             this.buffer.setText(newText);
         }
     }

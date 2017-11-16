@@ -81,6 +81,12 @@ public class Ranger {
         return this.getSelection().isEmpty();
     }
 
+    /**
+     */
+    public void clear(){
+        this.selection = "";
+    }
+
     @Override
     public Object clone()throws CloneNotSupportedException{
         return super.clone();
