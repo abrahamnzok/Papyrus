@@ -28,7 +28,6 @@ public class Selection implements Command {
         this.end = end;
     }
 
-
     /**
      */
     public void execute() {
