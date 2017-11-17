@@ -39,16 +39,16 @@ public class ClientInvoker extends Application implements Invoker {
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println(observable.getValue());
             textarea.setOnKeyPressed(event -> {
-                int carretPosition;
+                int caretPosition;
                 switch(event.getCode()){
                     case BACK_SPACE:
                         //Had to redefine it because the caretPosition move after pressing those keys
-                        carretPosition = textarea.getCaretPosition();
-                        deleteAtPosition(carretPosition-1);
+                        caretPosition = textarea.getCaretPosition();
+                        deleteAtPosition(caretPosition-1);
                         break;
                     case DELETE:
-                        carretPosition = textarea.getCaretPosition();
-                        deleteAtPosition(carretPosition);
+                        caretPosition = textarea.getCaretPosition();
+                        deleteAtPosition(caretPosition);
                         break;
                 }
             });
@@ -69,13 +69,6 @@ public class ClientInvoker extends Application implements Invoker {
             } else{
                 this.engine.select(0,0);
             }
-
-            try {
-                System.out.println(this.engine.getRangerClone().getSpaceBegin() + "" +this.engine.getRangerClone().getSpaceEnd() + "" + this.engine.getRangerClone().getSelection());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
-
         });
     }
 
