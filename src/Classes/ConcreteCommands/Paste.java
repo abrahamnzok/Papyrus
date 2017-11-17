@@ -27,6 +27,10 @@ public class Paste implements Command {
         this.position = 0;
     }
 
+    public Paste(int position){
+        this.position = position;
+    }
+
     /**
      */
     public void execute() {
