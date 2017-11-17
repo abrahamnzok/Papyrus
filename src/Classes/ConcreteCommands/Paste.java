@@ -34,7 +34,6 @@ public class Paste implements Command {
     /**
      */
     public void execute() {
-        // TODO implement here
         this.receiver.paste(this.position);
     }
 
@@ -42,7 +41,6 @@ public class Paste implements Command {
      * @param r 
      */
     public void setReceiver(Receiver r) {
-        // TODO implement here
         this.receiver = r;
     }
 
