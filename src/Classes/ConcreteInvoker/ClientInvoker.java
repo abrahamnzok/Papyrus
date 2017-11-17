@@ -145,11 +145,6 @@ public class ClientInvoker extends Application implements Invoker {
         this.textarea.setText(this.engine.getBufferClone().getText());
     }
 
-    @FXML
-    void handleSelect(MouseEvent event) {
-        System.out.println("Text");
-    }
-
     /**
      * @param command to execute
      */

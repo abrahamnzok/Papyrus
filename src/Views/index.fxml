@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="generalBackground" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Classes.ConcreteInvoker.ClientInvoker">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="generalBackground" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Classes.ConcreteInvoker.ClientInvoker">
    <children>
       <ButtonBar layoutX="15.0" layoutY="3.0" prefHeight="42.0" prefWidth="404.0" translateX="-29.0" translateY="-1.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="3.0">
         <buttons>
@@ -49,7 +49,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <TextArea fx:id="textarea" layoutY="48.0" maxHeight="359.0" maxWidth="600.0" minHeight="352.0" minWidth="600.0" onMouseReleased="#handleSelect" opacity="0.97" prefHeight="352.0" prefWidth="600.0" styleClass="flat-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0" />
+      <TextArea fx:id="textarea" layoutY="48.0" maxHeight="359.0" maxWidth="600.0" minHeight="352.0" minWidth="600.0" opacity="0.97" prefHeight="352.0" prefWidth="600.0" styleClass="flat-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0" />
       <ImageView disable="true" fitHeight="57.0" fitWidth="54.0" layoutX="537.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="-1.0">
          <image>
             <Image url="@../resources/logo.png" />
