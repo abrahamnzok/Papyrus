@@ -62,6 +62,21 @@ public class ClientInvoker extends Application implements Invoker {
                 e.printStackTrace();
             }
         });
+
+        this.textarea.setOnMouseClicked(event -> {
+            if(this.textarea.getSelection().getLength() > 0){
+                this.engine.select(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
+            } else{
+                this.engine.select(0,0);
+            }
+
+            try {
+                System.out.println(this.engine.getRangerClone().getSpaceBegin() + "" +this.engine.getRangerClone().getSpaceEnd() + "" + this.engine.getRangerClone().getSelection());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+
+        });
     }
 
     /**
@@ -121,6 +136,8 @@ public class ClientInvoker extends Application implements Invoker {
         int carretPosition = textarea.getCaretPosition();
         deleteAtPosition(carretPosition);
         this.textarea.setText(this.engine.getBufferClone().getText());
+        //We have to position it manually or it will move to the begining of the text
+        this.textarea.positionCaret(carretPosition);
     }
 
     /**
