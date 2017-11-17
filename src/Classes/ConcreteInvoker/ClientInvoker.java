@@ -37,7 +37,6 @@ public class ClientInvoker extends Application implements Invoker {
         this.textarea.requestFocus();
         this.engine = new BoardReceiver();
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(observable.getValue());
             textarea.setOnKeyPressed(event -> {
                 int caretPosition;
                 switch(event.getCode()){
@@ -55,11 +54,6 @@ public class ClientInvoker extends Application implements Invoker {
             if(oldValue.length() < newValue.length()){
                 int carretPosition = textarea.getCaretPosition();
                 insertAtPosition(newValue, carretPosition);
-            }
-            try {
-                System.out.println(this.engine.getBufferClone().getText());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
             }
         });
 
