@@ -35,53 +35,104 @@ public class ClientInvoker extends Application implements Invoker {
     @FXML
     private void initialize() {
         this.textarea.requestFocus();
-        //Initialize the person table with the two columns.
-        //On change listener for the textarea to detect key typed
         this.engine = new BoardReceiver();
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
-            //Call insert command by taking the next character typed after the caret
-            int carretPosition = textarea.getCaretPosition();
-            Insert insert = new Insert(Character.toString(newValue.charAt(carretPosition)), carretPosition);
-            insert.setReceiver(this.engine);
-            this.setCommand(insert);
-            /*
-             TODO Gerer la suppression de texte avec retour arrière et delete (ou clique droit supprimer),
-             Si on supprime un truc actuellement renvoie une erreur si on reesaie d'entrer un caractère (index out of bound)
-             + tester si la position > texte.length , si oui on met a .length, sinon osef
-             */
+            System.out.println(observable.getValue());
+            textarea.setOnKeyPressed(event -> {
+                int carretPosition;
+                switch(event.getCode()){
+                    case BACK_SPACE:
+                        //Had to redefine it because the caretPosition move after pressing those keys
+                        carretPosition = textarea.getCaretPosition();
+                        deleteAtPosition(carretPosition-1);
+                        break;
+                    case DELETE:
+                        carretPosition = textarea.getCaretPosition();
+                        deleteAtPosition(carretPosition);
+                        break;
+                }
+            });
+            if(oldValue.length() < newValue.length()){
+                int carretPosition = textarea.getCaretPosition();
+                insertAtPosition(newValue, carretPosition);
+            }
+            try {
+                System.out.println(this.engine.getBufferClone().getText());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
         });
     }
 
+    /**
+     * @param newValue The value to be inserted
+     * @param position Position where to insert
+    * Invoke the Insert command.
+     */
+    private void insertAtPosition(String newValue, int position){
+        //Call insert command by taking the next character typed after the caret
+        Insert insert = new Insert(Character.toString(newValue.charAt(position)), position);
+        insert.setReceiver(this.engine);
+        this.setCommand(insert);
+    }
 
+
+    /**
+     * @param position Position of the character to delete
+     * Invoke the delete command.
+     */
+    private void deleteAtPosition(int position){
+        Delete del = new Delete(position);
+        del.setReceiver(this.engine);
+        this.setCommand(del);
+    }
+
+
+    /**
+     * @param event the MouseEvent (on click on the button)
+     * Invoke the Copy command.
+     */
     @FXML
-    void handleCopy(MouseEvent event) {
+    private void handleCopy(MouseEvent event) {
         Copy cpy = new Copy();
         cpy.setReceiver(this.engine);
         this.setCommand(cpy);
     }
 
+    /**
+     * @param event the MouseEvent (on click on the button)
+     * Invoke the Cut command and mimic the same effect on the UI.
+     */
     @FXML
-    void handleCut(MouseEvent event) {
+    private void handleCut(MouseEvent event) throws CloneNotSupportedException {
         Cut cut = new Cut();
         cut.setReceiver(this.engine);
         this.setCommand(cut);
+        this.textarea.setText(this.engine.getBufferClone().getText());
     }
 
+    /**
+     * @param event the MouseEvent (on click on the button)
+     * Invoke the Delete command and mimic the same effect on the UI.
+     */
     @FXML
-    void handleDelete(MouseEvent event) throws CloneNotSupportedException {
+    private void handleDelete(MouseEvent event) throws CloneNotSupportedException {
         this.textarea.requestFocus();
         int carretPosition = textarea.getCaretPosition();
-        Delete del = new Delete(carretPosition);
-        del.setReceiver(this.engine);
-        this.setCommand(del);
-        System.out.println(this.engine.getBufferClone().getText());
+        deleteAtPosition(carretPosition);
+        this.textarea.setText(this.engine.getBufferClone().getText());
     }
 
+    /**
+     * @param event the paste (on click on the button)
+     * Invoke the Cut command and mimic the same effect on the UI.
+     */
     @FXML
-    void handlePaste(MouseEvent event) {
+    private void handlePaste(MouseEvent event) throws CloneNotSupportedException {
         Paste paste  = new Paste();
         paste.setReceiver(this.engine);
         this.setCommand(paste);
+        this.textarea.setText(this.engine.getBufferClone().getText());
     }
 
     @FXML
@@ -93,7 +144,6 @@ public class ClientInvoker extends Application implements Invoker {
      * @param command to execute
      */
     public void setCommand(Command command ) {
-        // TODO implement here
         command.execute();
     }
 
