@@ -36,6 +36,7 @@ public class ClientInvoker extends Application implements Invoker {
     private void initialize() {
         this.textarea.requestFocus();
         this.engine = new BoardReceiver();
+        //Detect any change on the textarea : insertion / deletion
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
             textarea.setOnKeyPressed(event -> {
                 int caretPosition;
@@ -57,6 +58,7 @@ public class ClientInvoker extends Application implements Invoker {
             }
         });
 
+        //Selection detection
         this.textarea.setOnMouseClicked(event -> {
             if(this.textarea.getSelection().getLength() > 0){
                 this.engine.select(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
@@ -123,7 +125,7 @@ public class ClientInvoker extends Application implements Invoker {
         int carretPosition = textarea.getCaretPosition();
         deleteAtPosition(carretPosition);
         this.textarea.setText(this.engine.getBufferClone().getText());
-        //We have to position it manually or it will move to the begining of the text
+        //We have to position it manually or it will move to the beginning of the text
         this.textarea.positionCaret(carretPosition);
     }
 
@@ -133,10 +135,13 @@ public class ClientInvoker extends Application implements Invoker {
      */
     @FXML
     private void handlePaste(MouseEvent event) throws CloneNotSupportedException {
-        Paste paste  = new Paste();
+        this.textarea.requestFocus();
+        int caretPosition = this.textarea.getCaretPosition();
+        Paste paste  = new Paste(caretPosition);
         paste.setReceiver(this.engine);
         this.setCommand(paste);
         this.textarea.setText(this.engine.getBufferClone().getText());
+        this.textarea.positionCaret(caretPosition);
     }
 
     /**
