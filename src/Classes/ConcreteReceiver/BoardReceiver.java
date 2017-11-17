@@ -74,7 +74,6 @@ public class BoardReceiver implements Receiver {
     @Override
     public void copy() {
         this.clipboard.setClipboard(this.ranger.getSelection());
-        System.out.println(this.clipboard.getClipboard());
     }
 
     /**
