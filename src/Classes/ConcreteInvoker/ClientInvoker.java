@@ -38,29 +38,27 @@ public class ClientInvoker extends Application implements Invoker {
         this.engine = new BoardReceiver();
         //Detect any change on the textarea : insertion / deletion
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
-            textarea.setOnKeyPressed(event -> {
-                int caretPosition;
+            this.textarea.setOnKeyPressed(event -> {
                 switch(event.getCode()){
                     case BACK_SPACE:
                         //Had to redefine it because the caretPosition move after pressing those keys
-                        caretPosition = textarea.getCaretPosition();
-                        deleteAtPosition(caretPosition-1);
+                        deleteAtPosition(this.textarea.getCaretPosition()-1);
                         break;
                     case DELETE:
-                        caretPosition = textarea.getCaretPosition();
-                        deleteAtPosition(caretPosition);
+                        deleteAtPosition(this.textarea.getCaretPosition());
                         break;
                 }
             });
             if(oldValue.length() < newValue.length()){
-                int carretPosition = textarea.getCaretPosition();
-                insertAtPosition(newValue, carretPosition);
+                insertAtPosition(newValue, this.textarea.getCaretPosition());
             }
         });
 
         //Selection detection
         this.textarea.setOnMouseClicked(event -> {
-            this.engine.select(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
+            Selection selection = new Selection(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
+            selection.setReceiver(this.engine);
+            this.setCommand(selection);
         });
     }
 
@@ -94,9 +92,9 @@ public class ClientInvoker extends Application implements Invoker {
      */
     @FXML
     private void handleCopy(MouseEvent event) {
-        Copy cpy = new Copy();
-        cpy.setReceiver(this.engine);
-        this.setCommand(cpy);
+        Copy copy = new Copy();
+        copy.setReceiver(this.engine);
+        this.setCommand(copy);
     }
 
     /**
@@ -118,11 +116,11 @@ public class ClientInvoker extends Application implements Invoker {
     @FXML
     private void handleDelete(MouseEvent event) throws CloneNotSupportedException {
         this.textarea.requestFocus();
-        int carretPosition = textarea.getCaretPosition();
-        deleteAtPosition(carretPosition);
+        int caretPosition = textarea.getCaretPosition();
+        deleteAtPosition(caretPosition);
         this.textarea.setText(this.engine.getBufferClone().getText());
         //We have to position it manually or it will move to the beginning of the text
-        this.textarea.positionCaret(carretPosition);
+        this.textarea.positionCaret(caretPosition);
     }
 
     /**

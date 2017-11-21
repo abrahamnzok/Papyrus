@@ -334,6 +334,7 @@ public class BoardReceiverTest {
                 lengthResult, this.buffer.length());
     }
 
+
     @Test
     public void pasteNothing() throws Exception {
         String bufferState = "Test for paste nothing";
@@ -376,6 +377,20 @@ public class BoardReceiverTest {
         this.receiver.paste(0);
         assertEquals("We want to cut and paste",
                 bufferState, this.buffer.getText());
+    }
+
+    @Test
+    public void copyAndCheckClipboardStaste() throws Exception {
+        String bufferState = "je";
+        this.buffer.setText(bufferState);
+        this.receiver.select(0, bufferState.length());
+        this.receiver.copy();
+        this.receiver.paste(this.buffer.length()/2);
+        this.receiver.select(0, this.buffer.length());
+        this.receiver.copy();
+        this.receiver.paste(this.buffer.length());
+        assertEquals("We want paste at different positions",
+                "jjeejjee", this.buffer.getText());
     }
 
     @Test
