@@ -60,11 +60,7 @@ public class ClientInvoker extends Application implements Invoker {
 
         //Selection detection
         this.textarea.setOnMouseClicked(event -> {
-            if(this.textarea.getSelection().getLength() > 0){
-                this.engine.select(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
-            } else{
-                this.engine.select(0,0);
-            }
+            this.engine.select(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
         });
     }
 
@@ -140,8 +136,9 @@ public class ClientInvoker extends Application implements Invoker {
         Paste paste  = new Paste(caretPosition);
         paste.setReceiver(this.engine);
         this.setCommand(paste);
+        int newCaretPosition = caretPosition + this.engine.getClipboardClone().getClipboard().length();
         this.textarea.setText(this.engine.getBufferClone().getText());
-        this.textarea.positionCaret(caretPosition);
+        this.textarea.positionCaret(newCaretPosition);
     }
 
     /**
