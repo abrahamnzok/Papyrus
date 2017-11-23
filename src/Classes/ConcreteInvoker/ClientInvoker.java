@@ -42,10 +42,10 @@ public class ClientInvoker extends Application implements Invoker {
                 switch(event.getCode()){
                     case BACK_SPACE:
                         //Had to redefine it because the caretPosition move after pressing those keys
-                        deleteAtPosition(this.textarea.getCaretPosition()-1);
+                        this.deleteAtPosition(this.textarea.getCaretPosition()-1);
                         break;
                     case DELETE:
-                        deleteAtPosition(this.textarea.getCaretPosition());
+                        this.deleteAtPosition(this.textarea.getCaretPosition());
                         break;
                 }
             });
