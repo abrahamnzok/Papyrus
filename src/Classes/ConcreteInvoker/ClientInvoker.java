@@ -27,10 +27,21 @@ public class ClientInvoker extends Application implements Invoker {
 
     private Receiver engine;
 
+    /*Prevent conflict between actions*/
+    private enum ACTION {
+        PASTE,
+        DELETE,
+        NONE
+    }
+
+    private ACTION currentAction = ACTION.NONE;
+
     @Override
     public void start(Stage stage){
         //application must include start
     }
+
+
 
     @FXML
     private void initialize() {
@@ -49,7 +60,7 @@ public class ClientInvoker extends Application implements Invoker {
                         break;
                 }
             });
-            if(oldValue.length() < newValue.length()){
+            if(oldValue.length() < newValue.length() && this.currentAction == ACTION.NONE){
                 insertAtPosition(newValue, this.textarea.getCaretPosition());
             }
         });
@@ -115,12 +126,14 @@ public class ClientInvoker extends Application implements Invoker {
      */
     @FXML
     private void handleDelete(MouseEvent event) throws CloneNotSupportedException {
+        this.currentAction = ACTION.DELETE;
         this.textarea.requestFocus();
         int caretPosition = textarea.getCaretPosition();
         deleteAtPosition(caretPosition);
         this.textarea.setText(this.engine.getBufferClone().getText());
         //We have to position it manually or it will move to the beginning of the text
         this.textarea.positionCaret(caretPosition);
+        this.currentAction = ACTION.NONE;
     }
 
     /**
@@ -129,14 +142,18 @@ public class ClientInvoker extends Application implements Invoker {
      */
     @FXML
     private void handlePaste(MouseEvent event) throws CloneNotSupportedException {
+        this.currentAction = ACTION.PASTE;
         this.textarea.requestFocus();
         int caretPosition = this.textarea.getCaretPosition();
+        int oldLength = this.textarea.getLength();
         Paste paste  = new Paste(caretPosition);
         paste.setReceiver(this.engine);
         this.setCommand(paste);
-        int newCaretPosition = caretPosition + this.engine.getClipboardClone().getClipboard().length();
-        this.textarea.setText(this.engine.getBufferClone().getText());
-        this.textarea.positionCaret(newCaretPosition);
+        this.textarea.setText(new StringBuilder(this.textarea.getText()).insert(caretPosition, this.engine.getClipboardClone().getClipboard()).toString());
+        int newLength = this.textarea.getLength();
+        //Position the caret at the end of the pasted words
+        this.textarea.positionCaret(caretPosition+newLength-oldLength);
+        this.currentAction = ACTION.NONE;
     }
 
     /**
