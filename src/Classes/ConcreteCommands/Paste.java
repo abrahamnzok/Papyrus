@@ -59,7 +59,7 @@ public class Paste implements Command {
     }
 
     /**
-     * @return position where we pasted
+     * @return true if position is negative false otherwise.
      */
     public boolean isNegative(){
         return this.position < 0;
