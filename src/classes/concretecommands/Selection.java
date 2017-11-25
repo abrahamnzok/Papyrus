@@ -1,5 +1,6 @@
 package classes.concretecommands;
 
+import classes.concretemementos.SelectGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
@@ -60,7 +61,7 @@ public class Selection implements Command, Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new SelectGhost(this.start, this.end);
     }
 
     /**
@@ -68,7 +69,8 @@ public class Selection implements Command, Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        this.start = ( (SelectGhost) m).getStartState();
+        this.end = ((SelectGhost) m).getEndState();
     }
 
     /*
