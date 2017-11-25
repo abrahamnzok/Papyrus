@@ -17,9 +17,15 @@ public class Delete implements Command, Recordable {
      */
     private Receiver receiver;
 
-
     /**
      * Default constructor
+     */
+    public Delete() {
+        this.position = 0;
+    }
+
+    /**
+     * Preferred constructor
      */
     public Delete(int position) {
         this.position = position;
@@ -33,7 +39,7 @@ public class Delete implements Command, Recordable {
     }
 
     /**
-     * @param r
+     * @param r Receiver which will execute the task
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
@@ -49,7 +55,7 @@ public class Delete implements Command, Recordable {
     }
 
     /**
-     * @param m
+     * @param m from Which we will retrieve savedStates
      */
     @Override
     public void restore(Memento m) {
@@ -57,7 +63,7 @@ public class Delete implements Command, Recordable {
     }
 
     /**
-     * @param
+     * @param position of the character to delete
      */
     protected void setPosition(int position){
         this.position = position;

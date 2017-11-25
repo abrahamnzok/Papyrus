@@ -3,6 +3,8 @@
     <words>
       <w>mockreceiver</w>
       <w>mockselector</w>
+      <w>nonmocked</w>
+      <w>nonmockedelete</w>
     </words>
   </dictionary>
 </component>

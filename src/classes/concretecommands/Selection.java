@@ -36,6 +36,8 @@ public class Selection implements Command, Recordable {
      * Default constructor
      */
     public Selection() {
+        this.start = 0;
+        this.end = 0;
     }
 
     /**
@@ -46,7 +48,7 @@ public class Selection implements Command, Recordable {
     }
 
     /**
-     * @param r
+     * @param r Receiver which will execute the task
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
@@ -62,7 +64,7 @@ public class Selection implements Command, Recordable {
     }
 
     /**
-     * @param m
+     * @param m from which we will retrieve savedState
      */
     @Override
     public void restore(Memento m) {

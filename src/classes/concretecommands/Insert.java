@@ -18,6 +18,8 @@ public class Insert implements Command, Recordable {
      * Default constructor
      */
     public Insert() {
+        this.textToInsert = "";
+        this.position = 0;
     }
 
     public Insert(String textToInsert, int position){
@@ -31,8 +33,7 @@ public class Insert implements Command, Recordable {
     }
 
     /**
-     * @param r 
-     * @return
+     * @param r Receiver which will execute the task
      */
     public void setReceiver(Receiver r) {
         this.receiver = r;
@@ -86,7 +87,7 @@ public class Insert implements Command, Recordable {
     }
 
     /**
-     * @param m
+     * @param m from which we will retrieve savedState
      */
     @Override
     public void restore(Memento m) {
