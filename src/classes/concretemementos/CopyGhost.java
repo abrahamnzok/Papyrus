@@ -14,4 +14,5 @@ public class CopyGhost implements Memento {
     public CopyGhost() {
     }
 
+
 }

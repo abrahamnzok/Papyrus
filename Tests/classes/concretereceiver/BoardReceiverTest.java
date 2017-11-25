@@ -329,7 +329,6 @@ public class BoardReceiverTest {
         this.receiver.paste(0);
         this.receiver.paste(this.buffer.length()/2);
         this.receiver.paste(this.buffer.length()/4);
-        System.out.println(this.buffer.getText());
         assertEquals("We want to test multiple paste",
                 lengthResult, this.buffer.length());
     }

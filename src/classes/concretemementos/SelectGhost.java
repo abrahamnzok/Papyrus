@@ -21,7 +21,33 @@ public class SelectGhost implements Memento {
     /**
      * Default constructor
      */
-    public SelectGhost(int startState, int endState) {
+    public SelectGhost() {
     }
 
+    /**
+     * Preferred constructor
+     */
+    public SelectGhost(int startState, int endState) {
+        this.startState = startState;
+        this.endState = endState;
+    }
+
+    /**
+     *
+     */
+    public int getStartState(){
+        return this.startState;
+    }
+
+    public int getEndState(){
+        return this.endState;
+    }
+
+    protected void setStartState(int startState) {
+        this.startState = startState;
+    }
+
+    protected void setEndState(int endState) {
+        this.endState = endState;
+    }
 }

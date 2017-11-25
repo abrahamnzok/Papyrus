@@ -1,5 +1,10 @@
 package classes.components;
 
+import classes.concretecommands.Selection;
+import classes.concretemementos.SelectGhost;
+import interfaces.memento.Memento;
+import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,14 +17,17 @@ public class CarecorderTest {
 
     @Test
     public void recordCommands() throws Exception {
+
     }
 
     @Test
     public void replayCommands() throws Exception {
+
     }
 
     @Test
     public void stopRecordingCommand() throws Exception {
+
     }
 
 }

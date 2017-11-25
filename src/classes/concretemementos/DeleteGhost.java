@@ -1,6 +1,5 @@
 package classes.concretemementos;
 
-import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 
 /**
@@ -17,6 +16,7 @@ public class DeleteGhost implements Memento {
      * Default constructor
      */
     public DeleteGhost(int positionState) {
+        this.positionState = positionState;
     }
 
     /*
@@ -24,7 +24,7 @@ public class DeleteGhost implements Memento {
      */
 
     public int getPositionState(){
-        return 0;
+        return this.positionState;
     }
 
 

@@ -40,7 +40,6 @@ public class Delete implements Command, Recordable {
         this.receiver = r;
     }
 
-
     /**
      * @return Specific Memento for the specific Recordable
      */
@@ -56,4 +55,19 @@ public class Delete implements Command, Recordable {
     public void restore(Memento m) {
 
     }
+
+    /**
+     * @param
+     */
+    protected void setPosition(int position){
+        this.position = position;
+    }
+
+    /**
+     * @return position where to delete
+     */
+    public int getPosition(){
+        return this.position;
+    }
+
 }

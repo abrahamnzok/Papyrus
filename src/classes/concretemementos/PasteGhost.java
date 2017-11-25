@@ -11,19 +11,20 @@ public class PasteGhost implements Memento {
     /**
      *
      */
-    public int position;
+    private int positionState;
 
     /**
      * Default constructor
      */
-    public PasteGhost() {
+    public PasteGhost(int positionState) {
+        this.positionState = positionState;
     }
 
     /*
     *
     */
     public int getPositionState(){
-        return 0;
+        return this.positionState;
     }
 
 }
