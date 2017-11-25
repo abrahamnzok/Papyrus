@@ -69,8 +69,10 @@ public class Selection implements Command, Recordable {
      */
     @Override
     public void restore(Memento m) {
-        this.start = ( (SelectGhost) m).getStartState();
-        this.end = ((SelectGhost) m).getEndState();
+        if(m != null && SelectGhost.class.isInstance(m)) {
+            this.start = ((SelectGhost) m).getStartState();
+            this.end = ((SelectGhost) m).getEndState();
+        }
     }
 
     /*

@@ -92,7 +92,7 @@ public class SelectionTest {
     @Test
     public void restoreNothing() throws Exception {
         this.selection.setStart(12);
-        this.selection.setStart(14);
+        this.selection.setEnd(14);
         this.selection.restore(null);
         assertTrue(this.selection.getStart() == 12 && this.selection.getEnd() == 14);
     }
