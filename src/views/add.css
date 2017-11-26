@@ -2,13 +2,20 @@
     -fx-background-color: #2b3848;
 }
 
-Button{
+Button, MenuButton{
     -fx-border-radius: 0 0 0 0;
     -fx-background-radius: 0 0 0 0;
     /* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
     -fx-background-color: #364657;
     -fx-text-fill: whitesmoke;
-    -fx-font: roboto;
+    -fx-font: 13px roboto;
+}
+MenuButton .label{
+    -fx-text-fill: whitesmoke;
+}
+
+.menu-item .label{
+    -fx-text-fill: #364657;
 }
 
 TextArea {
