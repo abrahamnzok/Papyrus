@@ -2,6 +2,7 @@ package classes.concretecommands;
 
 import classes.concretemementos.DeleteGhost;
 import classes.concretemementos.InsertGhost;
+import classes.concretereceiver.BoardReceiver;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import org.junit.Before;
@@ -15,11 +16,14 @@ public class DeleteTest {
     private Receiver receiver;
     private Delete delete;
     private Delete nonmockedelete;
+    private Receiver receiver1;
+
     @Before
     public void setUp() throws Exception {
         this.delete = Mockito.mock(Delete.class);
         this.receiver = Mockito.mock(Receiver.class);
         this.nonmockedelete = new Delete();
+        this.receiver1 = new BoardReceiver();
     }
 
     @Test
@@ -58,7 +62,7 @@ public class DeleteTest {
     @Test
     public void restoreDeleteTest1() throws Exception {
         this.nonmockedelete.setPosition(14);
-        DeleteGhost pasteGhost = new DeleteGhost(10);
+        DeleteGhost pasteGhost = new DeleteGhost(this.receiver1,10);
         this.nonmockedelete.restore(pasteGhost);
         assertEquals("We are trying to retrieve last saved data of delete",
                 10, this.nonmockedelete.getPosition());
@@ -67,7 +71,7 @@ public class DeleteTest {
     @Test
     public void restoreWrongMemento() throws Exception {
         this.nonmockedelete.setPosition(14);
-        InsertGhost insertGhost = new InsertGhost("Cant do this!",10);
+        InsertGhost insertGhost = new InsertGhost(this.receiver1,"Cant do this!",10);
         this.nonmockedelete.restore(insertGhost);
         assertEquals("We are trying to retrieve last saved data of delete",
                 this.nonmockedelete.getPosition(), 14);

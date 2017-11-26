@@ -1,14 +1,38 @@
 package classes.components;
 
 import interfaces.memento.Memento;
+import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
 
-public class Carecorder implements Recorder {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Carecorder implements Recorder,Cloneable {
+
+    private List<Memento> mementoList;
+
+    /*
+     ** Preferred Constructor
+     */
+
+    public Carecorder(){
+        this.mementoList = new ArrayList<>();
+    }
+
     /**
      * @param memento to store
      */
     @Override
-    public void recordCommands(Memento memento) {
+    public void record(Memento memento) {
+        this.mementoList.add(memento);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void replay(Recordable recordable) {
 
     }
 
@@ -16,15 +40,14 @@ public class Carecorder implements Recorder {
      *
      */
     @Override
-    public Memento replayCommands() {
-        return null;
+    public void stop() {
     }
 
     /**
      *
      */
-    @Override
-    public void stopRecordingCommand() {
-
+    public List careClone() throws CloneNotSupportedException{
+        return ((List) ((ArrayList) this.mementoList).clone());
     }
+
 }

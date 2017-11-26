@@ -1,6 +1,7 @@
 package classes.concretemementos;
 
 import classes.concretecommands.Paste;
+import interfaces.Receiver.Receiver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,9 +9,11 @@ import static org.junit.Assert.*;
 
 public class PasteGhostTest {
     private PasteGhost pasteGhost;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
-        this.pasteGhost = new PasteGhost(10);
+        this.receiver = receiver;
+        this.pasteGhost = new PasteGhost(this.receiver,10);
     }
 
     @Test

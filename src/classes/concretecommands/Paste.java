@@ -1,5 +1,6 @@
 package classes.concretecommands;
 
+import classes.concretemementos.PasteGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
@@ -71,7 +72,7 @@ public class Paste implements Command, Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new PasteGhost(this.receiver, this.position);
     }
 
     /**
@@ -79,6 +80,9 @@ public class Paste implements Command, Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        if(m != null && PasteGhost.class.isInstance(m)){
+            this.receiver = ((PasteGhost) m).getReceiver();
+            this.position = ((PasteGhost) m).getPositionState();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package classes.concretecommands;
 
+import classes.concretemementos.DeleteGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
@@ -51,7 +52,7 @@ public class Delete implements Command, Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new DeleteGhost(this.receiver, this.position);
     }
 
     /**
@@ -59,7 +60,10 @@ public class Delete implements Command, Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        if( m != null && DeleteGhost.class.isInstance(m)){
+            this.receiver = ((DeleteGhost) m).getReceiver();
+            this.position = ((DeleteGhost) m).getPositionState();
+        }
     }
 
     /**

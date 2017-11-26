@@ -1,5 +1,6 @@
 package classes.concretemementos;
 
+import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 
 /**
@@ -10,12 +11,17 @@ public class InsertGhost implements Memento {
     /**
      *
      */
-    public String textState;
+    private String textState;
 
     /**
      *
      */
-    public int positionState;
+    private int positionState;
+
+    /**
+     *
+     */
+    public Receiver receiverState;
 
     /**
      * Default constructor
@@ -26,7 +32,8 @@ public class InsertGhost implements Memento {
     /**
      * Preferred constructor
      */
-    public InsertGhost(String textState, int positionState) {
+    public InsertGhost(Receiver receiverState,String textState, int positionState) {
+        this.receiverState  =receiverState;
         this.textState = textState;
         this.positionState = positionState;
     }
@@ -50,6 +57,14 @@ public class InsertGhost implements Memento {
      */
     public String getTextState(){
         return this.textState;
+    }
+
+    /*
+     *
+     */
+
+    public Receiver getReceiver(){
+        return this.receiverState;
     }
 
 

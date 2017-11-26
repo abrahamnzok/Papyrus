@@ -61,7 +61,7 @@ public class Selection implements Command, Recordable {
      */
     @Override
     public Memento save() {
-        return new SelectGhost(this.start, this.end);
+        return new SelectGhost(this.receiver, this.start, this.end);
     }
 
     /**
@@ -70,6 +70,7 @@ public class Selection implements Command, Recordable {
     @Override
     public void restore(Memento m) {
         if(m != null && SelectGhost.class.isInstance(m)) {
+            this.receiver = ((SelectGhost) m).getReceiver();
             this.start = ((SelectGhost) m).getStartState();
             this.end = ((SelectGhost) m).getEndState();
         }
@@ -78,14 +79,14 @@ public class Selection implements Command, Recordable {
     /*
     * setting start of selection from configurator
     */
-    protected void setStart(int start){
+    public void setStart(int start){
         this.start = start;
     }
 
     /*
      * setting end of selection from the configurator
      */
-    protected void setEnd(int end){
+    public void setEnd(int end){
         this.end = end;
     }
 

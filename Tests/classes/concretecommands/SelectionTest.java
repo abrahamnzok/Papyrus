@@ -2,6 +2,7 @@ package classes.concretecommands;
 
 import classes.concretemementos.InsertGhost;
 import classes.concretemementos.SelectGhost;
+import classes.concretereceiver.BoardReceiver;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import org.junit.Before;
@@ -16,11 +17,14 @@ public class SelectionTest {
     private Receiver mockreceiver;
     private Selection mockselector;
     private Selection selection;
+    private Receiver receiver;
+
     @Before
     public void setUp() throws Exception {
         this.mockselector = Mockito.mock(Selection.class);
         this.mockreceiver = Mockito.mock(Receiver.class);
         this.selection = new Selection(10, 12);
+        this.receiver = new BoardReceiver();
     }
 
     @Test
@@ -74,7 +78,7 @@ public class SelectionTest {
     public void restore() throws Exception {
         this.selection.setStart(12);
         this.selection.setStart(23);
-        SelectGhost selection = new SelectGhost(13, 34);
+        SelectGhost selection = new SelectGhost(this.receiver,13, 34);
         this.selection.restore(selection);
         assertTrue("We want to retrieve savedParams and check ",
                 this.selection.getStart() == 13 && this.selection.getEnd() == 34);
@@ -84,7 +88,7 @@ public class SelectionTest {
     public void restoreCheckArgument() throws Exception {
         this.selection.setStart(12);
         this.selection.setStart(23);
-        SelectGhost selector = new SelectGhost(13, 34);
+        SelectGhost selector = new SelectGhost(this.receiver,13, 34);
         this.selection.restore(selector);
         assertTrue(Memento.class.isInstance(selector));
     }
@@ -101,7 +105,7 @@ public class SelectionTest {
     public void restoreWrongMemento() throws Exception {
         this.selection.setStart(14);
         this.selection.setEnd(15);
-        InsertGhost insertGhost = new InsertGhost("Cant do this!",10);
+        InsertGhost insertGhost = new InsertGhost(this.receiver,"Cant do this!",10);
         this.selection.restore(insertGhost);
         assertTrue("We are trying to retrieve last saved data of delete",
                 this.selection.getStart() == 14  && this.selection.getEnd() == 15);
