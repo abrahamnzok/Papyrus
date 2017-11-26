@@ -1,6 +1,7 @@
 package classes.concretemementos;
 
 import classes.concretecommands.Delete;
+import classes.concretereceiver.BoardReceiver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class DeleteGhostTest {
     private Delete delete;
     @Before
     public void setUp() throws Exception {
-        this.deleteGhost = new DeleteGhost(23);
+        this.deleteGhost = new DeleteGhost(new BoardReceiver(),23);
         this.delete = new Delete(23);
     }
 

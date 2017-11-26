@@ -1,5 +1,6 @@
 package classes.concretecommands;
 
+import classes.concretemementos.InsertGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
@@ -11,25 +12,25 @@ import interfaces.recordable.Recordable;
 public class Insert implements Command, Recordable {
 
     private Receiver receiver;
-    private String textToInsert;
+    private String textinput;
     private int position;
 
     /**
      * Default constructor
      */
     public Insert() {
-        this.textToInsert = "";
+        this.textinput = "";
         this.position = 0;
     }
 
-    public Insert(String textToInsert, int position){
+    public Insert(String textinput, int position){
         this.setPosition(position);
-        this.textToInsert = textToInsert;
+        this.textinput = textinput;
         this.position = this.getPosition() ;
     }
 
     public void execute() {
-        this.receiver.insert(this.textToInsert, this.position);
+        this.receiver.insert(this.textinput, this.position);
     }
 
     /**
@@ -40,18 +41,18 @@ public class Insert implements Command, Recordable {
     }
 
     /**
-     * @return textToInsert
+     * @return textinput
      */
-    public String getTextToInsert() {
-        return this.textToInsert;
+    public String getTextinput() {
+        return this.textinput;
     }
 
     /**
-     * @param textToInsert text that we need to insert
+     * @param textinput text that we need to insert
      * @return
      */
-    public void setTextToInsert(String textToInsert) {
-        this.textToInsert = textToInsert;
+    public void setTextinput(String textinput) {
+        this.textinput = textinput;
     }
 
     /**
@@ -83,7 +84,7 @@ public class Insert implements Command, Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new InsertGhost(this.receiver, this.textinput, this.position);
     }
 
     /**
@@ -91,6 +92,10 @@ public class Insert implements Command, Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        if( m != null && InsertGhost.class.isInstance(m)){
+            this.receiver = ((InsertGhost) m).getReceiver();
+            this.textinput = ((InsertGhost) m).getTextState();
+            this.position = ((InsertGhost) m ).getPositionState();
+        }
     }
 }

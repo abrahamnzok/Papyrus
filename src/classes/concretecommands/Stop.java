@@ -25,6 +25,7 @@ public class Stop implements Command {
      */
     public void execute() {
         // TODO implement here
+        this.recorder.stop();
     }
 
     /**
@@ -32,6 +33,7 @@ public class Stop implements Command {
      */
     public void setReceiver(Recorder carecorder) {
         // TODO implement here
+        this.recorder = carecorder;
     }
 
 }

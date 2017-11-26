@@ -1,6 +1,7 @@
 package classes.concretemementos;
 
-import classes.concretecommands.Selection;
+import classes.concretereceiver.BoardReceiver;
+import interfaces.Receiver.Receiver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,9 +9,11 @@ import static org.junit.Assert.*;
 
 public class SelectGhostTest {
     private SelectGhost selectGhost;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
-        this.selectGhost = new SelectGhost(10, 12);
+        this.receiver = new BoardReceiver();
+        this.selectGhost = new SelectGhost(this.receiver,10, 12);
     }
 
     @Test

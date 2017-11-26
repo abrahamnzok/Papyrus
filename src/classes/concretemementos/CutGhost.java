@@ -8,10 +8,24 @@ import interfaces.memento.Memento;
  */
 public class CutGhost implements Memento {
 
-    /**
+    /*
+     *
+     */
+    private Receiver receiver;
+
+
+    /*
      * Default constructor
      */
-    public CutGhost() {
+    public CutGhost(Receiver receiver) {
+        this.receiver = receiver;
+    }
+
+    /*
+     *
+     */
+    public Receiver receiver(){
+        return this.receiver;
     }
 
 }

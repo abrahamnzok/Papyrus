@@ -19,6 +19,12 @@ public class SelectGhost implements Memento {
     private int endState;
 
     /**
+     *
+     */
+    private Receiver receiver;
+
+
+    /**
      * Default constructor
      */
     public SelectGhost() {
@@ -27,7 +33,8 @@ public class SelectGhost implements Memento {
     /**
      * Preferred constructor
      */
-    public SelectGhost(int startState, int endState) {
+    public SelectGhost(Receiver receiver, int startState, int endState) {
+        this.receiver = receiver;
         this.startState = startState;
         this.endState = endState;
     }
@@ -49,5 +56,9 @@ public class SelectGhost implements Memento {
 
     protected void setEndState(int endState) {
         this.endState = endState;
+    }
+
+    public Receiver getReceiver(){
+        return this.receiver;
     }
 }

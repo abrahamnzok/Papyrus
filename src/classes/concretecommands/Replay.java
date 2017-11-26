@@ -24,15 +24,12 @@ public class Replay implements Command {
      *
      */
     public void execute() {
-        // TODO implement here
-        this.recorder.replayCommands();
     }
 
     /**
-     * @param c  
+     * @param carecorder the Object that knows how to store
      */
     public void setReceiver(Recorder carecorder) {
-        // TODO implement here
         this.recorder = carecorder;
     }
 
