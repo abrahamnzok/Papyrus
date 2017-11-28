@@ -1,6 +1,7 @@
 package classes.recordablecommands;
 
 import classes.concretecommands.Delete;
+import classes.concretemementos.DeleteGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 
@@ -28,7 +29,7 @@ public class DeleteRecordable extends Delete implements Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new DeleteGhost(super.getReceiver(), super.getPosition());
     }
 
     /**
@@ -36,6 +37,9 @@ public class DeleteRecordable extends Delete implements Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        if( m != null && DeleteGhost.class.isInstance(m)){
+            super.setReceiver(((DeleteGhost) m).getReceiver());
+            super.setPosition(((DeleteGhost) m).getPositionState());
+        }
     }
 }
