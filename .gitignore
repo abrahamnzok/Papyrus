@@ -9,4 +9,9 @@ out/
 .idea/workspace.xml
 .idea/uiDesigner.xml
 Papyrus.iml
-
+classes/components
+classes/concretecommands
+classes/concretemementos
+classes/concretereceiver
+classes/concreteinvoker
+src/classes/v3/
