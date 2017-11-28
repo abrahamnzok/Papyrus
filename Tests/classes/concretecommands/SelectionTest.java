@@ -18,7 +18,7 @@ public class SelectionTest {
     public void setUp() throws Exception {
         this.mockselector = Mockito.mock(Selection.class);
         this.mockreceiver = Mockito.mock(Receiver.class);
-        this.selection = new Selection();
+        this.selection = new Selection(10, 12);
     }
 
     @Test

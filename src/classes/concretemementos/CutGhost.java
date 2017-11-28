@@ -24,7 +24,7 @@ public class CutGhost implements Memento {
     /*
      *
      */
-    public Receiver receiver(){
+    public Receiver getReceiver(){
         return this.receiver;
     }
 

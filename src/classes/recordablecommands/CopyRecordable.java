@@ -1,6 +1,7 @@
 package classes.recordablecommands;
 
 import classes.concretecommands.Copy;
+import classes.concretemementos.CopyGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 
@@ -14,7 +15,7 @@ public class CopyRecordable extends Copy implements Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new CopyGhost(super.getReceiver());
     }
 
     /**
@@ -22,6 +23,8 @@ public class CopyRecordable extends Copy implements Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        if( m != null && CopyGhost.class.isInstance(m)){
+            super.setReceiver(((CopyGhost)m).getReceiver());
+        }
     }
 }

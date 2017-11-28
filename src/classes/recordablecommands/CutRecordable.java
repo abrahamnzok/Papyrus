@@ -1,6 +1,7 @@
 package classes.recordablecommands;
 
 import classes.concretecommands.Cut;
+import classes.concretemementos.CutGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 
@@ -12,7 +13,7 @@ public class CutRecordable extends Cut implements Recordable {
      */
     @Override
     public Memento save() {
-        return null;
+        return new CutGhost(super.getReceiver());
     }
 
     /**
@@ -20,6 +21,7 @@ public class CutRecordable extends Cut implements Recordable {
      */
     @Override
     public void restore(Memento m) {
-
+        if(m != null && CutGhost.class.isInstance(m)){
+        }
     }
 }

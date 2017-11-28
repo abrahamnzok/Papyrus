@@ -62,7 +62,7 @@ public class SelectionRecordableTest {
     }
 
     @Test
-    public void restoreCheckArgument() throws Exception {
+    public void receiverStateIsNotNull() throws Exception {
         this.selection.setStart(12);
         this.selection.setEnd(23);
         this.selection.setReceiver(new BoardReceiver());
