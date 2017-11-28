@@ -2,19 +2,23 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
 /**
  * 
  */
-public class Cut implements Command, Recordable {
+public class Cut implements Command{
 
 
     /**
      *
      */
     private Receiver receiver;
+
+    /**
+     *
+     */
+    private Recorder carecorder;
 
     /**
      * Default constructor
@@ -39,18 +43,10 @@ public class Cut implements Command, Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
+     *
      */
-    @Override
-    public Memento save() {
-        return null;
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
-    /**
-     * @param m
-     */
-    @Override
-    public void restore(Memento m) {
-
-    }
 }

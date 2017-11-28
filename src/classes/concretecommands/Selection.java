@@ -6,7 +6,7 @@ import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 
-public class Selection implements Command, Recordable {
+public class Selection implements Command {
 
     /**
      *
@@ -56,26 +56,6 @@ public class Selection implements Command, Recordable {
         this.receiver = r;
     }
 
-    /**
-     * @return Specific Memento for the specific Recordable
-     */
-    @Override
-    public Memento save() {
-        return new SelectGhost(this.receiver, this.start, this.end);
-    }
-
-    /**
-     * @param m from which we will retrieve savedState
-     */
-    @Override
-    public void restore(Memento m) {
-        if(m != null && SelectGhost.class.isInstance(m)) {
-            this.receiver = ((SelectGhost) m).getReceiver();
-            this.start = ((SelectGhost) m).getStartState();
-            this.end = ((SelectGhost) m).getEndState();
-        }
-    }
-
     /*
     * setting start of selection from configurator
     */
@@ -102,5 +82,12 @@ public class Selection implements Command, Recordable {
      */
     public int getEnd(){
         return this.end;
+    }
+
+    /**
+     *
+     */
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 }

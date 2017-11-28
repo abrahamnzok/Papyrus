@@ -15,11 +15,21 @@ public interface Recorder {
     /**
      *
      */
-    public void replay(Recordable recordable);
+    public void replay();
 
     /**
      *
      */
-    public void stop();
+    public void setRecording(boolean record);
+
+    /**
+     *
+     */
+    public boolean isRecording();
+
+    /**
+     *
+     */
+    public boolean stop();
 
 }

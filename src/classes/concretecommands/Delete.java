@@ -1,22 +1,29 @@
 package classes.concretecommands;
 
-import classes.concretemementos.DeleteGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
 /**
  *
  */
-public class Delete implements Command, Recordable {
+public class Delete implements Command {
 
 
-    private int position;
     /**
      *
      */
     private Receiver receiver;
+
+    /**
+     *
+     */
+    private Recorder carecorder;
+    /*
+     *
+     */
+    private int position;
+
 
     /**
      * Default constructor
@@ -48,28 +55,9 @@ public class Delete implements Command, Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
-     */
-    @Override
-    public Memento save() {
-        return new DeleteGhost(this.receiver, this.position);
-    }
-
-    /**
-     * @param m from Which we will retrieve savedStates
-     */
-    @Override
-    public void restore(Memento m) {
-        if( m != null && DeleteGhost.class.isInstance(m)){
-            this.receiver = ((DeleteGhost) m).getReceiver();
-            this.position = ((DeleteGhost) m).getPositionState();
-        }
-    }
-
-    /**
      * @param position of the character to delete
      */
-    protected void setPosition(int position){
+    public void setPosition(int position){
         this.position = position;
     }
 
@@ -78,6 +66,13 @@ public class Delete implements Command, Recordable {
      */
     public int getPosition(){
         return this.position;
+    }
+
+    /**
+     *
+     */
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
 }

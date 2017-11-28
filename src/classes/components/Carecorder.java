@@ -1,7 +1,6 @@
 package classes.components;
 
 import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
 
 import java.util.HashMap;
@@ -24,13 +23,6 @@ public class Carecorder implements Recorder,Cloneable {
      */
     @Override
     public void record(Memento memento) {
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void replay(Recordable recordable) {
 
     }
 
@@ -38,7 +30,31 @@ public class Carecorder implements Recorder,Cloneable {
      *
      */
     @Override
-    public void stop() {
+    public void replay() {
+
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void setRecording(boolean record) {
+    }
+
+    /**
+     *
+     */
+    @Override
+    public boolean isRecording() {
+        return false;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public boolean stop() {
+        return false;
     }
 
     /**

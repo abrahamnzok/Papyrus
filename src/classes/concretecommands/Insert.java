@@ -1,19 +1,22 @@
 package classes.concretecommands;
 
-import classes.concretemementos.InsertGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
 /**
  * 
  */
-public class Insert implements Command, Recordable {
+public class Insert implements Command {
 
     private Receiver receiver;
     private String textinput;
     private int position;
+
+    /**
+     *
+     */
+    private Recorder carecorder;
 
     /**
      * Default constructor
@@ -78,24 +81,11 @@ public class Insert implements Command, Recordable {
         return this.position < 0;
     }
 
-
     /**
-     * @return Specific Memento for the specific Recordable
+     *
      */
-    @Override
-    public Memento save() {
-        return new InsertGhost(this.receiver, this.textinput, this.position);
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
-    /**
-     * @param m from which we will retrieve savedState
-     */
-    @Override
-    public void restore(Memento m) {
-        if( m != null && InsertGhost.class.isInstance(m)){
-            this.receiver = ((InsertGhost) m).getReceiver();
-            this.textinput = ((InsertGhost) m).getTextState();
-            this.position = ((InsertGhost) m ).getPositionState();
-        }
-    }
 }
