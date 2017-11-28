@@ -1,10 +1,7 @@
 package classes.concretecommands;
 
-import classes.concretemementos.SelectGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 
 public class Selection implements Command {
 
