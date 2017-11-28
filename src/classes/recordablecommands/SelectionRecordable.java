@@ -2,7 +2,6 @@ package classes.recordablecommands;
 
 import classes.concretecommands.Selection;
 import classes.concretemementos.SelectGhost;
-import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
@@ -47,11 +46,15 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-     * @param m
+     * @param m memento state we want to restore to the originator
      */
     @Override
     public void restore(Memento m) {
-
+        if( m != null && SelectGhost.class.isInstance(m)){
+            super.setStart(((SelectGhost) m).getStartState());
+            super.setEnd(((SelectGhost) m).getEndState());
+            super.setReceiver(((SelectGhost) m).getReceiver());
+        }
     }
 
     /*

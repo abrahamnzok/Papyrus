@@ -3,6 +3,7 @@ package classes.recordablecommands;
 import classes.concretemementos.InsertGhost;
 import classes.concretemementos.SelectGhost;
 import classes.concretereceiver.BoardReceiver;
+import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class SelectionRecordableTest {
     public void saveTest3() throws Exception {
         this.selection.setStart(10);
         this.selection.setStart(23);
-        SelectGhost selectGhost =(SelectGhost) this.selection.save();
+        SelectGhost selectGhost = (SelectGhost) this.selection.save();
         assertEquals(this.selection.getEnd(), selectGhost.getEndState());
     }
 
@@ -64,9 +65,11 @@ public class SelectionRecordableTest {
     public void restoreCheckArgument() throws Exception {
         this.selection.setStart(12);
         this.selection.setEnd(23);
+        this.selection.setReceiver(new BoardReceiver());
         SelectGhost selector = new SelectGhost(this.selection.getReceiver(),13, 34);
         this.selection.restore(selector);
-        assertTrue(Memento.class.isInstance(selector) && BoardReceiver.class.isInstance(this.selection.getReceiver()));
+        assertTrue(Memento.class.isInstance(selector)
+                && Receiver.class.isInstance(this.selection.getReceiver()));
     }
 
     @Test
