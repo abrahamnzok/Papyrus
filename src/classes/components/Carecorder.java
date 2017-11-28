@@ -53,14 +53,14 @@ public class Carecorder implements Recorder,Cloneable {
      *
      */
     @Override
-    public boolean stop() {
-        return false;
+    public void stop() {
+
     }
 
     /**
      *
      */
-    public Map careClone() throws CloneNotSupportedException{
+    public Map careclone() throws CloneNotSupportedException{
         return ((Map) ((HashMap) this.mementoMap).clone());
     }
 

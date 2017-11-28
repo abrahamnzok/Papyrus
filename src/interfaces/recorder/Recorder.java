@@ -30,6 +30,6 @@ public interface Recorder {
     /**
      *
      */
-    public boolean stop();
+    public void stop();
 
 }
