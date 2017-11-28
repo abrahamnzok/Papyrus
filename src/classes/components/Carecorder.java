@@ -4,20 +4,19 @@ import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Carecorder implements Recorder,Cloneable {
 
-    private List<Memento> mementoList;
+    private Map<Class,Memento> mementoMap;
 
     /*
      ** Preferred Constructor
      */
 
     public Carecorder(){
-        this.mementoList = new ArrayList<>();
+        this.mementoMap = new HashMap<>();
     }
 
     /**
@@ -25,7 +24,6 @@ public class Carecorder implements Recorder,Cloneable {
      */
     @Override
     public void record(Memento memento) {
-        this.mementoList.add(memento);
     }
 
     /**
@@ -46,8 +44,8 @@ public class Carecorder implements Recorder,Cloneable {
     /**
      *
      */
-    public List careClone() throws CloneNotSupportedException{
-        return ((List) ((ArrayList) this.mementoList).clone());
+    public Map careClone() throws CloneNotSupportedException{
+        return ((Map) ((HashMap) this.mementoMap).clone());
     }
 
 }
