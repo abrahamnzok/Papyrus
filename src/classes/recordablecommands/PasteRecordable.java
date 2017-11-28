@@ -31,7 +31,7 @@ public class PasteRecordable extends Paste implements Recordable {
     }
 
     /**
-     * @param m
+     * @param m memento's state we want to restore to the originator
      */
     @Override
     public void restore(Memento m) {
