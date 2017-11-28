@@ -10,11 +10,11 @@ public interface Recordable {
     /**
      * @return Specific Memento for the specific Recordable
      */
-    public Memento save();
+    Memento save();
 
     /**
      * @param m
      */
-    public void restore(Memento m);
+    void restore(Memento m);
 
 }

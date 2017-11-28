@@ -1,7 +1,6 @@
 package interfaces.recorder;
 
 import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 
 /**
  * 
@@ -10,26 +9,26 @@ public interface Recorder {
     /**
      * @param memento  to store
      */
-    public void record(Memento memento);
+    void record(Memento memento);
 
     /**
      *
      */
-    public void replay();
+    void replay();
 
     /**
      *
      */
-    public void setRecording(boolean record);
+    void setrecording();
 
     /**
      *
      */
-    public boolean isRecording();
+    boolean isrecording();
 
     /**
      *
      */
-    public void stop();
+    void stoprecording();
 
 }
