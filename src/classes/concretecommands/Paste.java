@@ -26,10 +26,6 @@ public class Paste implements Command {
         this.position = 0;
     }
 
-    public Paste(Receiver r) {
-        this.receiver = r;
-    }
-
     public Paste(int position){
         this.position = position;
     }

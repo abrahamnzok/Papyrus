@@ -30,10 +30,6 @@ public class Selection implements Command {
         this.end = end;
     }
 
-    public Selection(Receiver r) {
-        this.receiver = r;
-    }
-
     /**
      * Default constructor
      */

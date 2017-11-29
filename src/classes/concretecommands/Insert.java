@@ -21,10 +21,6 @@ public class Insert implements Command {
         this.position = 0;
     }
 
-    public Insert(Receiver r) {
-        this.receiver = r;
-    }
-
     public Insert(String textToInsert, int position){
         this.setPosition(position);
         this.textinput = textinput;

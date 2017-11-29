@@ -30,12 +30,18 @@ public class Main extends Application {
         Receiver engine = new BoardReceiver();
 
         //The client instanciate all the commands and give them to the invoker.
-        Insert insert = new Insert(engine);
-        Delete delete = new Delete(engine);
-        Selection select = new Selection(engine);
-        Cut cut = new Cut(engine);
-        Copy copy = new Copy(engine);
-        Paste paste = new Paste(engine);
+        Insert insert = new Insert();
+        insert.setReceiver(engine);
+        Delete delete = new Delete();
+        delete.setReceiver(engine);
+        Selection select = new Selection();
+        select.setReceiver(engine);
+        Cut cut = new Cut();
+        cut.setReceiver(engine);
+        Copy copy = new Copy();
+        copy.setReceiver(engine);
+        Paste paste = new Paste();
+        paste.setReceiver(engine);
 
         Map<String, Command> commands = new HashMap<>();
         commands.put("insert", insert);
