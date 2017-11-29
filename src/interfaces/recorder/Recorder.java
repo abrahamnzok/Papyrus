@@ -9,7 +9,7 @@ public interface Recorder {
     /**
      * @param memento  to store
      */
-    void record(Memento memento);
+    void record(Memento memento) throws NoSuchMethodException;
 
     /**
      *

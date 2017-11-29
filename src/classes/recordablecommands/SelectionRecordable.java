@@ -8,15 +8,10 @@ import interfaces.recorder.Recorder;
 
 public class SelectionRecordable extends Selection implements Recordable {
 
-    private Recorder recorder;
-
     /**
      *
      */
-    @Override
-    public void execute() {
-        super.execute();
-    }
+    private Recorder recorder;
 
     /**
      * Default constructor
@@ -35,6 +30,14 @@ public class SelectionRecordable extends Selection implements Recordable {
     public SelectionRecordable(int start, int end) {
         super(start, end);
 
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void execute() {
+        super.execute();
     }
 
     /**

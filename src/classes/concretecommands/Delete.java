@@ -2,7 +2,6 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.recorder.Recorder;
 
 /**
  *
@@ -19,7 +18,6 @@ public class Delete implements Command {
      *
      */
     private int position;
-
 
     /**
      * Default constructor

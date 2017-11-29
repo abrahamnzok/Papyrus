@@ -23,7 +23,7 @@ public class Insert implements Command {
 
     public Insert(String textToInsert, int position){
         this.setPosition(position);
-        this.textinput = textinput;
+        this.textinput = textToInsert;
         this.position = this.getPosition() ;
     }
 

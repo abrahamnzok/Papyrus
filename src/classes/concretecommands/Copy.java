@@ -2,9 +2,6 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
-import interfaces.recorder.Recorder;
 
 public class Copy implements Command{
 

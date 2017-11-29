@@ -6,7 +6,6 @@ import classes.concretecommands.Stop;
 import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
-import interfaces.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +15,6 @@ public class CarecorderTest {
     private Record startrecording;
     private Stop stoprecording;
     private Replay replay;
-    private Buffer buffer;
-    private ClipBoard clipBoard;
-    private Ranger ranger;
     private Receiver receiver;
     private SelectionRecordable selection;
     private CutRecordable cut;
@@ -32,7 +28,7 @@ public class CarecorderTest {
         this.receiver = new BoardReceiver();
         this.selection = new SelectionRecordable();
         this.cut = new CutRecordable();
-        this.delete = new DeleteRecordable(10);
+        this.delete = new DeleteRecordable();
         this.insert = new InsertRecordable();
         this.paste = new PasteRecordable();
         this.copy = new CopyRecordable();
@@ -49,16 +45,12 @@ public class CarecorderTest {
     public void recordTest1() throws Exception {
         this.insert.setReceiver(this.receiver);
         this.selection.setReceiver(this.receiver);
-        this.delete.setReceiver(this.receiver);
-        this.insert.setTextinput("We try to do testing before coding");
-        this.insert.setPosition(0);
-        this.selection.setStart(10);
-        this.selection.setEnd(15);
-        this.delete.setPosition(10);
+        this.copy.setReceiver(this.receiver);
         this.recorder.record(this.insert.save());
-        this.recorder.record(this.delete.save());
+        this.recorder.record(this.copy.save());
         this.recorder.record(this.selection.save());
-        assertTrue(!this.recorder.careclone().isEmpty());
+        System.out.println(this.recorder.careclone().size());
+        //assertTrue(!this.recorder.careclone().isEmpty());
     }
 
     @Test
@@ -78,7 +70,18 @@ public class CarecorderTest {
 
     @Test
     public void recordTest3() throws Exception {
-
+        this.insert.setReceiver(this.receiver);
+        this.insert.setTextinput("We try to do testing before coding");
+        this.insert.setPosition(0);
+        this.recorder.record(this.insert.save());
+        System.out.println(this.recorder.careclone().size());
+       /* Pair<?, ?> p = (Pair<?, ?>) this.recorder.careclone().get(0);
+        Memento insertGhost =  (Memento) p.getValue();
+        InsertGhost real = (InsertGhost) insertGhost;
+        this.insert.restore(real);
+        assertEquals("Check if buffers contains insert object text",
+                real.getTextState(), this.insert.getTextinput());
+                */
     }
 
     @Test

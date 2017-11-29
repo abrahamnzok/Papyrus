@@ -23,8 +23,8 @@ public class Carecorder implements Recorder,Cloneable {
      * @param memento to store
      */
     @Override
-    public void record(Memento memento) {
-
+    public void record(Memento memento) throws NoSuchMethodException {
+        this.container.add(new Pair<>(memento.getClass().getConstructor(), memento));
     }
 
     /**
