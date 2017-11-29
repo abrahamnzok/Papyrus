@@ -11,6 +11,6 @@ public interface Invoker {
      * @param cmd
      * @return
      */
-    public void setCommand(Command cmd );
+    void setCommand(Command cmd );
 
 }

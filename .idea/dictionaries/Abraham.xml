@@ -2,10 +2,13 @@
   <dictionary name="Abraham">
     <words>
       <w>careclone</w>
+      <w>isrecording</w>
       <w>mockreceiver</w>
       <w>mockselector</w>
       <w>nonmocked</w>
       <w>nonmockedelete</w>
+      <w>setrecording</w>
+      <w>stoprecording</w>
     </words>
   </dictionary>
 </component>
