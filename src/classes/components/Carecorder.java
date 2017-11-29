@@ -3,19 +3,19 @@ package classes.components;
 import interfaces.memento.Memento;
 import interfaces.recorder.Recorder;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Carecorder implements Recorder,Cloneable {
 
-    private Map<Class,Memento> mementoMap;
+    private List<Pair<Class,Memento>> container;
 
     /*
      ** Preferred Constructor
      */
 
     public Carecorder(){
-        this.mementoMap = new HashMap<>();
+        this.container = new ArrayList<>();
     }
 
     /**
@@ -38,14 +38,14 @@ public class Carecorder implements Recorder,Cloneable {
      *
      */
     @Override
-    public void setRecording(boolean record) {
+    public void setrecording() {
     }
 
     /**
      *
      */
     @Override
-    public boolean isRecording() {
+    public boolean isrecording() {
         return false;
     }
 
@@ -53,15 +53,15 @@ public class Carecorder implements Recorder,Cloneable {
      *
      */
     @Override
-    public void stop() {
+    public void stoprecording() {
 
     }
 
     /**
      *
      */
-    public Map careclone() throws CloneNotSupportedException{
-        return ((Map) ((HashMap) this.mementoMap).clone());
+    public List careclone() throws CloneNotSupportedException{
+        return ((List) ((ArrayList<Pair<Class,Memento>>) this.container).clone());
     }
 
 }

@@ -1,16 +1,21 @@
 package classes.components;
 
-import classes.concretecommands.*;
-
+import classes.concretecommands.Record;
+import classes.concretecommands.Replay;
+import classes.concretecommands.Stop;
 import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
+import interfaces.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class CarecorderTest {
+    private Record startrecording;
+    private Stop stoprecording;
+    private Replay replay;
     private Buffer buffer;
     private ClipBoard clipBoard;
     private Ranger ranger;
@@ -32,6 +37,12 @@ public class CarecorderTest {
         this.paste = new PasteRecordable();
         this.copy = new CopyRecordable();
         this.recorder = new Carecorder();
+        this.startrecording = new Record();
+        this.stoprecording = new Stop();
+        this.replay = new Replay();
+        this.startrecording.setReceiver(this.recorder);
+        this.stoprecording.setReceiver(this.recorder);
+        this.replay.setReceiver(this.recorder);
     }
 
     @Test
@@ -56,12 +67,11 @@ public class CarecorderTest {
         this.insert.setTextinput("We try to do testing before coding");
         this.insert.setPosition(0);
         this.recorder.record(this.insert.save());
-        this.receiver.insert(this.insert.getTextinput(), this.insert.getPosition());
-        this.recorder.stop();
+        this.insert.execute();
         this.insert.setTextinput(" After we can implement methods");
-        this.insert.setPosition(this.receiver.getBufferClone().length() );
-        this.receiver.insert(this.insert.getTextinput(), this.insert.getPosition());
-        this.recorder.replay();
+        this.insert.setPosition(this.receiver.getBufferClone().length());
+        this.insert.execute();
+        this.replay.execute();
         assertEquals("Check if buffers contains insert object text",
                 "We try to do testing before coding", this.receiver.getBufferClone().getText());
     }
