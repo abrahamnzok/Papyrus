@@ -39,7 +39,10 @@ public class Pair<F, S> implements PairInterface{
         if (o == null || !(o instanceof Pair)) return false;
 
         Pair<?, ?> pair = (Pair<?, ?>) o;
-        return this.value.getClass().isInstance(pair.getValue()) || (key != null ? key.equals(pair.getKey()) : pair.getKey() == null) && (value != null ? value.equals(pair.getValue()) : pair.getValue() == null);
+        return key.hashCode() == pair.key.hashCode() && value.hashCode() == pair.value.hashCode()
+                || this.value.getClass().isInstance(pair.getValue())
+                || (key != null ? key.equals(pair.getKey()) : pair.getKey() == null)
+                && (value != null ? value.equals(pair.getValue()) : pair.getValue() == null);
     }
     /**
      * Compute a hash code using the hash codes of the underlying objects

@@ -3,12 +3,13 @@ package classes.components;
 import interfaces.memento.Memento;
 import interfaces.recorder.Recorder;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Carecorder implements Recorder,Cloneable {
 
-    private List<Pair<Class,Memento>> container;
+    private List<Pair<Constructor,Memento>> container;
 
     /*
      ** Preferred Constructor
@@ -61,7 +62,7 @@ public class Carecorder implements Recorder,Cloneable {
      *
      */
     public List careclone() throws CloneNotSupportedException{
-        return ((List) ((ArrayList<Pair<Class,Memento>>) this.container).clone());
+        return ((List) ((ArrayList<Pair<Constructor,Memento>>) this.container).clone());
     }
 
 }
