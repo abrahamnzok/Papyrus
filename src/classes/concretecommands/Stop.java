@@ -4,7 +4,8 @@ import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
 public class Stop implements Command {
-    /*
+
+    /**
      *
      */
     private Recorder recorder;

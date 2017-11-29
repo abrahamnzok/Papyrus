@@ -37,7 +37,7 @@ public class Main extends Application {
         Copy copy = new Copy(engine);
         Paste paste = new Paste(engine);
 
-        HashMap commands = new HashMap<String, Command>();
+        Map<String, Command> commands = new HashMap<>();
         commands.put("insert", insert);
         commands.put("delete", delete);
         commands.put("selection", select);

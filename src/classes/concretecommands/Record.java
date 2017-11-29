@@ -5,7 +5,7 @@ import interfaces.recorder.Recorder;
 
 public class Record implements Command {
 
-    /*
+    /**
      *
      */
     private Recorder recorder;
