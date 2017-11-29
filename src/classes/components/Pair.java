@@ -11,8 +11,8 @@ import java.util.Objects;
  */
 public class Pair<F, S> implements PairInterface{
 
-    private final F key;
-    private final S value;
+    private F key;
+    private S value;
 
     /**
      * Constructor for a Pair.
@@ -36,16 +36,11 @@ public class Pair<F, S> implements PairInterface{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !this.getClass().isInstance(o.getClass())) return false;
+        if (o == null || !(o instanceof Pair)) return false;
 
-        Pair<?, ?> pair = (Pair<?,?>) o;
-
-        if (key != null ? !key.equals(pair.key) : pair.key!= null) return false;
-        if (value != null ? !value.equals(pair.value) : pair.value != null) return false;
-
-        return true;
+        Pair<?, ?> pair = (Pair<?, ?>) o;
+        return this.value.getClass().isInstance(pair.getValue()) || (key != null ? key.equals(pair.getKey()) : pair.getKey() == null) && (value != null ? value.equals(pair.getValue()) : pair.getValue() == null);
     }
-
     /**
      * Compute a hash code using the hash codes of the underlying objects
      *
@@ -53,7 +48,7 @@ public class Pair<F, S> implements PairInterface{
      */
     @Override
     public int hashCode() {
-        return (this.key == null ? 0 : this.key.hashCode()) ^ (this.key == null ? 0 : this.key.hashCode());
+        return (this.key == null ? 0 : this.key.hashCode()) ^ (this.value == null ? 0 : this.value.hashCode());
     }
 
     /**
