@@ -12,19 +12,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.util.Map;
+
 public class ClientInvoker extends Application implements Invoker {
 
     @FXML
-    private Button copyButton;
-    @FXML
-    private Button cutButton;
-    @FXML
-    private Button pasteButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
     private TextArea textarea;
 
+    private Map<String, Command> commandMap;
     private Receiver engine;
 
     /*Prevent conflict between actions*/
@@ -41,12 +36,10 @@ public class ClientInvoker extends Application implements Invoker {
         //application must include start
     }
 
-
-
     @FXML
     private void initialize() {
         this.textarea.requestFocus();
-        this.engine = new BoardReceiver();
+
         //Detect any change on the textarea : insertion / deletion
         this.textarea.textProperty().addListener((observable, oldValue, newValue) -> {
             this.textarea.setOnKeyPressed(event -> {
@@ -61,14 +54,15 @@ public class ClientInvoker extends Application implements Invoker {
                 }
             });
             if(oldValue.length() < newValue.length() && this.currentAction == ACTION.NONE){
-                insertAtPosition(newValue, this.textarea.getCaretPosition());
+                insertAtPosition(observable.getValue(), this.textarea.getCaretPosition());
             }
         });
 
         //Selection detection
         this.textarea.setOnMouseClicked(event -> {
-            Selection selection = new Selection(this.textarea.getSelection().getStart(), this.textarea.getSelection().getEnd());
-            selection.setReceiver(this.engine);
+            Selection selection = (Selection) this.commandMap.get("selection");
+            selection.setStart(this.textarea.getSelection().getStart());
+            selection.setEnd(this.textarea.getSelection().getEnd());
             this.setCommand(selection);
         });
     }
@@ -80,8 +74,9 @@ public class ClientInvoker extends Application implements Invoker {
      */
     private void insertAtPosition(String newValue, int position){
         //Call insert command by taking the next character typed after the caret
-        Insert insert = new Insert(Character.toString(newValue.charAt(position)), position);
-        insert.setReceiver(this.engine);
+        Insert insert = (Insert) this.commandMap.get("insert");
+        insert.setPosition(position);
+        insert.setTextinput(Character.toString(newValue.charAt(position)));
         this.setCommand(insert);
     }
 
@@ -91,8 +86,8 @@ public class ClientInvoker extends Application implements Invoker {
      * Invoke the delete command.
      */
     private void deleteAtPosition(int position){
-        Delete del = new Delete(position);
-        del.setReceiver(this.engine);
+        Delete del = (Delete) this.commandMap.get("delete");
+        del.setPosition(position);
         this.setCommand(del);
     }
 
@@ -102,10 +97,8 @@ public class ClientInvoker extends Application implements Invoker {
      * Invoke the Copy command.
      */
     @FXML
-    private void handleCopy(MouseEvent event) {
-        Copy copy = new Copy();
-        copy.setReceiver(this.engine);
-        this.setCommand(copy);
+    private void handleCopy(MouseEvent event){
+        this.setCommand(this.commandMap.get("copy"));
     }
 
     /**
@@ -114,9 +107,7 @@ public class ClientInvoker extends Application implements Invoker {
      */
     @FXML
     private void handleCut(MouseEvent event) throws CloneNotSupportedException {
-        Cut cut = new Cut();
-        cut.setReceiver(this.engine);
-        this.setCommand(cut);
+        this.setCommand(this.commandMap.get("cut"));
         this.textarea.setText(this.engine.getBufferClone().getText());
     }
 
@@ -146,8 +137,9 @@ public class ClientInvoker extends Application implements Invoker {
         this.textarea.requestFocus();
         int caretPosition = this.textarea.getCaretPosition();
         int oldLength = this.textarea.getLength();
-        Paste paste  = new Paste(caretPosition);
-        paste.setReceiver(this.engine);
+        //Invoke the paste command
+        Paste paste = (Paste) this.commandMap.get("paste");
+        paste.setPaste(caretPosition);
         this.setCommand(paste);
         this.textarea.setText(new StringBuilder(this.textarea.getText()).insert(caretPosition, this.engine.getClipboardClone().getClipboard()).toString());
         int newLength = this.textarea.getLength();
@@ -163,4 +155,11 @@ public class ClientInvoker extends Application implements Invoker {
         command.execute();
     }
 
+    public void setCommandMap(Map<String, Command> m){
+        this.commandMap = m;
+    }
+
+    public void setEngine(Receiver engine) {
+        this.engine = engine;
+    }
 }

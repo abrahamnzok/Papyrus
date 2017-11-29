@@ -19,6 +19,9 @@ public class Copy implements Command{
     public Copy() {
     }
 
+    public Copy(Receiver r) {
+        this.receiver = r;
+    }
 
     /**
      */

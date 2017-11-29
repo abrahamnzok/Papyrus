@@ -32,6 +32,10 @@ public class Delete implements Command {
         this.position = 0;
     }
 
+    public Delete(Receiver r) {
+        this.receiver = r;
+    }
+
     /**
      * Preferred constructor
      */
