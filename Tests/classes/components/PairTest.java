@@ -6,8 +6,11 @@ import classes.recordablecommands.CutRecordable;
 import classes.recordablecommands.InsertRecordable;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
+import interfaces.recordable.Recordable;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.lang.reflect.Constructor;
 
 import static org.junit.Assert.*;
 
@@ -32,15 +35,20 @@ public class PairTest {
 
     @Test
     public void pairTest2() throws Exception{
-        this.copyRecordable.setReceiver(this.receiver);
-        Pair<Class, Memento> pair = new Pair<Class, Memento>(this.copyRecordable.getClass(), this.copyRecordable.save());
-        Pair<Class, Memento> pair1 = new Pair<Class, Memento>(Class.class, this.copyRecordable.save());
-        System.out.println(pair.hashCode());
+        Pair<String, Integer> pair1 = new Pair<>("Moi", 1);
+        Pair<String, Integer> pair2 = new Pair<>("Moi", 1);
+        assertTrue("Comparing two pairs with primitive types elements",
+                pair1.equals(pair2) && pair2.equals(pair1));
     }
 
     @Test
     public void pairTest3() throws Exception{
-
+        this.insertRecordable.setReceiver(this.receiver);
+        this.insertRecordable.setTextinput("Yeap me");
+        this.insertRecordable.setPosition(0);
+        Pair<Class, Memento> pair = new Pair<>(this.insertRecordable.getClass(), this.insertRecordable.save());
+        Pair<Class, Memento> pair1 = new Pair<>(this.insertRecordable.getClass(), this.insertRecordable.save());;
+        System.out.println(pair.equals(pair1));
     }
 
     @Test
