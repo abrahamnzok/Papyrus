@@ -31,6 +31,7 @@ public class Pair<F, S> implements PairInterface{
      * @return true if the underlying objects of the Pair are both considered
      *         equal
      */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

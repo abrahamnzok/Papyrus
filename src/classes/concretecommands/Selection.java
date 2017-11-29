@@ -40,7 +40,7 @@ public class Selection implements Command {
 
     /**
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.select(this.start, this.end);
     }

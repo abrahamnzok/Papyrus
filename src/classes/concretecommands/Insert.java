@@ -27,7 +27,7 @@ public class Insert implements Command {
         this.position = this.getPosition() ;
     }
 
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         this.receiver.insert(this.textinput, this.position);
     }
 

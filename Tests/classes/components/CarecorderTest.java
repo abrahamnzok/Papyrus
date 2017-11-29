@@ -42,15 +42,29 @@ public class CarecorderTest {
     }
 
     @Test
-    public void recordTest1() throws Exception {
+    public void recordTest() throws Exception {
         this.insert.setReceiver(this.receiver);
         this.selection.setReceiver(this.receiver);
         this.copy.setReceiver(this.receiver);
         this.recorder.record(this.insert.save());
         this.recorder.record(this.copy.save());
         this.recorder.record(this.selection.save());
-        System.out.println(this.recorder.careclone().size());
-        //assertTrue(!this.recorder.careclone().isEmpty());
+        assertEquals("Is the object containing the mementos incremented when we are not recording",
+                0, this.recorder.careclone().size());
+    }
+
+    @Test
+    public void recordTest1() throws Exception {
+        this.startrecording.execute();
+        this.insert.setReceiver(this.receiver);
+        this.selection.setReceiver(this.receiver);
+        this.copy.setReceiver(this.receiver);
+        this.recorder.record(this.insert.save());
+        this.recorder.record(this.copy.save());
+        this.recorder.record(this.selection.save());
+        this.stoprecording.execute();
+        assertEquals("We check if the object containing the mementos is incremented",
+                3, this.recorder.careclone().size());
     }
 
     @Test
@@ -58,47 +72,63 @@ public class CarecorderTest {
         this.insert.setReceiver(this.receiver);
         this.insert.setTextinput("We try to do testing before coding");
         this.insert.setPosition(0);
-        this.recorder.record(this.insert.save());
         this.insert.execute();
         this.insert.setTextinput(" After we can implement methods");
         this.insert.setPosition(this.receiver.getBufferClone().length());
         this.insert.execute();
         this.replay.execute();
-        assertEquals("Check if buffers contains insert object text",
-                "We try to do testing before coding", this.receiver.getBufferClone().getText());
+        assertEquals("We cannot record without starting the recording action",
+                true, this.recorder.careclone().isEmpty());
     }
 
     @Test
     public void recordTest3() throws Exception {
+        this.startrecording.execute();
+        this.stoprecording.execute();
         this.insert.setReceiver(this.receiver);
-        this.insert.setTextinput("We try to do testing before coding");
+        this.insert.setTextinput("We don't want this to be recorded");
         this.insert.setPosition(0);
-        this.recorder.record(this.insert.save());
-        System.out.println(this.recorder.careclone().size());
-       /* Pair<?, ?> p = (Pair<?, ?>) this.recorder.careclone().get(0);
-        Memento insertGhost =  (Memento) p.getValue();
-        InsertGhost real = (InsertGhost) insertGhost;
-        this.insert.restore(real);
-        assertEquals("Check if buffers contains insert object text",
-                real.getTextState(), this.insert.getTextinput());
-                */
+        this.insert.setRecorder(this.recorder);
+        this.insert.execute();
+        assertEquals("We cannot record when recording is not on",
+                true, this.recorder.careclone().isEmpty());
+
     }
 
     @Test
     public void recordTest4() throws Exception {
-
+        this.insert.setTextinput("First lesson on testing a software ");
+        this.insert.setPosition(0);
+        this.startrecording.execute();
+        this.insert.setReceiver(this.receiver);
+        this.insert.setTextinput("We try to do testing before coding");
+        this.insert.setPosition(0);
+        this.recorder.record(this.insert.save());
+        this.insert.setTextinput(" After we can implement methods");
+        this.insert.setPosition(this.receiver.getBufferClone().length());
+        this.recorder.record(this.insert.save());
+        this.replay.execute();
+        assertEquals("Check if buffers contains insert object text",
+                "We try to do testing before coding After we can implement methods", this.receiver.getBufferClone().getText());
     }
 
     @Test
     public void recordTest5() throws Exception {
-
+        this.insert.setReceiver(this.receiver);
+        this.insert.setRecorder(this.recorder);
+        this.selection.setReceiver(this.receiver);
+        this.selection.setStart(10);
+        this.selection.setEnd(13);
+        this.selection.setRecorder(this.recorder);
+        this.insert.setTextinput("I would like to go there but I cannot");
+        this.insert.setPosition(0);
+        this.insert.execute();
+        this.startrecording.execute();
+        this.selection.execute();
+        this.stoprecording.execute();
+        assertEquals("We can select what was not recorded",
+                1, this.recorder.careclone().size());
     }
-
-    @Test
-    public void recordSeveralCommandsTest2() throws Exception {
-
-    }
-
 
 
 }

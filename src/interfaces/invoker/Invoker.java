@@ -11,6 +11,6 @@ public interface Invoker {
      * @param cmd
      * @return
      */
-    void setCommand(Command cmd );
+    void setCommand(Command cmd ) throws NoSuchMethodException;
 
 }

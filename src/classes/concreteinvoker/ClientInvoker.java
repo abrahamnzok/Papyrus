@@ -44,15 +44,27 @@ public class ClientInvoker extends Application implements Invoker {
                 switch(event.getCode()){
                     case BACK_SPACE:
                         //Had to redefine it because the caretPosition move after pressing those keys
-                        this.deleteAtPosition(this.textarea.getCaretPosition()-1);
+                        try {
+                            this.deleteAtPosition(this.textarea.getCaretPosition()-1);
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case DELETE:
-                        this.deleteAtPosition(this.textarea.getCaretPosition());
+                        try {
+                            this.deleteAtPosition(this.textarea.getCaretPosition());
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
             });
             if(oldValue.length() < newValue.length() && this.currentAction == ACTION.NONE){
-                insertAtPosition(observable.getValue(), this.textarea.getCaretPosition());
+                try {
+                    insertAtPosition(observable.getValue(), this.textarea.getCaretPosition());
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -61,7 +73,11 @@ public class ClientInvoker extends Application implements Invoker {
             Selection selection = (Selection) this.commandMap.get("selection");
             selection.setStart(this.textarea.getSelection().getStart());
             selection.setEnd(this.textarea.getSelection().getEnd());
-            this.setCommand(selection);
+            try {
+                this.setCommand(selection);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -70,7 +86,7 @@ public class ClientInvoker extends Application implements Invoker {
      * @param position Position where to insert
     * Invoke the Insert command.
      */
-    private void insertAtPosition(String newValue, int position){
+    private void insertAtPosition(String newValue, int position) throws NoSuchMethodException {
         //Call insert command by taking the next character typed after the caret
         Insert insert = (Insert) this.commandMap.get("insert");
         insert.setPosition(position);
@@ -83,7 +99,7 @@ public class ClientInvoker extends Application implements Invoker {
      * @param position Position of the character to delete
      * Invoke the delete command.
      */
-    private void deleteAtPosition(int position){
+    private void deleteAtPosition(int position) throws NoSuchMethodException {
         Delete del = (Delete) this.commandMap.get("delete");
         del.setPosition(position);
         this.setCommand(del);
@@ -95,7 +111,7 @@ public class ClientInvoker extends Application implements Invoker {
      * Invoke the Copy command.
      */
     @FXML
-    private void handleCopy(MouseEvent event){
+    private void handleCopy(MouseEvent event) throws NoSuchMethodException {
         this.setCommand(this.commandMap.get("copy"));
     }
 
@@ -104,7 +120,7 @@ public class ClientInvoker extends Application implements Invoker {
      * Invoke the Cut command and mimic the same effect on the UI.
      */
     @FXML
-    private void handleCut(MouseEvent event) throws CloneNotSupportedException {
+    private void handleCut(MouseEvent event) throws CloneNotSupportedException, NoSuchMethodException {
         this.setCommand(this.commandMap.get("cut"));
         this.textarea.setText(this.engine.getBufferClone().getText());
     }
@@ -114,11 +130,11 @@ public class ClientInvoker extends Application implements Invoker {
      * Invoke the Delete command and mimic the same effect on the UI.
      */
     @FXML
-    private void handleDelete(MouseEvent event) throws CloneNotSupportedException {
+    private void handleDelete(MouseEvent event) throws CloneNotSupportedException, NoSuchMethodException {
         this.currentAction = ACTION.DELETE;
         this.textarea.requestFocus();
         int caretPosition = textarea.getCaretPosition();
-        deleteAtPosition(caretPosition);
+        this.deleteAtPosition(caretPosition);
         this.textarea.setText(this.engine.getBufferClone().getText());
         //We have to position it manually or it will move to the beginning of the text
         this.textarea.positionCaret(caretPosition);
@@ -130,7 +146,7 @@ public class ClientInvoker extends Application implements Invoker {
      * Invoke the Cut command and mimic the same effect on the UI.
      */
     @FXML
-    private void handlePaste(MouseEvent event) throws CloneNotSupportedException {
+    private void handlePaste(MouseEvent event) throws CloneNotSupportedException, NoSuchMethodException {
         this.currentAction = ACTION.PASTE;
         this.textarea.requestFocus();
         int caretPosition = this.textarea.getCaretPosition();
@@ -149,7 +165,7 @@ public class ClientInvoker extends Application implements Invoker {
     /**
      * @param command to execute
      */
-    public void setCommand(Command command ) {
+    public void setCommand(Command command ) throws NoSuchMethodException {
         command.execute();
     }
 

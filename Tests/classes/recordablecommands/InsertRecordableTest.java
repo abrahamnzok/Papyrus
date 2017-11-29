@@ -1,8 +1,13 @@
 package classes.recordablecommands;
 
+import classes.components.Carecorder;
+import classes.components.Pair;
 import classes.concretemementos.InsertGhost;
 import classes.concretemementos.SelectGhost;
+import classes.concretereceiver.BoardReceiver;
+import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
+import interfaces.recorder.Recorder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,9 +15,13 @@ import static org.junit.Assert.*;
 
 public class InsertRecordableTest {
     private InsertRecordable nonmockedinsert;
+    private Carecorder recorder;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
         this.nonmockedinsert = new InsertRecordable();
+        this.recorder = new Carecorder();
+        this.receiver = new BoardReceiver();
     }
 
     @Test
@@ -48,6 +57,22 @@ public class InsertRecordableTest {
         this.nonmockedinsert.restore(insertGhost);
         assertTrue(this.nonmockedinsert.getTextinput().equals(insertGhost.getTextState())
                 && this.nonmockedinsert.getPosition() == insertGhost.getPositionState());
+    }
+    @Test
+    public void restoreInsertTest2() throws Exception{
+        this.nonmockedinsert.setReceiver(this.receiver);
+        this.nonmockedinsert.setTextinput("We try to do testing before coding");
+        this.nonmockedinsert.setPosition(0);
+        this.recorder.record(this.nonmockedinsert.save());
+        this.nonmockedinsert.setReceiver(this.receiver);
+        this.nonmockedinsert.setTextinput("Firs rule of software modeling ");
+        this.nonmockedinsert.setPosition(0);
+        Pair<?, ?> p = (Pair<?, ?>) this.recorder.careclone().get(0);
+        Memento insertGhost =  (Memento) p.getValue();
+        InsertGhost real = (InsertGhost) insertGhost;
+        this.nonmockedinsert.restore(real);
+        assertEquals("Check if buffers contains insert object text",
+                real.getTextState(), this.nonmockedinsert.getTextinput());
     }
 
     @Test
