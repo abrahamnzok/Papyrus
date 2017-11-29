@@ -1,5 +1,7 @@
 package interfaces.command;
 
+import interfaces.Receiver.Receiver;
+
 /**
  * 
  */
