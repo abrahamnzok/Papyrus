@@ -1,13 +1,11 @@
 package classes.concreteinvoker;
 
 import classes.concretecommands.*;
-import classes.concretereceiver.BoardReceiver;
 import interfaces.command.Command;
 import interfaces.invoker.Invoker;
 import interfaces.Receiver.Receiver;
 import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;

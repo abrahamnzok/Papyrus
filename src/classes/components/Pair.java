@@ -2,8 +2,6 @@ package classes.components;
 
 import interfaces.pair.PairInterface;
 
-import java.util.Objects;
-
 /**
  * Container to ease passing around a tuple of two objects. This object provides a sensible
  * implementation of equals(), returning true if equals() is true on each of the contained
@@ -37,7 +35,6 @@ public class Pair<F, S> implements PairInterface{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || !(o instanceof Pair)) return false;
-
         Pair<?, ?> pair = (Pair<?, ?>) o;
         return key.hashCode() == pair.key.hashCode() && value.hashCode() == pair.value.hashCode()
                 || this.value.getClass().isInstance(pair.getValue())
