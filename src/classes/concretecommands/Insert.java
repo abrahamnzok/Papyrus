@@ -14,11 +14,6 @@ public class Insert implements Command {
     private int position;
 
     /**
-     *
-     */
-    private Recorder carecorder;
-
-    /**
      * Default constructor
      */
     public Insert() {

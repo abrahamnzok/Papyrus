@@ -18,10 +18,6 @@ public class Delete implements Command {
     /**
      *
      */
-    private Recorder carecorder;
-    /*
-     *
-     */
     private int position;
 
 

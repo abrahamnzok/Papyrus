@@ -17,11 +17,6 @@ public class Paste implements Command {
     /**
      *
      */
-    private Recorder carecorder;
-
-    /**
-     *
-     */
     private int position;
 
     /**

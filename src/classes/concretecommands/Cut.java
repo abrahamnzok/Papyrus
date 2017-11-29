@@ -16,11 +16,6 @@ public class Cut implements Command{
     private Receiver receiver;
 
     /**
-     *
-     */
-    private Recorder carecorder;
-
-    /**
      * Default constructor
      */
     public Cut() {
