@@ -13,6 +13,13 @@ public class CutGhost implements Memento {
      */
     private Receiver receiver;
 
+    /**
+     *
+     */
+
+    public CutGhost(){
+
+    }
 
     /*
      * Default constructor

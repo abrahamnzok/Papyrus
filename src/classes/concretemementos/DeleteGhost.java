@@ -19,6 +19,14 @@ public class DeleteGhost implements Memento {
     private Receiver receiver;
 
     /**
+     *
+     */
+
+    public DeleteGhost(){
+
+    }
+
+    /**
      * Default constructor
      */
     public DeleteGhost(Receiver receiver, int positionState) {

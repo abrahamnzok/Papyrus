@@ -14,6 +14,13 @@ public class CopyGhost implements Memento {
     private Receiver receiver;
 
     /**
+     *
+     */
+    public CopyGhost(){
+
+    }
+
+    /**
      * Default constructor
      */
     public CopyGhost(Receiver receiver) {

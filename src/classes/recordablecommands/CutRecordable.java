@@ -8,6 +8,14 @@ import interfaces.recordable.Recordable;
 public class CutRecordable extends Cut implements Recordable {
 
 
+
+    /**
+     *
+     */
+    public CutRecordable(){
+        super();
+    }
+
     /**
      * @return Specific Memento for the specific Recordable
      */
@@ -22,6 +30,7 @@ public class CutRecordable extends Cut implements Recordable {
     @Override
     public void restore(Memento m) {
         if(m != null && CutGhost.class.isInstance(m)){
+            super.setReceiver(((CutGhost) m).getReceiver());
         }
     }
 }
