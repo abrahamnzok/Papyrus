@@ -26,6 +26,9 @@ public class Cut implements Command{
     public Cut() {
     }
 
+    public Cut(Receiver r) {
+        this.receiver = r;
+    }
 
     /**
      */

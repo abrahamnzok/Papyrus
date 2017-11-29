@@ -30,6 +30,10 @@ public class Selection implements Command {
         this.end = end;
     }
 
+    public Selection(Receiver r) {
+        this.receiver = r;
+    }
+
     /**
      * Default constructor
      */
@@ -54,28 +58,28 @@ public class Selection implements Command {
     }
 
     /*
-    * setting start of selection from configurator
+    * setting start of selection
     */
     public void setStart(int start){
         this.start = start;
     }
 
     /*
-     * setting end of selection from the configurator
+     * setting end of selection
      */
     public void setEnd(int end){
         this.end = end;
     }
 
     /*
-     * @return start of selection from configurator
+     * @return start of selection
      */
     public int getStart(){
         return this.start;
     }
 
     /*
-     * @return end of selection from the configurator
+     * @return end of selection
      */
     public int getEnd(){
         return this.end;
