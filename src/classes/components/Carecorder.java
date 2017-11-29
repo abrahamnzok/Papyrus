@@ -11,8 +11,8 @@ public class Carecorder implements Recorder,Cloneable {
 
     private List<Pair<Constructor,Memento>> container;
 
-    /*
-     ** Preferred Constructor
+    /**
+     * Preferred Constructor
      */
 
     public Carecorder(){

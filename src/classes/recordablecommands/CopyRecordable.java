@@ -4,12 +4,30 @@ import classes.concretecommands.Copy;
 import classes.concretemementos.CopyGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
 public class CopyRecordable extends Copy implements Recordable {
 
+    /**
+     *
+     */
+    private Recorder recorder;
+
+    /**
+     * Defaut Constructor
+     */
     public CopyRecordable(){
         super();
     }
+
+    /**
+     */
+    @Override
+    public void execute() throws NoSuchMethodException {
+        this.recorder.record(this.save());
+        super.execute();
+    }
+
     /**
      * @return Specific Memento for the specific Recordable
      */
@@ -26,5 +44,13 @@ public class CopyRecordable extends Copy implements Recordable {
         if( m != null && CopyGhost.class.isInstance(m)){
             super.setReceiver(((CopyGhost)m).getReceiver());
         }
+    }
+
+    /**
+     *
+     * @param recorder new Receiver that know how to record this
+     */
+    public void setRecorder(Recorder recorder){
+        this.recorder = recorder;
     }
 }

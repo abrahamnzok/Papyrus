@@ -18,7 +18,7 @@ public class Copy implements Command{
 
     /**
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.copy();
     }
