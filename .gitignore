@@ -9,8 +9,4 @@ out/
 .idea/workspace.xml
 .idea/uiDesigner.xml
 Papyrus.iml
-
-
-\.idea/libraries/org_junit_contrib_junit_theories_4_12\.xml
-
-\.idea/libraries/org_mockito_mockito_all_1_9_0\.xml
+\.idea/libraries/
