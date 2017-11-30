@@ -35,7 +35,7 @@ public class Delete implements Command {
 
     /**
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.delete(this.position);
     }
