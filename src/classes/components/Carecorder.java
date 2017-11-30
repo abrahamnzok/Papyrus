@@ -58,10 +58,7 @@ public class Carecorder implements Recorder,Cloneable {
                             assert o != null;
                             Recordable r = (Recordable) o.newInstance();
                             r.restore(pair.getValue());
-                        } catch (InstantiationException
-                                | IllegalAccessException
-                                | InvocationTargetException
-                                | NoSuchMethodException e) {
+                        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                             e.printStackTrace();
                         }
                     }
