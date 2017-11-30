@@ -15,7 +15,7 @@ public class Stop implements Command {
      */
     @Override
     public void execute() {
-
+        this.recorder.stoprecording();
     }
 
     /**
@@ -23,5 +23,6 @@ public class Stop implements Command {
      */
     public void setReceiver(Recorder recorder) {
         // TODO implement here
+        this.recorder = recorder;
     }
 }

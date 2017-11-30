@@ -15,6 +15,7 @@ public class Record implements Command {
      */
     @Override
     public void execute() {
+        this.recorder.setrecording();
     }
 
     /**
@@ -22,5 +23,6 @@ public class Record implements Command {
      */
     public void setReceiver(Recorder recorder) {
         // TODO implement here
+        this.recorder = recorder;
     }
 }

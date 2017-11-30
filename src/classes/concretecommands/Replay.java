@@ -15,7 +15,7 @@ public class Replay implements Command {
      */
     @Override
     public void execute() {
-
+        this.recorder.replay();
     }
 
     /**
@@ -23,5 +23,6 @@ public class Replay implements Command {
      */
     public void setReceiver(Recorder recorder) {
         // TODO implement here
+        this.recorder = recorder;
     }
 }
