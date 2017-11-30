@@ -7,7 +7,7 @@ import interfaces.pair.PairInterface;
  * implementation of equals(), returning true if equals() is true on each of the contained
  * objects.
  */
-public class Pair<F, S> implements PairInterface{
+public class Pair<F, S> implements PairInterface, Cloneable{
 
     private F key;
     private S value;
@@ -80,7 +80,8 @@ public class Pair<F, S> implements PairInterface{
     /**
      *@return a shallow copy of this
      */
-    public Object pair() throws CloneNotSupportedException {
-        return this.clone();
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

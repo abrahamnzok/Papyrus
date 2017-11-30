@@ -47,6 +47,10 @@ public class CarecorderTest {
         this.insert.setReceiver(this.receiver);
         this.cut.setReceiver(this.receiver);
         this.cut.setRecorder(this.recorder);
+        this.delete.setReceiver(this.receiver);
+        this.delete.setRecorder(this.recorder);
+        this.paste.setReceiver(this.receiver);
+        this.paste.setRecorder(this.recorder);
     }
 
     @Test
@@ -223,11 +227,73 @@ public class CarecorderTest {
     }
 
     @Test
-    public void replayTest5() throws Exception{
+    public void replayTest1() throws Exception{
         this.insert.setTextinput("I think it is the ideal thing to do");
         this.insert.setPosition(0);
+        this.insert.execute();
+        this.startrecording.execute();
         this.selection.setStart(0);
-        this.selection.setEnd(0);
+        this.selection.setEnd(12);
+        this.selection.execute();
+        this.cut.execute();
+        this.replay.execute();
+        this.insert.setTextinput("I'm not sure but I allow this to happen");
+        this.insert.setPosition(this.receiver.getBufferClone().length());
+        this.insert.execute();
+        this.stoprecording.execute();
+        this.replay.execute();
+        assertEquals("We cannot replay while recording",
+                "I'm not sure", this.receiver.getClipboardClone().getClipboard());
+    }
+
+    @Test
+    public void replayTest2() throws Exception{
+        this.insert.setTextinput("I think it is the ideal thing to do");
+        this.insert.setPosition(0);
+        this.startrecording.execute();
+        this.insert.execute();
+        this.selection.execute();
+        this.copy.execute();
+        this.selection.setStart(0);
+        this.selection.setEnd(this.receiver.getBufferClone().length());
+        this.selection.execute();
+        this.cut.execute();
+        this.replay.execute();
+        this.insert.setTextinput(" and I allow this to happen");
+        this.insert.setPosition(this.receiver.getBufferClone().length());
+        this.insert.execute();
+        this.stoprecording.execute();
+        this.replay.execute();
+        assertEquals("Check if we can replay after we have stop recording",
+                "I think it is the ideal thing to do and I allow this to happen",
+                this.receiver.getBufferClone().getText());
+    }
+
+    @Test
+    public void replayTest3() throws Exception{
+        this.insert.setTextinput("I was there last night");
+        this.insert.setPosition(this.receiver.getBufferClone().length());
+        this.insert.execute();
+        this.startrecording.execute();
+        this.selection.setStart(3);
+        this.selection.setEnd(11);
+        this.selection.execute();
+        this.copy.execute();
+        this.stoprecording.execute();
+        this.insert.setTextinput("I'm wishing something right now that I was there last night");
+        this.insert.setPosition(this.receiver.getBufferClone().length());
+        this.insert.execute();
+        this.replay.execute();
+        assertEquals("What happens when nothing was insert but record other commands",
+                "wishing", this.receiver.getClipboardClone().getClipboard());
+    }
+
+    @Test
+    public void replayTest4() throws Exception{
+        this.insert.setTextinput("I think it is the ideal thing to do");
+        this.insert.setPosition(0);
+        this.selection.setStart(1);
+        this.selection.setEnd(7);
         this.insert.execute();
         this.startrecording.execute();
         this.selection.execute();
@@ -235,10 +301,37 @@ public class CarecorderTest {
         this.stoprecording.execute();
         this.selection.setStart(0);
         this.selection.setEnd(this.receiver.getBufferClone().length());
+        this.selection.execute();
         this.cut.execute();
-        this.insert.setTextinput("I think it is the ideal thing to do");
+        this.insert.setTextinput("I allow this to happen");
         this.insert.setPosition(0);
         this.insert.execute();
         this.replay.execute();
+        assertEquals("We want to check the state of the buffer and clipboard",
+                "allow", this.receiver.getClipboardClone().getClipboard());
+    }
+
+    @Test
+    public void replayTest5() throws Exception{
+        this.insert.setTextinput("I think it is the ideal thing to do");
+        this.insert.setPosition(0);
+        this.selection.setStart(0);
+        this.selection.setEnd(7);
+        this.startrecording.execute();
+        this.insert.execute();
+        this.selection.execute();
+        this.copy.execute();
+        this.cut.execute();
+        this.stoprecording.execute();
+        this.selection.setStart(0);
+        this.selection.setEnd(this.receiver.getBufferClone().length());
+        this.selection.execute();
+        this.cut.execute();
+        this.insert.setTextinput("I allow this to happen");
+        this.insert.setPosition(0);
+        this.insert.execute();
+        this.replay.execute();
+        assertEquals("In case we record insert , the buffer changes state after replay",
+                " it is the ideal thing to do", this.receiver.getBufferClone().getText());
     }
 }

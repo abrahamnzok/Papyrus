@@ -1,7 +1,7 @@
 package classes.components;
 
 
-public class Ranger {
+public class Ranger implements Cloneable {
     /**
      *
      */

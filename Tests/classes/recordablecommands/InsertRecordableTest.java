@@ -63,6 +63,7 @@ public class InsertRecordableTest {
         this.nonmockedinsert.setReceiver(this.receiver);
         this.nonmockedinsert.setTextinput("We try to do testing before coding");
         this.nonmockedinsert.setPosition(0);
+        this.recorder.setrecording();
         this.recorder.record(this.nonmockedinsert.save());
         this.nonmockedinsert.setReceiver(this.receiver);
         this.nonmockedinsert.setTextinput("Firs rule of software modeling ");

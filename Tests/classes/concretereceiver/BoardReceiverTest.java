@@ -139,6 +139,30 @@ public class BoardReceiverTest {
     }
 
     @Test
+    public void makeSelectionOutOfBoundaries2() throws Exception {
+        String bufferState = "I need to ";
+        this.buffer.setText(bufferState);
+        String expected = "I need to";
+        int start = 10;
+        int finish = 15;
+        this.receiver.select(start, finish);
+        assertEquals("A second test to assure us protection from selecting out of boundaries",
+                expected, this.ranger.getSelection());
+    }
+
+    @Test
+    public void makeSelectionOutOfBoundaries3() throws Exception {
+        String bufferState = "I need to change my clothes";
+        this.buffer.setText(bufferState);
+        String expected = "need to change my clothes";
+        int start = 34;
+        int finish = 1;
+        this.receiver.select(start, finish);
+        assertEquals("A third test to assure us protection from selecting out of boundaries",
+                expected, this.ranger.getSelection());
+    }
+
+    @Test
     public void makeFirstSelection() throws Exception {
         String s = "Try to select me";
         this.buffer.setText(s);
