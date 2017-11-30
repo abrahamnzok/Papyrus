@@ -15,6 +15,6 @@ public interface Recordable {
     /**
      * @param m
      */
-    void restore(Memento m);
+    void restore(Memento m) throws NoSuchMethodException;
 
 }
