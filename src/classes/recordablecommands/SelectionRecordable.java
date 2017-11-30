@@ -37,7 +37,7 @@ public class SelectionRecordable extends Selection implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.save());
+        this.recorder.record(this.getClass(),this.save());
         super.execute();
     }
 
@@ -53,11 +53,12 @@ public class SelectionRecordable extends Selection implements Recordable {
      * @param m memento state we want to restore to the originator
      */
     @Override
-    public void restore(Memento m) {
+    public void restore(Memento m) throws NoSuchMethodException {
         if( m != null && SelectGhost.class.isInstance(m)){
             super.setStart(((SelectGhost) m).getStartState());
             super.setEnd(((SelectGhost) m).getEndState());
             super.setReceiver(((SelectGhost) m).getReceiver());
+            super.execute();
         }
     }
 

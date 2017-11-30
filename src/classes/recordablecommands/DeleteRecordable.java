@@ -33,7 +33,7 @@ public class DeleteRecordable extends Delete implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.save());
+        this.recorder.record(this.getClass(), this.save());
         super.execute();
     }
 
@@ -49,10 +49,11 @@ public class DeleteRecordable extends Delete implements Recordable {
      * @param m
      */
     @Override
-    public void restore(Memento m) {
+    public void restore(Memento m) throws NoSuchMethodException {
         if( m != null && DeleteGhost.class.isInstance(m)){
             super.setReceiver(((DeleteGhost) m).getReceiver());
             super.setPosition(((DeleteGhost) m).getPositionState());
+            super.execute();
         }
     }
 

@@ -24,7 +24,7 @@ public class CopyRecordable extends Copy implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.save());
+        this.recorder.record(this.getClass(),this.save());
         super.execute();
     }
 
@@ -40,9 +40,10 @@ public class CopyRecordable extends Copy implements Recordable {
      * @param m to restore
      */
     @Override
-    public void restore(Memento m) {
+    public void restore(Memento m) throws NoSuchMethodException {
         if( m != null && CopyGhost.class.isInstance(m)){
             super.setReceiver(((CopyGhost)m).getReceiver());
+            super.execute();
         }
     }
 

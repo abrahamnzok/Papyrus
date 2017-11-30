@@ -31,7 +31,7 @@ public class PasteRecordable extends Paste implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.save());
+        this.recorder.record(this.getClass(),this.save());
         super.execute();
     }
 
@@ -47,10 +47,11 @@ public class PasteRecordable extends Paste implements Recordable {
      * @param m memento's state we want to restore to the originator
      */
     @Override
-    public void restore(Memento m) {
+    public void restore(Memento m) throws NoSuchMethodException {
         if(m != null && PasteGhost.class.isInstance(m)){
             super.setReceiver(((PasteGhost) m).getReceiver());
             super.setPaste(((PasteGhost) m).getPositionState());
+            super.execute();
         }
     }
 

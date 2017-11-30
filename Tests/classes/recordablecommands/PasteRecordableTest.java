@@ -2,6 +2,8 @@ package classes.recordablecommands;
 
 import classes.concretemementos.DeleteGhost;
 import classes.concretemementos.PasteGhost;
+import classes.concretereceiver.BoardReceiver;
+import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +12,12 @@ import static org.junit.Assert.*;
 
 public class PasteRecordableTest {
     private PasteRecordable nonmocked;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
         this.nonmocked = new PasteRecordable();
+        this.receiver = new BoardReceiver();
+        this.nonmocked.setReceiver(this.receiver);
     }
 
     @Test

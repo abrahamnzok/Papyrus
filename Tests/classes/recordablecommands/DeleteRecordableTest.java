@@ -2,6 +2,8 @@ package classes.recordablecommands;
 
 import classes.concretemementos.DeleteGhost;
 import classes.concretemementos.InsertGhost;
+import classes.concretereceiver.BoardReceiver;
+import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +12,12 @@ import static org.junit.Assert.*;
 
 public class DeleteRecordableTest {
     private DeleteRecordable nonmockedelete;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
         this.nonmockedelete = new DeleteRecordable();
+        this.receiver = new BoardReceiver();
+        this.nonmockedelete.setReceiver(this.receiver);
     }
 
     @Test

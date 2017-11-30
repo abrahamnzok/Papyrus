@@ -24,7 +24,7 @@ public class CutRecordable extends Cut implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.save());
+        this.recorder.record(this.getClass(),this.save());
         super.execute();
     }
 
@@ -40,9 +40,10 @@ public class CutRecordable extends Cut implements Recordable {
      * @param m
      */
     @Override
-    public void restore(Memento m) {
+    public void restore(Memento m) throws NoSuchMethodException {
         if(m != null && CutGhost.class.isInstance(m)){
             super.setReceiver(((CutGhost) m).getReceiver());
+            super.execute();
         }
     }
 

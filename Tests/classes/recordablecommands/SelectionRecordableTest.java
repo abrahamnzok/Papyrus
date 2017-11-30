@@ -12,9 +12,12 @@ import static org.junit.Assert.*;
 
 public class SelectionRecordableTest {
     private SelectionRecordable selection;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
         this.selection = new SelectionRecordable(10, 12);
+        this.receiver = new BoardReceiver();
+        this.selection.setReceiver(this.receiver);
     }
 
     @Test

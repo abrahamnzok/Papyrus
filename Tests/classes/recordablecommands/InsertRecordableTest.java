@@ -11,6 +11,8 @@ import interfaces.recorder.Recorder;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+
 import static org.junit.Assert.*;
 
 public class InsertRecordableTest {
@@ -22,6 +24,7 @@ public class InsertRecordableTest {
         this.nonmockedinsert = new InsertRecordable();
         this.recorder = new Carecorder();
         this.receiver = new BoardReceiver();
+        this.nonmockedinsert.setReceiver(this.receiver);
     }
 
     @Test
@@ -64,7 +67,7 @@ public class InsertRecordableTest {
         this.nonmockedinsert.setTextinput("We try to do testing before coding");
         this.nonmockedinsert.setPosition(0);
         this.recorder.setrecording();
-        this.recorder.record(this.nonmockedinsert.save());
+        this.recorder.record(this.nonmockedinsert.getClass(),this.nonmockedinsert.save());
         this.nonmockedinsert.setReceiver(this.receiver);
         this.nonmockedinsert.setTextinput("Firs rule of software modeling ");
         this.nonmockedinsert.setPosition(0);
