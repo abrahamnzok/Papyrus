@@ -354,4 +354,55 @@ public class CarecorderTest {
                 this.receiver.getClipboardClone().getClipboard().equals("But I'm not sure")
                         && this.receiver.getBufferClone().getText().isEmpty());
     }
+
+    @Test
+    public void replayTest7() throws Exception{
+        this.insert.setTextinput("I think it is a good idea");
+        this.insert.setPosition(0);
+        this.startrecording.execute();
+        this.insert.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.stoprecording.execute();
+        this.selection.setStart(0);
+        this.selection.setEnd(this.receiver.getBufferClone().length());
+        this.selection.execute();
+        this.cut.execute();
+        this.replay.execute();
+        assertEquals("We try to delete as the buffer changes its length and replay the commands",
+                "I think it is a good " , this.receiver.getBufferClone().getText());
+    }
+
+    @Test
+    public void replayTest8() throws Exception{
+        this.insert.setTextinput("good");
+        this.insert.setPosition(0);
+        this.insert.execute();
+        this.startrecording.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length()-1);
+        this.delete.execute();
+        this.stoprecording.execute();
+        this.selection.setStart(0);
+        this.selection.setEnd(this.receiver.getBufferClone().length());
+        this.selection.execute();
+        this.cut.execute();
+        this.insert.setTextinput("idea");
+        this.insert.setPosition(0);
+        this.insert.execute();
+        this.replay.execute();
+        assertEquals("We try to delete at different positions as the buffer length changes",
+                true, this.receiver.getBufferClone().isEmpty());
+    }
 }
