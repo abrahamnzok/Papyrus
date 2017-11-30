@@ -33,13 +33,13 @@ public class Carecorder implements Recorder,Cloneable {
      */
     @Override
     public void record(Memento memento) throws NoSuchMethodException {
-        if(this.hasPermission()) {
-            this.container.add(new Pair<>(memento.getClass().getConstructor(), memento));
-        }
+        if(this.isRecording()) this.container.add(new Pair<>(memento.getClass().getConstructor(), memento));
     }
 
     /**
-     *
+     * Sets the action of replaying on
+     * At this point, we restore the mementos to their originators
+     * replay cannot execute while recording
      */
     @Override
     public void replay() {
@@ -47,7 +47,9 @@ public class Carecorder implements Recorder,Cloneable {
     }
 
     /**
-     *
+     * Sets the action of recording on
+     * The container of mementos must be cleared each time a recording session starts
+     * Otherwise we would play past recordings
      */
     @Override
     public void setrecording() {
@@ -58,7 +60,7 @@ public class Carecorder implements Recorder,Cloneable {
     /**
      *
      */
-    private boolean hasPermission() {
+    private boolean isRecording() {
         return this.recordingState;
     }
 
