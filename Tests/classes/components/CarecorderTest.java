@@ -405,4 +405,31 @@ public class CarecorderTest {
         assertEquals("We try to delete at different positions as the buffer length changes",
                 true, this.receiver.getBufferClone().isEmpty());
     }
+
+    @Test
+    public void replayTest9() throws Exception{
+        this.insert.setTextinput("idea");
+        this.insert.setPosition(0);
+        this.startrecording.execute();
+        this.insert.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length());
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length());
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length());
+        this.delete.execute();
+        this.delete.setPosition(this.receiver.getBufferClone().length());
+        this.delete.execute();
+        this.stoprecording.execute();
+        this.selection.setStart(0);
+        this.selection.setEnd(this.receiver.getBufferClone().length());
+        this.selection.execute();
+        this.cut.execute();
+        this.insert.setTextinput("idea");
+        this.insert.setPosition(0);
+        this.insert.execute();
+        this.replay.execute();
+        assertEquals("We try to delete at different positions and buffer is not empty at the beginning",
+                "idea", this.receiver.getBufferClone().getText());
+    }
 }
