@@ -100,7 +100,7 @@ public class BoardReceiver implements Receiver {
      */
     @Override
     public void delete(int position) {
-        if(!this.buffer.isEmpty() && position < this.buffer.length()){
+        if(!this.buffer.isEmpty() && position < this.buffer.length() && position >= 0){
             String newText = (new StringBuilder(this.buffer.getText()).deleteCharAt(position)).toString();
             this.buffer.setText(newText);
         }
