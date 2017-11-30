@@ -4,16 +4,28 @@ import classes.concretecommands.Cut;
 import classes.concretemementos.CutGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
 public class CutRecordable extends Cut implements Recordable {
 
-
+    /**
+     *
+     */
+    private Recorder recorder;
 
     /**
      *
      */
     public CutRecordable(){
         super();
+    }
+
+    /**
+     */
+    @Override
+    public void execute() throws NoSuchMethodException {
+        this.recorder.record(this.save());
+        super.execute();
     }
 
     /**
@@ -33,4 +45,9 @@ public class CutRecordable extends Cut implements Recordable {
             super.setReceiver(((CutGhost) m).getReceiver());
         }
     }
+
+    public void setRecorder(Recorder recorder){
+        this.recorder = recorder;
+    }
+
 }
