@@ -65,9 +65,9 @@ public class BoardReceiver implements Receiver {
     public void select(int start, int end) {
         this.ranger.range(start, end);
         if(this.ranger.getSpaceEnd() >= this.buffer.length()){
-            this.ranger.range(this.ranger.getSpaceBegin(), this.buffer.getText().length());
+            this.ranger.range(this.ranger.getSpaceBegin(), this.buffer.length());
             if(this.ranger.getSpaceBegin() >= this.buffer.length()){
-                this.ranger.range(0, this.ranger.getSpaceEnd());
+                this.ranger.range(0, this.buffer.length());
             }
         }
         this.ranger.setSelection(this.buffer.getText().substring(this.ranger.getSpaceBegin(), this.ranger.getSpaceEnd()));
