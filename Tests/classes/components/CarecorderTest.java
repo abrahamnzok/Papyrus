@@ -3,12 +3,9 @@ package classes.components;
 import classes.concretecommands.Record;
 import classes.concretecommands.Replay;
 import classes.concretecommands.Stop;
-import classes.concretemementos.InsertGhost;
 import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 import org.junit.Before;
 import org.junit.Test;
 
