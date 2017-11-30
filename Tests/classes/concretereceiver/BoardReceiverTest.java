@@ -546,4 +546,13 @@ public class BoardReceiverTest {
         assertTrue("Make sure we do not delete at 0!!", !this.buffer.getText().contains("I"));
     }
 
+    @Test
+    public void deleteOutOfBoundaries() throws Exception {
+        String bufferState = "I love this";
+        this.buffer.setText(bufferState);
+        this.receiver.delete(60);
+        assertEquals("We make sure that we cannot delete outOf Boundaries",
+                "I love this", this.buffer.getText());
+    }
+
 }
