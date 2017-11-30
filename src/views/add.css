@@ -8,7 +8,7 @@ Button, MenuButton{
     /* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
     -fx-background-color: #364657;
     -fx-text-fill: whitesmoke;
-    -fx-font: 13px roboto;
+    -fx-font: 13px sans-serif;
 }
 MenuButton .label{
     -fx-text-fill: whitesmoke;
@@ -21,7 +21,7 @@ MenuButton .label{
 TextArea {
     -fx-border-radius: 0 0 0 0;
     -fx-background-radius: 0 0 0 0;
-    -fx-font: 18px Arial;
+    -fx-font: 18px sans-serif;
 }
 
 TextArea .content {
