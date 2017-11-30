@@ -24,11 +24,6 @@ public interface Recorder {
     /**
      *
      */
-    boolean isrecording();
-
-    /**
-     *
-     */
     void stoprecording();
 
 }

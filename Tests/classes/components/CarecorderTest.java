@@ -3,9 +3,12 @@ package classes.components;
 import classes.concretecommands.Record;
 import classes.concretecommands.Replay;
 import classes.concretecommands.Stop;
+import classes.concretemementos.InsertGhost;
 import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
+import interfaces.memento.Memento;
+import interfaces.recordable.Recordable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,13 +67,14 @@ public class CarecorderTest {
         this.insert.execute();
         this.selection.execute();
         this.copy.execute();
-        this.stoprecording.execute();
-        assertEquals("We check if the object containing the mementos is incremented",
-                3, this.recorder.careclone().size());
+        assertEquals("We check if the object containing the mementos is not incremented",
+                0, this.recorder.careclone().size());
     }
 
     @Test
     public void recordTest2() throws Exception {
+        this.startrecording.setReceiver(this.recorder);
+        this.stoprecording.setReceiver(this.recorder);
         this.startrecording.execute();
         this.insert.setReceiver(this.receiver);
         this.selection.setReceiver(this.receiver);
@@ -91,6 +95,7 @@ public class CarecorderTest {
         this.insert.setReceiver(this.receiver);
         this.insert.setTextinput("We try to do testing before coding");
         this.insert.setPosition(0);
+        this.insert.setRecorder(this.recorder);
         this.insert.execute();
         this.insert.setTextinput(" After we can implement methods");
         this.insert.setPosition(this.receiver.getBufferClone().length());
@@ -122,8 +127,8 @@ public class CarecorderTest {
         this.stoprecording.setReceiver(this.recorder);
         this.insert.setRecorder(this.recorder);
         this.replay.setReceiver(this.recorder);
-        this.startrecording.execute();
         this.insert.setReceiver(this.receiver);
+        this.startrecording.execute();
         this.insert.setTextinput("We try to do testing before coding");
         this.insert.setPosition(0);
         this.insert.execute();
@@ -151,8 +156,8 @@ public class CarecorderTest {
         this.startrecording.execute();
         this.selection.execute();
         this.stoprecording.execute();
-        assertEquals("We can record when insert was not recorded before",
-                0, this.recorder.careclone().size());
+        assertEquals("We can record other commands when insert wasn't recorded before",
+                1, this.recorder.careclone().size());
     }
 
     @Test
@@ -194,8 +199,8 @@ public class CarecorderTest {
         this.insert.execute();
         this.selection.execute();
         this.stoprecording.execute();
-        assertEquals("We can record insert if we don't have the initial insert",
-                0, this.recorder.careclone().size());
+        assertEquals("We can record insert after recording has started",
+                3, this.recorder.careclone().size());
     }
 
     @Test
@@ -222,7 +227,7 @@ public class CarecorderTest {
         this.insert.execute();
         this.selection.execute();
         this.stoprecording.execute();
-        assertEquals("We can record insert if we don't have the initial insert",
+        assertEquals("Once we have stopped recording they are no way to go back from the last recording",
                 2, this.recorder.careclone().size());
     }
 
@@ -237,4 +242,38 @@ public class CarecorderTest {
         assertEquals(true, this.recorder.careclone().isEmpty());
     }
 
+    @Test
+    public void hasAccessTest1() throws Exception{
+        this.startrecording.setReceiver(this.recorder);
+        this.stoprecording.setReceiver(this.recorder);
+        this.insert.setRecorder(this.recorder);
+        this.insert.setReceiver(this.receiver);
+        this.selection.setRecorder(this.recorder);
+        this.selection.setReceiver(this.receiver);
+        this.selection.setStart(10);
+        this.selection.setEnd(13);
+        this.insert.setTextinput("I think it is the ideal thing to do");
+        this.insert.setPosition(0);
+        this.startrecording.execute();
+        this.insert.execute();
+        this.stoprecording.execute();
+        assertEquals(false, this.recorder.careclone().isEmpty());
+    }
+
+    @Test
+    public void hasAccessTest2() throws Exception{
+        this.startrecording.setReceiver(this.recorder);
+        this.stoprecording.setReceiver(this.recorder);
+        this.selection.setRecorder(this.recorder);
+        this.selection.setReceiver(this.receiver);
+        this.copy.setRecorder(this.recorder);
+        this.copy.setReceiver(this.receiver);
+        this.selection.setStart(0);
+        this.selection.setEnd(13);
+        this.startrecording.execute();
+        this.selection.execute();
+        this.copy.execute();
+        this.stoprecording.execute();
+        assertEquals(false, this.recorder.careclone().isEmpty());
+    }
 }

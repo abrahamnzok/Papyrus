@@ -9,7 +9,15 @@ import java.util.List;
 
 public class Carecorder implements Recorder,Cloneable {
 
+    /**
+     *
+     */
     private List<Pair<Constructor,Memento>> container;
+
+    /**
+     *
+     */
+    private boolean recordingState;
 
     /**
      * Preferred Constructor
@@ -17,6 +25,7 @@ public class Carecorder implements Recorder,Cloneable {
 
     public Carecorder(){
         this.container = new ArrayList<>();
+        this.recordingState = false;
     }
 
     /**
@@ -24,7 +33,9 @@ public class Carecorder implements Recorder,Cloneable {
      */
     @Override
     public void record(Memento memento) throws NoSuchMethodException {
-        this.container.add(new Pair<>(memento.getClass().getConstructor(), memento));
+        if(this.hasPermission()) {
+            this.container.add(new Pair<>(memento.getClass().getConstructor(), memento));
+        }
     }
 
     /**
@@ -40,14 +51,15 @@ public class Carecorder implements Recorder,Cloneable {
      */
     @Override
     public void setrecording() {
+        this.container.clear();
+        this.recordingState = true;
     }
 
     /**
      *
      */
-    @Override
-    public boolean isrecording() {
-        return false;
+    private boolean hasPermission() {
+        return this.recordingState;
     }
 
     /**
@@ -55,7 +67,7 @@ public class Carecorder implements Recorder,Cloneable {
      */
     @Override
     public void stoprecording() {
-
+        this.recordingState = false;
     }
 
     /**
@@ -64,5 +76,4 @@ public class Carecorder implements Recorder,Cloneable {
     public List careclone() throws CloneNotSupportedException{
         return ((List) ((ArrayList<Pair<Constructor,Memento>>) this.container).clone());
     }
-
 }
