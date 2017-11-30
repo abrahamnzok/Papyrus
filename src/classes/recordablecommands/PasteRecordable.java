@@ -4,9 +4,14 @@ import classes.concretecommands.Paste;
 import classes.concretemementos.PasteGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
 public class PasteRecordable extends Paste implements Recordable {
 
+    /**
+     *
+     */
+    private Recorder recorder;
 
     /**
      * Default constructor
@@ -20,6 +25,14 @@ public class PasteRecordable extends Paste implements Recordable {
      */
     public PasteRecordable(int position) {
         super(position);
+    }
+
+    /**
+     */
+    @Override
+    public void execute() throws NoSuchMethodException {
+        this.recorder.record(this.save());
+        super.execute();
     }
 
     /**
@@ -39,5 +52,9 @@ public class PasteRecordable extends Paste implements Recordable {
             super.setReceiver(((PasteGhost) m).getReceiver());
             super.setPaste(((PasteGhost) m).getPositionState());
         }
+    }
+
+    public void setRecorder(Recorder recorder){
+        this.recorder = recorder;
     }
 }

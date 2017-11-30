@@ -32,7 +32,7 @@ public class Paste implements Command {
 
     /**
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         this.receiver.paste(this.position);
     }
 
