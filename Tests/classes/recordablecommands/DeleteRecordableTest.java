@@ -43,8 +43,8 @@ public class DeleteRecordableTest {
     @Test
     public void restoreDeleteTest1() throws Exception {
         this.nonmockedelete.setPosition(14);
-        DeleteGhost pasteGhost = new DeleteGhost(this.nonmockedelete.getReceiver(),10);
-        this.nonmockedelete.restore(pasteGhost);
+        DeleteGhost deleteGhost = new DeleteGhost(this.nonmockedelete.getReceiver(),10);
+        this.nonmockedelete.restore(deleteGhost);
         assertEquals("We are trying to retrieve last saved data of delete",
                 10, this.nonmockedelete.getPosition());
     }
