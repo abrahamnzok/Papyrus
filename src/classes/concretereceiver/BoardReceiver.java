@@ -59,12 +59,16 @@ public class BoardReceiver implements Receiver {
     /**
      * @param start which the starting point of the selection
      * @param end   which is the ending point of the selection
+     * if selection is set out of boundaries then selection is made on the whole content
      */
     @Override
     public void select(int start, int end) {
         this.ranger.range(start, end);
-        if(this.ranger.getSpaceEnd() >= this.buffer.getText().length()){
+        if(this.ranger.getSpaceEnd() >= this.buffer.length()){
             this.ranger.range(this.ranger.getSpaceBegin(), this.buffer.getText().length());
+            if(this.ranger.getSpaceBegin() >= this.buffer.length()){
+                this.ranger.range(0, this.ranger.getSpaceEnd());
+            }
         }
         this.ranger.setSelection(this.buffer.getText().substring(this.ranger.getSpaceBegin(), this.ranger.getSpaceEnd()));
     }
