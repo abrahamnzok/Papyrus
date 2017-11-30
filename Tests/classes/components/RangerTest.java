@@ -98,8 +98,4 @@ public class RangerTest {
         assertEquals(result, this.ranger.getSelection());
     }
 
-    @Test
-    public void filterEmptyChars() throws Exception {
-    }
-
 }
