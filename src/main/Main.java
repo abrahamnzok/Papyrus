@@ -57,6 +57,7 @@ public class Main extends Application {
         //Show the IHM
         Scene s = new Scene(root, 1080, 720);
         s.getStylesheets().add(Main.class.getResource("../views/add.css").toExternalForm());
+        primaryStage.getIcons().add(new Image("./resources/logosmall.png"));
         primaryStage.setTitle("Papyrus");
         primaryStage.setScene(s);
         primaryStage.show();

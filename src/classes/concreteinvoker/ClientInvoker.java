@@ -29,11 +29,6 @@ public class ClientInvoker extends Application implements Invoker {
 
     private ACTION currentAction = ACTION.NONE;
 
-    @Override
-    public void start(Stage stage){
-        //application must include start
-    }
-
     @FXML
     private void initialize() {
         this.textarea.requestFocus();
@@ -108,6 +103,24 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the MouseEvent (on click on the button)
+     * Invoke the Undo command.
+     */
+    @FXML
+    private void handleUndo(MouseEvent event) throws NoSuchMethodException {
+        this.setCommand(this.commandMap.get("copy"));
+    }
+
+    /**
+     * @param event the MouseEvent (on click on the button)
+     * Invoke the Redo command.
+     */
+    @FXML
+    private void handleRedo(MouseEvent event) throws NoSuchMethodException {
+        this.setCommand(this.commandMap.get("copy"));
+    }
+
+    /**
+     * @param event the MouseEvent (on click on the button)
      * Invoke the Copy command.
      */
     @FXML
@@ -175,5 +188,11 @@ public class ClientInvoker extends Application implements Invoker {
 
     public void setEngine(Receiver engine) {
         this.engine = engine;
+    }
+
+
+    @Override
+    public void start(Stage stage){
+        //application must include start
     }
 }
