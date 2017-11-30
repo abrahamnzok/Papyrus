@@ -20,7 +20,7 @@ public class ClientInvoker extends Application implements Invoker {
     private Map<String, Command> commandMap;
     private Receiver engine;
 
-    /*Prevent conflict between actions*/
+    /** Prevent conflict between actions **/
     private enum ACTION {
         PASTE,
         DELETE,

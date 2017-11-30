@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Client
+ * Configurator
  */
 public class Main extends Application {
 
