@@ -51,9 +51,9 @@
             </Button>
             <MenuButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Macro">
               <items>
-                <MenuItem fx:id="playButton" mnemonicParsing="false" text="Play" />
-                <MenuItem fx:id="startButton" mnemonicParsing="false" text="Start recording" />
-                  <MenuItem fx:id="stopButton" mnemonicParsing="false" text="Stop recording" />
+                <MenuItem fx:id="playButton" mnemonicParsing="false" onAction="#handlePlay" text="Play" />
+                <MenuItem fx:id="startButton" mnemonicParsing="false" onAction="#handleStartRecording" text="Start recording" />
+                  <MenuItem fx:id="stopButton" mnemonicParsing="false" onAction="#handleStopRecording" text="Stop recording" />
               </items>
             </MenuButton>
             <ButtonBar buttonMinWidth="25.0" prefHeight="42.0" prefWidth="75.0">

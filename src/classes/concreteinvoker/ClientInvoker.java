@@ -5,6 +5,7 @@ import interfaces.command.Command;
 import interfaces.invoker.Invoker;
 import interfaces.Receiver.Receiver;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -20,15 +21,19 @@ public class ClientInvoker extends Application implements Invoker {
     private Map<String, Command> commandMap;
     private Receiver engine;
 
-    /** Prevent conflict between actions **/
+    /** Prevent conflict between actions */
     private enum ACTION {
         PASTE,
         DELETE,
+        REPLAY,
         NONE
     }
 
     private ACTION currentAction = ACTION.NONE;
 
+    /**
+     * Automatically called after creating the controller
+     */
     @FXML
     private void initialize() {
         this.textarea.requestFocus();
@@ -38,8 +43,8 @@ public class ClientInvoker extends Application implements Invoker {
             this.textarea.setOnKeyPressed(event -> {
                 switch(event.getCode()){
                     case BACK_SPACE:
-                        //Had to redefine it because the caretPosition move after pressing those keys
                         try {
+                            //Had to redefine the carret because it moves after pressing those keys
                             this.deleteAtPosition(this.textarea.getCaretPosition()-1);
                         } catch (NoSuchMethodException e) {
                             e.printStackTrace();
@@ -155,7 +160,7 @@ public class ClientInvoker extends Application implements Invoker {
     }
 
     /**
-     * @param event the paste (on click on the button)
+     * @param event the MouseEvent (on click on the button)
      * Invoke the Cut command and mimic the same effect on the UI.
      */
     @FXML
@@ -176,16 +181,55 @@ public class ClientInvoker extends Application implements Invoker {
     }
 
     /**
+     * @param event the ActionEvent (on click on the label)
+     * Invoke the replay command and mimic the result on the UI
+     */
+    @FXML
+    void handlePlay(ActionEvent event) throws NoSuchMethodException, CloneNotSupportedException {
+        this.textarea.requestFocus();
+        this.currentAction = ACTION.REPLAY;
+        this.setCommand(this.commandMap.get("replay"));
+        this.textarea.setText(this.engine.getBufferClone().getText());
+        this.currentAction = ACTION.NONE;
+    }
+
+    /**
+     * @param event the ActionEvent (on click on the label)
+     * Invoke the Cut command and mimic the same effect on the UI.
+     */
+    @FXML
+    void handleStartRecording(ActionEvent event) throws NoSuchMethodException {
+        this.setCommand(this.commandMap.get("record"));
+    }
+
+    /**
+     * @param event the ActionEvent (on click on the label)
+     * Invoke the Cut command and mimic the same effect on the UI.
+     */
+    @FXML
+    void handleStopRecording(ActionEvent event) throws NoSuchMethodException {
+        this.setCommand(this.commandMap.get("stop"));
+    }
+
+
+    /**
      * @param command to execute
+     *  Execute the given command
      */
     public void setCommand(Command command ) throws NoSuchMethodException {
         command.execute();
     }
 
+    /**
+     * @param m Map of <String, Command> to set
+     */
     public void setCommandMap(Map<String, Command> m){
         this.commandMap = m;
     }
 
+    /**
+     * @param engine Receiver to set
+     */
     public void setEngine(Receiver engine) {
         this.engine = engine;
     }
