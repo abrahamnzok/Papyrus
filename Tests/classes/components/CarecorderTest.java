@@ -55,9 +55,9 @@ public class CarecorderTest {
 
     @Test
     public void recordTest() throws Exception {
-        this.recorder.record(this.insert.getClass(),this.insert.save());
-        this.recorder.record(this.insert.getClass(),this.copy.save());
-        this.recorder.record(this.insert.getClass(),this.selection.save());
+        this.recorder.record(this.insert.save(), this.insert);
+        this.recorder.record(this.copy.save(), this.insert);
+        this.recorder.record(this.selection.save(), this.insert);
         assertEquals("Is the object containing the mementos incremented when we are not recording",
                 0, this.recorder.careclone().size());
     }

@@ -1,6 +1,7 @@
 package interfaces.recorder;
 
 import interfaces.memento.Memento;
+import interfaces.recordable.Recordable;
 
 /**
  * 
@@ -8,9 +9,9 @@ import interfaces.memento.Memento;
 public interface Recorder {
     /**
      * @param memento  to store
-     * @param myclass the name of the class that created the memento
+     * @param recordable reference to the originator
      */
-    void record(Class myclass, Memento memento) throws NoSuchMethodException;
+    void record(Memento memento, Recordable recordable) throws NoSuchMethodException;
 
     /**
      *

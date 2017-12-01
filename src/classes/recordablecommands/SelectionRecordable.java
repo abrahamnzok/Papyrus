@@ -37,7 +37,7 @@ public class SelectionRecordable extends Selection implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.getClass(),this.save());
+        this.recorder.record(this.save(), this);
         super.execute();
     }
 

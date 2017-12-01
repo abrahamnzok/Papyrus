@@ -14,7 +14,7 @@ public class Carecorder implements Recorder,Cloneable {
     /**
      *
      */
-    private List<Pair<Class,Memento>> container;
+    private List<Pair<Memento,Recordable>> container;
 
     /**
      *
@@ -24,7 +24,6 @@ public class Carecorder implements Recorder,Cloneable {
     /**
      * Preferred Constructor
      */
-
     public Carecorder(){
         this.container = new ArrayList<>();
         this.recordingState = false;
@@ -34,8 +33,9 @@ public class Carecorder implements Recorder,Cloneable {
      * @param memento to store
      */
     @Override
-    public void record(Class myclass, Memento memento) throws NoSuchMethodException {
-        if(this.isRecording()) this.container.add(new Pair<>(myclass, memento));
+    public void record(Memento memento, Recordable recordable) throws NoSuchMethodException {
+        if(this.isRecording()) this.container.add(new Pair<>(memento, recordable));
+
     }
 
     /**
@@ -48,17 +48,10 @@ public class Carecorder implements Recorder,Cloneable {
         if(!this.isRecording()){
             this.container.forEach(
                     pair ->{
-                        Constructor o = null;
                         try {
-                            o = ((Class<?>)pair.getKey()).getConstructor();
+                            pair.getValue().restore(pair.getKey());
+                            System.out.println("Commande rejouée : " + pair.getValue().getClass().getSimpleName());
                         } catch (NoSuchMethodException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            assert o != null;
-                            Recordable r = (Recordable) o.newInstance();
-                            r.restore(pair.getValue());
-                        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                             e.printStackTrace();
                         }
                     }
@@ -75,6 +68,7 @@ public class Carecorder implements Recorder,Cloneable {
     public void setrecording() {
         this.container.clear();
         this.recordingState = true;
+        System.out.println("Recording ON !");
     }
 
     /**
@@ -90,12 +84,13 @@ public class Carecorder implements Recorder,Cloneable {
     @Override
     public void stoprecording() {
         this.recordingState = false;
+        System.out.println("Recording OFF !");
     }
 
     /**
      *
      */
     public List careclone() throws CloneNotSupportedException{
-        return ((List) ((ArrayList<Pair<Class,Memento>>) this.container).clone());
+        return ((List) ((ArrayList<Pair<Memento,Recordable>>) this.container).clone());
     }
 }

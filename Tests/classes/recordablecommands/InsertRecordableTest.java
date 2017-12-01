@@ -67,12 +67,12 @@ public class InsertRecordableTest {
         this.nonmockedinsert.setTextinput("We try to do testing before coding");
         this.nonmockedinsert.setPosition(0);
         this.recorder.setrecording();
-        this.recorder.record(this.nonmockedinsert.getClass(),this.nonmockedinsert.save());
+        this.recorder.record(this.nonmockedinsert.save(), this.nonmockedinsert);
         this.nonmockedinsert.setReceiver(this.receiver);
         this.nonmockedinsert.setTextinput("Firs rule of software modeling ");
         this.nonmockedinsert.setPosition(0);
         Pair<?, ?> p = (Pair<?, ?>) this.recorder.careclone().get(0);
-        Memento insertGhost =  (Memento) p.getValue();
+        Memento insertGhost =  (Memento) p.getKey();
         InsertGhost real = (InsertGhost) insertGhost;
         this.nonmockedinsert.restore(real);
         assertEquals("Check if buffers contains insert object text",
