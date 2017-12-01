@@ -33,7 +33,7 @@ public class DeleteRecordable extends Delete implements Recordable {
      */
     @Override
     public void execute() throws NoSuchMethodException {
-        this.recorder.record(this.save(), this);
+        ((Carecorder) this.recorder).record(this.save(), this);
         super.execute();
     }
 
