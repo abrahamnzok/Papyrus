@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Loading the resources
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/index.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/index.fxml"));
         Parent root = fxmlLoader.load();
         ClientInvoker controller = fxmlLoader.getController();
 
@@ -56,8 +56,8 @@ public class Main extends Application {
 
         //Show the IHM
         Scene s = new Scene(root, 1080, 720);
-        s.getStylesheets().add(Main.class.getResource("../views/add.css").toExternalForm());
-        primaryStage.getIcons().add(new Image("./resources/logosmall.png"));
+        s.getStylesheets().add(getClass().getResource("/views/add.css").toExternalForm());
+        primaryStage.getIcons().add(new Image(getClass().getResource("/resources/logosmall.png").toExternalForm()));
         primaryStage.setTitle("Papyrus");
         primaryStage.setScene(s);
         primaryStage.show();
