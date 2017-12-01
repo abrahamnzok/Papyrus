@@ -1,5 +1,6 @@
 package classes.concretecommands;
 
+import classes.components.Carecorder;
 import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
@@ -15,7 +16,7 @@ public class Record implements Command {
      */
     @Override
     public void execute() {
-        this.recorder.setrecording();
+        ((Carecorder) this.recorder).setrecording();
     }
 
     /**

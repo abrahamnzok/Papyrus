@@ -10,7 +10,7 @@ public interface Recordable {
     /**
      * @return Specific Memento for the specific Recordable
      */
-    Memento save();
+    Memento save() throws CloneNotSupportedException;
 
     /**
      * @param m

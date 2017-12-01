@@ -1,5 +1,6 @@
 package classes.concretecommands;
 
+import classes.components.Carecorder;
 import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
@@ -15,14 +16,13 @@ public class Replay implements Command {
      */
     @Override
     public void execute() {
-        this.recorder.replay();
+        ((Carecorder) this.recorder).replay();
     }
 
     /**
      * @param recorder is the receiver to perform the recording
      */
     public void setReceiver(Recorder recorder) {
-        // TODO implement here
         this.recorder = recorder;
     }
 }

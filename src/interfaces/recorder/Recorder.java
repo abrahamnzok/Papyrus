@@ -13,19 +13,4 @@ public interface Recorder {
      */
     void record(Memento memento, Recordable recordable) throws NoSuchMethodException;
 
-    /**
-     *
-     */
-    void replay();
-
-    /**
-     *
-     */
-    void setrecording();
-
-    /**
-     *
-     */
-    void stoprecording();
-
 }
