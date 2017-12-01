@@ -392,6 +392,26 @@ public class BoardReceiverTest {
     }
 
     @Test
+    public void pasteOutOfBoundaries() throws Exception {
+        String bufferState = "Test for paste when clipboard";
+        this.buffer.setText(bufferState);
+        this.clipBoard.setClipboard(" contains something");
+        this.receiver.paste(this.buffer.length()*2);
+        assertEquals("We want paste when clipboard is empty",
+                bufferState, this.buffer.getText());
+    }
+
+    @Test
+    public void pasteOutOfBoundariesTest2() throws Exception {
+        String bufferState = "Test for paste when clipboard";
+        this.buffer.setText(bufferState);
+        this.clipBoard.setClipboard(" contains something");
+        this.receiver.paste(-1);
+        assertEquals("We want paste when clipboard is empty",
+                bufferState, this.buffer.getText());
+    }
+
+    @Test
     public void cutNPaste() throws Exception {
         String bufferState = "Test";
         this.buffer.setText(bufferState);
@@ -538,6 +558,7 @@ public class BoardReceiverTest {
         assertEquals("We make sure that we can delete at any position",
                 lengthBeforeDelete, this.buffer.getText().length());
     }
+
     @Test
     public void deleteCorrectPosition0() throws Exception {
         String bufferState = "I need we need to delete this s";
