@@ -23,7 +23,7 @@ public class InsertGhostTest {
 
     @Test
     public void getPositionState() throws Exception {
-        assertEquals("Testing", this.insertGhost.getTextState());
+        assertEquals("Testing", this.insertGhost.getInputState());
     }
 
 }

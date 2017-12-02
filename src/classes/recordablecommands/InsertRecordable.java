@@ -44,7 +44,7 @@ public class InsertRecordable extends Insert implements Recordable {
     public void restore(Memento m) throws NoSuchMethodException {
         if( m != null && InsertGhost.class.isInstance(m)){
             super.setReceiver(((InsertGhost)m).getReceiver());
-            super.setTextinput(((InsertGhost) m).getTextState());
+            super.setTextinput(((InsertGhost) m).getInputState());
             super.setPosition(((InsertGhost) m).getPositionState());
             super.execute();
         }

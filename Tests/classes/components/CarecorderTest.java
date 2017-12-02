@@ -19,7 +19,6 @@ public class CarecorderTest {
     private SelectionRecordable selection;
     private CutRecordable cut;
     private DeleteRecordable delete;
-    private PasteRecordable paste;
     private InsertRecordable insert;
     private CopyRecordable copy;
     private Carecorder recorder;
@@ -30,7 +29,6 @@ public class CarecorderTest {
         this.cut = new CutRecordable();
         this.delete = new DeleteRecordable();
         this.insert = new InsertRecordable();
-        this.paste = new PasteRecordable();
         this.copy = new CopyRecordable();
         this.recorder = new Carecorder();
         this.startrecording = new Record();
@@ -49,8 +47,6 @@ public class CarecorderTest {
         this.cut.setRecorder(this.recorder);
         this.delete.setReceiver(this.receiver);
         this.delete.setRecorder(this.recorder);
-        this.paste.setReceiver(this.receiver);
-        this.paste.setRecorder(this.recorder);
     }
 
     @Test
