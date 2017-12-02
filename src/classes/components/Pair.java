@@ -6,15 +6,26 @@ import interfaces.pair.PairInterface;
  * Container to ease passing around a tuple of two objects. This object provides a sensible
  * implementation of equals(), returning true if equals() is true on each of the contained
  * objects.
+ * This object is generic and is intended to be immutable.
+ * @author Abraham Mubanzo
  */
 public class Pair<F, S> implements PairInterface, Cloneable{
 
-    private F key;
-    private S value;
+
+    /**
+     * Object of any type {@code int} {@code String} {@code Object}
+     * represents the key of the pair
+     */
+    private final F key;
+
+    /**
+     * Object of any type {@code int} {@code String} {@code Object}
+     * represents the value of the pair
+     */
+    private final S value;
 
     /**
      * Constructor for a Pair.
-     *
      * @param key the first object in the Pair
      * @param value the second object in the pair
      */
@@ -43,8 +54,7 @@ public class Pair<F, S> implements PairInterface, Cloneable{
                 && (value != null ? value.equals(pair.getValue()) : pair.getValue() == null);
     }
     /**
-     * Compute a hash code using the hash codes of the underlying objects
-     *
+     * Computes a hash code using the hash codes of the underlying objects
      * @return a hashcode of the Pair
      */
     @Override
@@ -79,6 +89,7 @@ public class Pair<F, S> implements PairInterface, Cloneable{
 
     /**
      *@return a shallow copy of this
+     * @throws CloneNotSupportedException
      */
     @Override
     public Object clone() throws CloneNotSupportedException {

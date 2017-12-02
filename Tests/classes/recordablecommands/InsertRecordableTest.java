@@ -7,11 +7,8 @@ import classes.concretemementos.SelectGhost;
 import classes.concretereceiver.BoardReceiver;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
-import interfaces.recorder.Recorder;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.lang.reflect.Constructor;
 
 import static org.junit.Assert.*;
 
@@ -32,7 +29,7 @@ public class InsertRecordableTest {
         this.nonmockedinsert.setTextinput("Hello trying to save me?");
         this.nonmockedinsert.setPosition(10);
         InsertGhost insertGhost = (InsertGhost) this.nonmockedinsert.save();
-        assertTrue(this.nonmockedinsert.getTextinput().equals(insertGhost.getTextState())
+        assertTrue(this.nonmockedinsert.getTextinput().equals(insertGhost.getInputState())
                 && this.nonmockedinsert.getPosition() == insertGhost.getPositionState());
     }
 
@@ -58,7 +55,7 @@ public class InsertRecordableTest {
         this.nonmockedinsert.setPosition(9);
         InsertGhost insertGhost = new InsertGhost(this.nonmockedinsert.getReceiver(),"I'm here to be retrieved",10);
         this.nonmockedinsert.restore(insertGhost);
-        assertTrue(this.nonmockedinsert.getTextinput().equals(insertGhost.getTextState())
+        assertTrue(this.nonmockedinsert.getTextinput().equals(insertGhost.getInputState())
                 && this.nonmockedinsert.getPosition() == insertGhost.getPositionState());
     }
     @Test
@@ -76,7 +73,7 @@ public class InsertRecordableTest {
         InsertGhost real = (InsertGhost) insertGhost;
         this.nonmockedinsert.restore(real);
         assertEquals("Check if buffers contains insert object text",
-                real.getTextState(), this.nonmockedinsert.getTextinput());
+                real.getInputState(), this.nonmockedinsert.getTextinput());
     }
 
     @Test

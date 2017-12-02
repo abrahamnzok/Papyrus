@@ -5,11 +5,13 @@ import classes.concretemementos.PasteGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
-
+/**
+ * Subclass inheriting properties from {@link Paste}
+ */
 public class PasteRecordable extends Paste implements Recordable {
 
     /**
-     *
+     * {@link Recorder} to perform the action of storing a command when is to be executed
      */
     private Recorder recorder;
 
@@ -20,8 +22,8 @@ public class PasteRecordable extends Paste implements Recordable {
         super();
     }
 
-    /*
-     * Preferred constructor
+    /**
+     *{@inheritDoc}
      */
     public PasteRecordable(int position) {
         super(position);
@@ -36,7 +38,7 @@ public class PasteRecordable extends Paste implements Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
+     * @return {@link Memento} which holds the state of {@link PasteRecordable}
      */
     @Override
     public Memento save() {
@@ -44,7 +46,7 @@ public class PasteRecordable extends Paste implements Recordable {
     }
 
     /**
-     * @param m memento's state we want to restore to the originator
+     * @param m {@link Memento} to restore
      */
     @Override
     public void restore(Memento m) throws NoSuchMethodException {
@@ -55,6 +57,9 @@ public class PasteRecordable extends Paste implements Recordable {
         }
     }
 
+    /**
+     * @param recorder new Receiver that knows how to record this
+     */
     public void setRecorder(Recorder recorder){
         this.recorder = recorder;
     }

@@ -5,11 +5,13 @@ import classes.concretemementos.SelectGhost;
 import interfaces.memento.Memento;
 import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
-
+/**
+ * Subclass inheriting properties from {@link Selection}
+ */
 public class SelectionRecordable extends Selection implements Recordable {
 
     /**
-     *
+     * {@link Recorder} to perform the action of storing a command when is to be executed
      */
     private Recorder recorder;
 
@@ -21,11 +23,7 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-
-     * Preferred Constructor
-     *
-     * @param start starting point of selection
-     * @param end  ending point of selection
+     *{@inheritDoc}
      */
     public SelectionRecordable(int start, int end) {
         super(start, end);
@@ -33,7 +31,7 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-     *
+     *{@inheritDoc}
      */
     @Override
     public void execute() throws NoSuchMethodException {
@@ -42,7 +40,7 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
+     * @return {@link Memento} which holds the state of {@link SelectionRecordable}
      */
     @Override
     public Memento save() {
@@ -50,7 +48,7 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-     * @param m memento state we want to restore to the originator
+     * @param m {@link Memento} to restore
      */
     @Override
     public void restore(Memento m) throws NoSuchMethodException {
@@ -62,8 +60,8 @@ public class SelectionRecordable extends Selection implements Recordable {
         }
     }
 
-    /*
-     *
+    /**
+     * @param recorder new Receiver that knows how to record this
      */
     public void setRecorder(Recorder recorder){
         this.recorder = recorder;

@@ -84,7 +84,7 @@ public class ClientInvoker extends Application implements Invoker {
     /**
      * @param newValue The value to be inserted
      * @param position Position where to insert
-    * Invoke the Insert command.
+     * Invoke the Insert command.
      */
     private void insertAtPosition(String newValue, int position) throws NoSuchMethodException {
         //Call insert command by taking the next character typed after the caret
@@ -98,6 +98,7 @@ public class ClientInvoker extends Application implements Invoker {
     /**
      * @param position Position of the character to delete
      * Invoke the delete command.
+     * @throws NoSuchMethodException
      */
     private void deleteAtPosition(int position) throws NoSuchMethodException {
         Delete del = (Delete) this.commandMap.get("delete");
@@ -108,7 +109,8 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the MouseEvent (on click on the button)
-     * Invoke the Undo command.
+     * Invoke the Undo command
+     * @throws NoSuchMethodException
      */
     @FXML
     private void handleUndo(MouseEvent event) throws NoSuchMethodException {
@@ -118,6 +120,7 @@ public class ClientInvoker extends Application implements Invoker {
     /**
      * @param event the MouseEvent (on click on the button)
      * Invoke the Redo command.
+     * @throws NoSuchMethodException
      */
     @FXML
     private void handleRedo(MouseEvent event) throws NoSuchMethodException {
@@ -126,7 +129,8 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the MouseEvent (on click on the button)
-     * Invoke the Copy command.
+     * Invoke {@link Copy} command.
+     * @throws NoSuchMethodException
      */
     @FXML
     private void handleCopy(MouseEvent event) throws NoSuchMethodException {
@@ -135,7 +139,9 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the MouseEvent (on click on the button)
-     * Invoke the Cut command and mimic the same effect on the UI.
+     * Invoke {@link Cut} command and mimic the same effect on the UI.
+     * @throws CloneNotSupportedException
+     * @throws NoSuchMethodException
      */
     @FXML
     private void handleCut(MouseEvent event) throws CloneNotSupportedException, NoSuchMethodException {
@@ -145,7 +151,9 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the MouseEvent (on click on the button)
-     * Invoke the Delete command and mimic the same effect on the UI.
+     * Invoke {@link Delete} command and mimic the same effect on the UI.
+     * @throws CloneNotSupportedException
+     * @throws NoSuchMethodException
      */
     @FXML
     private void handleDelete(MouseEvent event) throws CloneNotSupportedException, NoSuchMethodException {
@@ -161,7 +169,9 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the MouseEvent (on click on the button)
-     * Invoke the Cut command and mimic the same effect on the UI.
+     * Invoke {@link Paste} command and mimic the same effect on the UI.
+     * @throws CloneNotSupportedException
+     * @throws NoSuchMethodException
      */
     @FXML
     private void handlePaste(MouseEvent event) throws CloneNotSupportedException, NoSuchMethodException {
@@ -182,7 +192,9 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the ActionEvent (on click on the label)
-     * Invoke the replay command and mimic the result on the UI
+     * Invoke {@link Replay} command and mimic the result on the UI
+     * @throws NoSuchMethodException
+     * @throws CloneNotSupportedException
      */
     @FXML
     void handlePlay(ActionEvent event) throws NoSuchMethodException, CloneNotSupportedException {
@@ -195,7 +207,8 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the ActionEvent (on click on the label)
-     * Invoke the Cut command and mimic the same effect on the UI.
+     * Invoke {@link Record} command and mimic the same effect on the UI.
+     * @throws NoSuchMethodException
      */
     @FXML
     void handleStartRecording(ActionEvent event) throws NoSuchMethodException {
@@ -204,7 +217,8 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param event the ActionEvent (on click on the label)
-     * Invoke the Cut command and mimic the same effect on the UI.
+     * Invoke {@link Stop} command and mimic the same effect on the UI.
+     * @throws NoSuchMethodException
      */
     @FXML
     void handleStopRecording(ActionEvent event) throws NoSuchMethodException {
@@ -214,21 +228,21 @@ public class ClientInvoker extends Application implements Invoker {
 
     /**
      * @param command to execute
-     *  Execute the given command
+     *  Execute the given {@link Command}
      */
     public void setCommand(Command command ) throws NoSuchMethodException {
         command.execute();
     }
 
     /**
-     * @param m Map of <String, Command> to set
+     * @param m {@link Map} to set
      */
     public void setCommandMap(Map<String, Command> m){
         this.commandMap = m;
     }
 
     /**
-     * @param engine Receiver to set
+     * @param engine {@link Receiver} to set
      */
     public void setEngine(Receiver engine) {
         this.engine = engine;

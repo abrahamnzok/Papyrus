@@ -1,5 +1,8 @@
 package interfaces.pair;
 
+/**
+ * @author Abraham Mubanzo
+ */
 public interface PairInterface {
 
     /**
@@ -12,7 +15,6 @@ public interface PairInterface {
 
     /**
      * Compute a hash code using the hash codes of the underlying objects
-     *
      * @return a hashcode of the Pair
      */
     @Override

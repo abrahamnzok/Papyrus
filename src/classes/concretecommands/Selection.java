@@ -2,21 +2,25 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
+import interfaces.recorder.Recorder;
 
+/**
+ * Record Command
+ */
 public class Selection implements Command {
 
     /**
-     *
+     * {@link Recorder} to perform the action when the command is to be executed
      */
     private Receiver receiver;
 
     /**
-     *
+     * {@code int} hold the value of the starting point of selection
      */
     private int start;
 
     /**
-     *
+     * {@code int} hold the value of the ending point of selection
      */
     private int end;
 
@@ -39,6 +43,8 @@ public class Selection implements Command {
     }
 
     /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
      */
     public void execute() throws NoSuchMethodException {
         // TODO implement here
@@ -53,28 +59,30 @@ public class Selection implements Command {
         this.receiver = r;
     }
 
-    /*
-    * setting start of selection
-    */
+    /**
+     * setting start of selection
+     * @param  start starting point of the selection
+     */
     public void setStart(int start){
         this.start = start;
     }
 
-    /*
+    /**
      * setting end of selection
+     * @param end ending point of the selection
      */
     public void setEnd(int end){
         this.end = end;
     }
 
-    /*
+    /**
      * @return start of selection
      */
     public int getStart(){
         return this.start;
     }
 
-    /*
+    /**
      * @return end of selection
      */
     public int getEnd(){
@@ -82,7 +90,7 @@ public class Selection implements Command {
     }
 
     /**
-     *
+     * @return receiver
      */
     public Receiver getReceiver() {
         return this.receiver;

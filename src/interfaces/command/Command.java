@@ -1,14 +1,12 @@
 package interfaces.command;
 
-import interfaces.Receiver.Receiver;
-
 /**
  * 
  */
 public interface Command {
 
     /**
-     *
+     * action to perform when executing the command
      */
     void execute() throws NoSuchMethodException;
 
