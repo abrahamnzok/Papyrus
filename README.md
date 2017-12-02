@@ -17,6 +17,4 @@ What it does not :
 - Use keyboard shortcuts
 - Delete multiple characters at a time.
 
-Even if we made the binding between the Delete function and Del / Backspace keys. 
-
-We hightly recommend to only use the buttons on the UI.
+Even if we made the binding between the Delete function and Del / Backspace keys, we hightly recommend to only use the buttons on the UI.
