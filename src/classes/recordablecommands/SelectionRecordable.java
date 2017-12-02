@@ -23,7 +23,7 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      */
     public SelectionRecordable(int start, int end) {
         super(start, end);
@@ -31,7 +31,7 @@ public class SelectionRecordable extends Selection implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      */
     @Override
     public void execute() throws NoSuchMethodException {

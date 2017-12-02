@@ -3,6 +3,9 @@ package classes.concretecommands;
 import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
+/**
+ * Record Command
+ */
 public class Record implements Command {
 
     /**

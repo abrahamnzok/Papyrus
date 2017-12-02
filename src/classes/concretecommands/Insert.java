@@ -9,7 +9,7 @@ import interfaces.Receiver.Receiver;
 public class Insert implements Command {
 
     /**
-     * Receiver to perform the action when the command is to be executed
+     * {@link Receiver} to perform the action when the command is to be executed
      */
     private Receiver receiver;
 

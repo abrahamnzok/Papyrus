@@ -24,7 +24,7 @@ public class CopyRecordable extends Copy implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      * @throws NoSuchMethodException
      */
     @Override

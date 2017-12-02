@@ -24,7 +24,7 @@ public class CutRecordable extends Cut implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      * @throws NoSuchMethodException
      */
     @Override

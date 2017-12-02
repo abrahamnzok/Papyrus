@@ -24,14 +24,14 @@ public class DeleteRecordable extends Delete implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      */
     public DeleteRecordable(int position) {
         super(position);
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      * @throws NoSuchMethodException
      */
     @Override

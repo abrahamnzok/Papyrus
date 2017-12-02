@@ -24,14 +24,14 @@ public class InsertRecordable extends Insert implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      */
     public InsertRecordable(String textinput, int position) {
         super(textinput, position);
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      * @throws NoSuchMethodException
      */
     @Override

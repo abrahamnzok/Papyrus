@@ -2,11 +2,15 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
+import interfaces.recorder.Recorder;
 
+/**
+ * Record Command
+ */
 public class Selection implements Command {
 
     /**
-     * Receiver to perform the action when the command is to be executed
+     * {@link Recorder} to perform the action when the command is to be executed
      */
     private Receiver receiver;
 

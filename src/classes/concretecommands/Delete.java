@@ -4,11 +4,12 @@ import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
 
 /**
- *
+ * Delete Command
  */
 public class Delete implements Command {
+
     /**
-     *
+     * {@link Receiver} to perform the action when the command is to be executed
      */
     private Receiver receiver;
 
@@ -25,7 +26,7 @@ public class Delete implements Command {
     }
 
     /**
-     *
+     * Preferred Constructor
      * @param position position of the character to delete
      */
     public Delete(int position) {
@@ -33,6 +34,8 @@ public class Delete implements Command {
     }
 
     /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
      */
     public void execute() throws NoSuchMethodException {
         // TODO implement here
@@ -40,7 +43,7 @@ public class Delete implements Command {
     }
 
     /**
-     * @param r Receiver which will execute the task
+     * @param r {@link Receiver} which will execute the task
      */
     public void setReceiver(Receiver r) {
         // TODO implement here

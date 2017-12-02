@@ -23,14 +23,13 @@ public class PasteRecordable extends Paste implements Recordable {
     }
 
     /**
-     * {@inheritDoc}
+     *{@inheritDoc}
      */
     public PasteRecordable(int position) {
         super(position);
     }
 
     /**
-     * {@inheritDoc}
      */
     @Override
     public void execute() throws NoSuchMethodException {

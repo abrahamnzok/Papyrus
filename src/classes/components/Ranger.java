@@ -4,22 +4,22 @@ package classes.components;
 public class Ranger implements Cloneable {
 
     /**
-     * {@code int} to hold the value of the starting point
+     *{@code int} to hold the value of the starting point
      */
     private int spaceBegin;
 
     /**
-     * {@code int} to hold the content {@link Ranger} receives from {@link Buffer}
+     *{@code int} to hold the content {@link Ranger} receives from {@link Buffer}
      */
     private String selection;
 
     /**
-     * {@code int} to hold the value of the starting point
+     *{@code int} to hold the value of the starting point
      */
     private int spaceEnd;
 
     /**
-     * Default constructor
+     * Preferred constructor
      */
     public Ranger() {
         this.selection = "";

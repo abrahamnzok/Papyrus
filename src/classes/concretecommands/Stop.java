@@ -3,10 +3,13 @@ package classes.concretecommands;
 import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
+/**
+ * Stop Command
+ */
 public class Stop implements Command {
 
     /**
-     * Receiver that takes care of the recording and replaying tasks
+     * {@link Recorder} that takes care of the recording and replaying tasks
      */
     private Recorder recorder;
 
