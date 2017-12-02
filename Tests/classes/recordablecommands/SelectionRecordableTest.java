@@ -1,5 +1,6 @@
 package classes.recordablecommands;
 
+import classes.components.DoUndoEngine;
 import classes.concretemementos.InsertGhost;
 import classes.concretemementos.SelectGhost;
 import classes.concretereceiver.BoardReceiver;
@@ -13,11 +14,14 @@ import static org.junit.Assert.*;
 public class SelectionRecordableTest {
     private SelectionRecordable selection;
     private Receiver receiver;
+
     @Before
     public void setUp() throws Exception {
         this.selection = new SelectionRecordable(10, 12);
         this.receiver = new BoardReceiver();
+        ((BoardReceiver)this.receiver).setRecorder(new DoUndoEngine(receiver));
         this.selection.setReceiver(this.receiver);
+
     }
 
     @Test
@@ -68,7 +72,10 @@ public class SelectionRecordableTest {
     public void receiverStateIsNotNull() throws Exception {
         this.selection.setStart(12);
         this.selection.setEnd(23);
-        this.selection.setReceiver(new BoardReceiver());
+        BoardReceiver b = new BoardReceiver();
+        DoUndoEngine d = new DoUndoEngine(b);
+        b.setRecorder(d);
+        this.selection.setReceiver(b);
         SelectGhost selector = new SelectGhost(this.selection.getReceiver(),13, 34);
         this.selection.restore(selector);
         assertTrue(Memento.class.isInstance(selector)

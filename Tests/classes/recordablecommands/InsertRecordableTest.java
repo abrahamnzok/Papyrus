@@ -1,6 +1,7 @@
 package classes.recordablecommands;
 
 import classes.components.Carecorder;
+import classes.components.DoUndoEngine;
 import classes.components.Pair;
 import classes.concretemementos.InsertGhost;
 import classes.concretemementos.SelectGhost;
@@ -21,6 +22,7 @@ public class InsertRecordableTest {
         this.nonmockedinsert = new InsertRecordable();
         this.recorder = new Carecorder();
         this.receiver = new BoardReceiver();
+        ((BoardReceiver)this.receiver).setRecorder(new DoUndoEngine(receiver));
         this.nonmockedinsert.setReceiver(this.receiver);
     }
 
