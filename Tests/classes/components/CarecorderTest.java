@@ -22,9 +22,11 @@ public class CarecorderTest {
     private InsertRecordable insert;
     private CopyRecordable copy;
     private Carecorder recorder;
+
     @Before
     public void setUp() throws Exception {
         this.receiver = new BoardReceiver();
+        ((BoardReceiver)this.receiver).setRecorder(new DoUndoEngine(receiver));
         this.selection = new SelectionRecordable();
         this.cut = new CutRecordable();
         this.delete = new DeleteRecordable();
