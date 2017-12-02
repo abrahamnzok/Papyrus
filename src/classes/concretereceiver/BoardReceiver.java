@@ -4,28 +4,38 @@ import classes.components.Buffer;
 import classes.components.ClipBoard;
 import classes.components.Ranger;
 import interfaces.Receiver.Receiver;
+
 /**
- *
+ * Object of type Receiver
+ * Handles all the actions executed by the concrete commands
+ * {@link classes.concretecommands.Insert} {@link classes.concretecommands.Selection}
+ * {@link classes.concretecommands.Paste} {@link classes.concretecommands.Delete}
+ * {@link classes.concretecommands.Cut} {@link classes.concretecommands.Copy}
  */
 public class BoardReceiver implements Receiver {
+
     /**
-     *
+     * Object that stores the user's input
+     * When there is an insert, paste or delete action
      */
     private Buffer buffer;
 
     /**
-     *
+     * Object that stores temporary content of the buffer
+     * When there is a copy or cut action
      */
     private ClipBoard clipboard;
 
     /**
-     *
+     * Object that deals with the selection
+     * When there is a select action
      */
     private Ranger ranger;
 
 
     /**
-     * Default constructor
+     * Preferred constructor of the engine
+     * Internal objects include {@link Buffer} {@link ClipBoard} {@link Ranger}
      */
     public BoardReceiver() {
         this.buffer = new Buffer();
@@ -34,6 +44,7 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * Auxiliary Constructor
      * @param buffer, clipboard, ranger
      */
     public BoardReceiver(Buffer buffer, ClipBoard clipboard, Ranger ranger) {
@@ -43,9 +54,10 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * Insert a text (string) in the buffer at the defined position
-     * @param text The text to insert
-     * @param position The position where to insert the text
+     * inserts a text {@link String} in the buffer at a position
+     * @param text the text to insert
+     * @param position the position where to insert the text
+     * {@param position} can never be out of boundaries
      */
     @Override
     public void insert(String text, int position) {
@@ -58,8 +70,8 @@ public class BoardReceiver implements Receiver {
 
     /**
      * @param start which the starting point of the selection
-     * @param end   which is the ending point of the selection
-     * if selection is set out of boundaries then selection is made on the whole content
+     * @param end which is the ending point of the selection
+     * if the selection is set out of boundaries then selection is made on the whole content
      */
     @Override
     public void select(int start, int end) {
@@ -74,13 +86,18 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * handles the action of copying the selection to the clipboard.
+     * We can only perform this action on the assurance that the ranger is not empty
+     *
      */
     @Override
     public void copy() {
-        this.clipboard.setClipboard(this.ranger.getSelection());
+        if(!this.ranger.getSelection().isEmpty())this.clipboard.setClipboard(this.ranger.getSelection());
     }
 
     /**
+     * handles the action of cutting the selection from the buffer and copying it to the clipboard
+     * We can only perform a cut action on the assurance that the ranger is not empty
      */
     @Override
     public void cut() {
@@ -91,6 +108,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * @param position position where the content of the clipboard is to be put in the buffer
+     * position can never be set out of boundaries
      */
     @Override
     public void paste(int position) {
@@ -100,7 +119,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * @param position position of character to delete
+     * @param position position of the character to delete
+     * position can never be set out of boundaries
      */
     @Override
     public void delete(int position) {
@@ -111,8 +131,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
-     * @param start starting point of the selection
-     * @param end end point of the selection
+     * @param start starting point of deletion
+     * @param end end point of deletion
      */
     private void clear(int start, int end) {
         if(!this.buffer.isEmpty() && start <= this.buffer.length() && end <= this.buffer.length()){
@@ -122,6 +142,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * @return a Buffer's clone.
+     * A clone of object Buffer is rendered to avoid the real object being modified
      */
     @Override
     public Buffer getBufferClone() throws CloneNotSupportedException {
@@ -129,6 +151,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * @return a Ranger's clone
+     *  A clone of the object is rendered to avoid the real object being modified
      */
     @Override
     public Ranger getRangerClone() throws CloneNotSupportedException {
@@ -136,6 +160,8 @@ public class BoardReceiver implements Receiver {
     }
 
     /**
+     * @return a Clipboard's clone
+     * A clone of the object is rendered to avoid the real object being modified
      */
     @Override
     public ClipBoard getClipboardClone() throws CloneNotSupportedException {
