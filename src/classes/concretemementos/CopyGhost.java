@@ -14,7 +14,7 @@ public class CopyGhost implements Memento {
     private Receiver receiver;
 
     /**
-     * Default constructor
+     * @param receiver {@link Receiver} state
      */
     public CopyGhost(Receiver receiver) {
         this.receiver = receiver;

@@ -20,7 +20,8 @@ public class PasteGhost implements Memento {
 
 
     /**
-     * Default constructor
+     * @param receiverState {@link Receiver} state
+     * @param positionState position state
      */
     public PasteGhost(Receiver receiverState, int positionState) {
         this.receiverState = receiverState;

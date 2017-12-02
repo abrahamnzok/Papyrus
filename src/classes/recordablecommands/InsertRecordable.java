@@ -32,7 +32,7 @@ public class InsertRecordable extends Insert implements Recordable {
 
     /**
      *{@inheritDoc}
-     * @throws NoSuchMethodException
+     *@throws NoSuchMethodException
      */
     @Override
     public void execute() throws NoSuchMethodException {

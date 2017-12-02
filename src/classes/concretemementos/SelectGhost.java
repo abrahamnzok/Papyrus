@@ -24,7 +24,10 @@ public class SelectGhost implements Memento {
     private Receiver receiver;
 
     /**
-     * Preferred constructor
+     *
+     * @param receiver {@link Receiver} state
+     * @param startState state of the starting point of selection
+     * @param endState  state of the ending point of selection
      */
     public SelectGhost(Receiver receiver, int startState, int endState) {
         this.receiver = receiver;

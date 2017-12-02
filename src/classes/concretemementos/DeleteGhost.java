@@ -19,7 +19,9 @@ public class DeleteGhost implements Memento {
     private Receiver receiver;
 
     /**
-     * Default constructor
+     *
+     * @param receiver {@link Receiver}
+     * @param positionState position state
      */
     public DeleteGhost(Receiver receiver, int positionState) {
         this.receiver = receiver;

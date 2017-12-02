@@ -14,7 +14,7 @@ public class CutGhost implements Memento {
     private Receiver receiver;
 
     /**
-     * Default constructor
+     * @param receiver {@link Receiver} state
      */
     public CutGhost(Receiver receiver) {
         this.receiver = receiver;

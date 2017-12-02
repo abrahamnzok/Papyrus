@@ -24,7 +24,10 @@ public class InsertGhost implements Memento {
     private Receiver receiverState;
 
     /**
-     * Preferred constructor
+     *
+     * @param receiverState {@link Receiver} state
+     * @param inputState input state
+     * @param positionState position state
      */
     public InsertGhost(Receiver receiverState, String inputState, int positionState) {
         this.receiverState  =receiverState;
