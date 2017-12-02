@@ -13,7 +13,7 @@ public interface Recordable {
     Memento save();
 
     /**
-     * @param m
+     * @param m {@link Memento} to restore
      */
     void restore(Memento m) throws NoSuchMethodException;
 

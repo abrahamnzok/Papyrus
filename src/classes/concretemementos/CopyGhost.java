@@ -4,7 +4,7 @@ import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 
 /**
- * Immutable Object Memento of the recordable command CopyRecordable
+ * Immutable Object {@link Memento} of the recordable command CopyRecordable
  */
 public class CopyGhost implements Memento {
 

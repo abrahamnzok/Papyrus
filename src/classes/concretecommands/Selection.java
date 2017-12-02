@@ -61,6 +61,7 @@ public class Selection implements Command {
 
     /**
      * setting start of selection
+     * @param  start starting point of the selection
      */
     public void setStart(int start){
         this.start = start;
@@ -68,6 +69,7 @@ public class Selection implements Command {
 
     /**
      * setting end of selection
+     * @param end ending point of the selection
      */
     public void setEnd(int end){
         this.end = end;

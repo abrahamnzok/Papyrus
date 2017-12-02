@@ -50,6 +50,7 @@ public class Insert implements Command {
     }
 
     /**
+     * Sets the {@link Receiver} 
      * @param r Receiver which will execute the task
      */
     public void setReceiver(Receiver r) {

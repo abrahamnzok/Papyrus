@@ -8,9 +8,9 @@ import interfaces.Receiver.Receiver;
 /**
  * Object of type Receiver
  * Handles all the actions executed by the concrete commands
- * {@link classes.concretecommands.Insert} {@link classes.concretecommands.Selection}
- * {@link classes.concretecommands.Paste} {@link classes.concretecommands.Delete}
- * {@link classes.concretecommands.Cut} {@link classes.concretecommands.Copy}
+ * {@link classes.concretecommands.Insert}, {@link classes.concretecommands.Selection}
+ * {@link classes.concretecommands.Paste}, {@link classes.concretecommands.Delete}
+ * {@link classes.concretecommands.Cut}, {@link classes.concretecommands.Copy}
  */
 public class BoardReceiver implements Receiver {
 
@@ -45,7 +45,9 @@ public class BoardReceiver implements Receiver {
 
     /**
      * Auxiliary Constructor
-     * @param buffer, clipboard, ranger
+     * @param buffer {@link Buffer}
+     * @param clipboard {@link ClipBoard}
+     * @param ranger {@link Ranger}
      */
     public BoardReceiver(Buffer buffer, ClipBoard clipboard, Ranger ranger) {
         this.buffer = buffer;

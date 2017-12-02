@@ -1,6 +1,8 @@
 package classes.components;
 
-
+/**
+ * Object that handles tasks related with the setting up of the selection
+ */
 public class Ranger implements Cloneable {
 
     /**

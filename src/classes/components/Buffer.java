@@ -3,7 +3,7 @@ package classes.components;
 /**
  * Buffer object
  * Its main use is to keep track of the changes made by the commands
- * Inside a String {@param text} that holds the text
+ * Inside a string {@param text} that holds the text
  * 
  */
 public class Buffer implements Cloneable {
