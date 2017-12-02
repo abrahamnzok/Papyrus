@@ -2,8 +2,11 @@ package classes.concretereceiver;
 
 import classes.components.Buffer;
 import classes.components.ClipBoard;
+import classes.components.DoUndoEngine;
 import classes.components.Ranger;
+import classes.concretemementos.BoardGhost;
 import interfaces.Receiver.Receiver;
+import interfaces.memento.Memento;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,10 +23,12 @@ public class BoardReceiverTest {
 
     @Before
     public void setUp() throws Exception {
+
         this.buffer = new Buffer();
         this.clipBoard = new ClipBoard();
         this.ranger = new Ranger();
         this.receiver = new BoardReceiver(this.buffer, this.clipBoard, this.ranger);
+        ((BoardReceiver)this.receiver).setRecorder(new DoUndoEngine(receiver));
     }
 
     @Test
@@ -574,6 +579,30 @@ public class BoardReceiverTest {
         this.receiver.delete(60);
         assertEquals("We make sure that we cannot delete outOf Boundaries",
                 "I love this", this.buffer.getText());
+    }
+
+    /**
+     * Test to save the state of the BoardReceiver with a buffer change
+     * @throws Exception
+     */
+    @Test
+    public void save() throws Exception{
+        this.buffer.setText("Hello");
+        Memento m = ((BoardReceiver)this.receiver).save();
+        assertEquals("This buffer + memento's buffer should be the same", this.buffer.getText() ,((BoardGhost)m).getBufferState().getText());
+    }
+
+    /**
+     * Test to restore the state of the BoardReceiver with a buffer change
+     * @throws Exception
+     */
+    @Test
+    public void restore() throws Exception{
+        this.buffer.setText("Hello");
+        Memento m = ((BoardReceiver)this.receiver).save();
+        this.buffer.setText("I like trains");
+        ((BoardReceiver)this.receiver).restore(m);
+        assertEquals("The buffer should contain his old value, restored from the memento", ((BoardGhost)m).getBufferState().getText(), this.receiver.getBufferClone().getText());
     }
 
 }
