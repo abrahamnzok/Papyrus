@@ -6,12 +6,22 @@ import interfaces.pair.PairInterface;
  * Container to ease passing around a tuple of two objects. This object provides a sensible
  * implementation of equals(), returning true if equals() is true on each of the contained
  * objects.
- * A pair object is intended to be immutable.
+ * This object is generic and is intended to be immutable.
  */
 public class Pair<F, S> implements PairInterface, Cloneable{
 
-    private F key;
-    private S value;
+
+    /**
+     * Object of any type {@code int} {@code String} {@code Object}
+     * represents the key of the pair
+     */
+    private final F key;
+
+    /**
+     * Object of any type {@code int} {@code String} {@code Object}
+     * represents the value of the pair
+     */
+    private final S value;
 
     /**
      * Constructor for a Pair.
