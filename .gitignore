@@ -8,5 +8,6 @@ out/
 .idea/Papyrus.iml
 .idea/workspace.xml
 .idea/uiDesigner.xml
+.idea/artifacts
 Papyrus.iml
 \.idea/libraries/
