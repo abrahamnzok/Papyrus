@@ -1,5 +1,6 @@
 package classes.concreteinvoker;
 
+import classes.components.Ranger;
 import classes.concretecommands.*;
 import interfaces.command.Command;
 import interfaces.invoker.Invoker;
@@ -26,6 +27,8 @@ public class ClientInvoker extends Application implements Invoker {
         PASTE,
         DELETE,
         REPLAY,
+        REDO,
+        UNDO,
         NONE
     }
 
@@ -70,13 +73,16 @@ public class ClientInvoker extends Application implements Invoker {
 
         //Selection detection
         this.textarea.setOnMouseClicked(event -> {
-            Selection selection = (Selection) this.commandMap.get("selection");
-            selection.setStart(this.textarea.getSelection().getStart());
-            selection.setEnd(this.textarea.getSelection().getEnd());
-            try {
-                this.setCommand(selection);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+            //Don't register simple click, only proper selections
+            if(this.textarea.getSelection().getStart() != this.textarea.getSelection().getEnd()){
+                Selection selection = (Selection) this.commandMap.get("selection");
+                selection.setStart(this.textarea.getSelection().getStart());
+                selection.setEnd(this.textarea.getSelection().getEnd());
+                try {
+                    this.setCommand(selection);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -113,8 +119,14 @@ public class ClientInvoker extends Application implements Invoker {
      * @throws NoSuchMethodException
      */
     @FXML
-    private void handleUndo(MouseEvent event) throws NoSuchMethodException {
-        this.setCommand(this.commandMap.get("copy"));
+    private void handleUndo(MouseEvent event) throws NoSuchMethodException, CloneNotSupportedException {
+        this.currentAction = ACTION.UNDO;
+        this.textarea.selectRange(0,0);
+        this.setCommand(this.commandMap.get("undo"));
+        this.textarea.setText(this.engine.getBufferClone().getText());
+        Ranger r = this.engine.getRangerClone();
+        this.textarea.selectRange(r.getSpaceBegin(), r.getSpaceEnd());
+        this.currentAction = ACTION.NONE;
     }
 
     /**
@@ -123,8 +135,14 @@ public class ClientInvoker extends Application implements Invoker {
      * @throws NoSuchMethodException
      */
     @FXML
-    private void handleRedo(MouseEvent event) throws NoSuchMethodException {
-        this.setCommand(this.commandMap.get("copy"));
+    private void handleRedo(MouseEvent event) throws NoSuchMethodException, CloneNotSupportedException {
+        this.currentAction = ACTION.REDO;
+        this.textarea.selectRange(0,0);
+        this.setCommand(this.commandMap.get("redo"));
+        this.textarea.setText(this.engine.getBufferClone().getText());
+        Ranger r = this.engine.getRangerClone();
+        this.textarea.selectRange(r.getSpaceBegin(), r.getSpaceEnd());
+        this.currentAction = ACTION.NONE;
     }
 
     /**
@@ -198,8 +216,8 @@ public class ClientInvoker extends Application implements Invoker {
      */
     @FXML
     void handlePlay(ActionEvent event) throws NoSuchMethodException, CloneNotSupportedException {
-        this.textarea.requestFocus();
         this.currentAction = ACTION.REPLAY;
+        this.textarea.requestFocus();
         this.setCommand(this.commandMap.get("replay"));
         this.textarea.setText(this.engine.getBufferClone().getText());
         this.currentAction = ACTION.NONE;
