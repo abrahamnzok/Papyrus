@@ -1,11 +1,12 @@
 package classes.components;
+
 /**
- * 
+ * Object that deals with the storage of temporary content from the Buffer
  */
 public class ClipBoard implements Cloneable {
 
     /**
-     *
+     * Internal object where a content is stored
      */
     private String clipboard;
 
@@ -40,6 +41,11 @@ public class ClipBoard implements Cloneable {
         return this.getClipboard().isEmpty();
     }
 
+    /**
+     *
+     * @return a shallow copy of {@link ClipBoard}
+     * @throws CloneNotSupportedException
+     */
     @Override
     public Object clone()throws CloneNotSupportedException{
         return super.clone();
