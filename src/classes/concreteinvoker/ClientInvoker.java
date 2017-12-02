@@ -235,7 +235,7 @@ public class ClientInvoker extends Application implements Invoker {
     }
 
     /**
-     * @param m Map of <String, Command> to set
+     * @param m {@link Map} to set
      */
     public void setCommandMap(Map<String, Command> m){
         this.commandMap = m;

@@ -11,7 +11,7 @@ public class Ranger implements Cloneable {
     private int spaceBegin;
 
     /**
-     *{@code int} to hold the content {@link Ranger} receives from {@link Buffer}
+     *{@code String} to hold the content {@link Ranger} receives from {@link Buffer}
      */
     private String selection;
 
@@ -28,10 +28,10 @@ public class Ranger implements Cloneable {
     }
 
     /**
+     * Sets the starting point of selection and the ending point of selection.
+     * If spaceBegin is greater than spaceEnd, they will switch values.
      * @param spaceBegin  starting point of selection
      * @param spaceEnd  ending point of selection
-     * if {@param spaceBegin} is greater that {@param spaceEnd}
-     * they will switch one {@param spaceBegin} will become another {@param spaceEnd} and vice versa.
      */
     public void range(int spaceBegin , int spaceEnd ) {
         if(spaceBegin > spaceEnd){
@@ -77,7 +77,7 @@ public class Ranger implements Cloneable {
 
     /**
      * @param selection to be trimmed
-     * @return the same content without empty characters before and after the outline
+     * @return a String without empty characters before and after the outline
      */
 
     protected String filterEmptyChars(String selection){
