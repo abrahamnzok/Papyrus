@@ -1,12 +1,14 @@
 package main;
 
 import classes.components.Carecorder;
+import classes.components.DoUndoEngine;
 import classes.concretecommands.*;
 import classes.concreteinvoker.ClientInvoker;
 import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
 import interfaces.command.Command;
+import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,35 +31,44 @@ public class Main extends Application {
 
         //The client instanciate all the engines
         Receiver engine = new BoardReceiver();
-        Recorder recorder = new Carecorder();
+        Recorder carecorder = new Carecorder();
+        Recorder doUndoEngine = new DoUndoEngine(engine);
+        //Bind the recording engine to the main engine.
+        ((BoardReceiver) engine).setRecorder(doUndoEngine);
 
         //The client instanciate all the commands and give them to the invoker.
         InsertRecordable insert = new InsertRecordable();
         insert.setReceiver(engine);
-        insert.setRecorder(recorder);
+        insert.setRecorder(carecorder);
         DeleteRecordable delete = new DeleteRecordable();
         delete.setReceiver(engine);
-        delete.setRecorder(recorder);
+        delete.setRecorder(carecorder);
         SelectionRecordable select = new SelectionRecordable();
         select.setReceiver(engine);
-        select.setRecorder(recorder);
+        select.setRecorder(carecorder);
         CutRecordable cut = new CutRecordable();
         cut.setReceiver(engine);
-        cut.setRecorder(recorder);
+        cut.setRecorder(carecorder);
         CopyRecordable copy = new CopyRecordable();
         copy.setReceiver(engine);
-        copy.setRecorder(recorder);
+        copy.setRecorder(carecorder);
         PasteRecordable paste = new PasteRecordable();
         paste.setReceiver(engine);
-        paste.setRecorder(recorder);
+        paste.setRecorder(carecorder);
 
         //Macro related commands
         Record record = new Record();
-        record.setReceiver(recorder);
+        record.setReceiver(carecorder);
         Replay replay = new Replay();
-        replay.setReceiver(recorder);
+        replay.setReceiver(carecorder);
         Stop stop = new Stop();
-        stop.setReceiver(recorder);
+        stop.setReceiver(carecorder);
+
+        //UndoRedo related commands
+        Undo undo = new Undo();
+        undo.setReceiver(doUndoEngine);
+        Redo redo = new Redo();
+        redo.setReceiver(doUndoEngine);
 
         Map<String, Command> commands = new HashMap<>();
         commands.put("insert", insert);
@@ -69,7 +80,12 @@ public class Main extends Application {
         commands.put("replay", replay);
         commands.put("record", record);
         commands.put("stop", stop);
+        commands.put("record", record);
+        commands.put("stop", stop);
+        commands.put("undo", undo);
+        commands.put("redo", redo);
 
+        //Giving the commands and the engine to the invoker
         controller.setCommandMap(commands);
         controller.setEngine(engine);
 
