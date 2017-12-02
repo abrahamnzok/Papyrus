@@ -1,5 +1,6 @@
 package classes.recordablecommands;
 
+import classes.components.Carecorder;
 import classes.concretecommands.Delete;
 import classes.concretemementos.DeleteGhost;
 import interfaces.memento.Memento;

@@ -1,5 +1,6 @@
 package classes.recordablecommands;
 
+import classes.components.Carecorder;
 import classes.concretecommands.Cut;
 import classes.concretemementos.CutGhost;
 import interfaces.memento.Memento;

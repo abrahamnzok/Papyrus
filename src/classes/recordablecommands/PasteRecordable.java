@@ -1,5 +1,6 @@
 package classes.recordablecommands;
 
+import classes.components.Carecorder;
 import classes.concretecommands.Paste;
 import classes.concretemementos.PasteGhost;
 import interfaces.memento.Memento;
