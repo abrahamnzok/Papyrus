@@ -1,5 +1,8 @@
 package interfaces.pair;
 
+/**
+ * @author Abraham Mubanzo
+ */
 public interface PairInterface {
 
     /**

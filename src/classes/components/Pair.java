@@ -7,6 +7,7 @@ import interfaces.pair.PairInterface;
  * implementation of equals(), returning true if equals() is true on each of the contained
  * objects.
  * This object is generic and is intended to be immutable.
+ * @author Abraham Mubanzo
  */
 public class Pair<F, S> implements PairInterface, Cloneable{
 

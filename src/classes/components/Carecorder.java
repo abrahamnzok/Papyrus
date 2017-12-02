@@ -9,12 +9,13 @@ import java.util.List;
 public class Carecorder implements Recorder,Cloneable {
 
     /**
-     *
+     * Internal object inside which we store {@link Memento} objects
+     * This object is never to be accessed from external objects
      */
     private List<Pair<Memento,Recordable>> container;
 
     /**
-     *
+     * {@code boolean} controls whether the following action {@}
      */
     private boolean recordingState;
 
@@ -35,6 +36,7 @@ public class Carecorder implements Recorder,Cloneable {
      * The value of the pair is a Recordable
      * @param memento stored by the caretaker
      * @param recordable the originator associated with the memento
+     * @throws NoSuchMethodException
      */
     @Override
     public void record(Memento memento, Recordable recordable) throws NoSuchMethodException {
@@ -93,8 +95,9 @@ public class Carecorder implements Recorder,Cloneable {
     }
 
     /**
-     * @return a shallow copy of the object that contains the mementos
      * This object is mainly used for testing purposes.
+     * @return a shallow copy of the object that contains the mementos
+     * @throws CloneNotSupportedException
      */
     public List careclone() throws CloneNotSupportedException{
         return ((List) ((ArrayList<Pair<Memento,Recordable>>) this.container).clone());
