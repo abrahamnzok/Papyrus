@@ -7,15 +7,13 @@ import interfaces.Receiver.Receiver;
  *
  */
 public class Delete implements Command {
-
-
     /**
      *
      */
     private Receiver receiver;
 
     /**
-     *
+     *{@code int} position where to delete.
      */
     private int position;
 
@@ -27,7 +25,8 @@ public class Delete implements Command {
     }
 
     /**
-     * Preferred constructor
+     *
+     * @param position position of the character to delete
      */
     public Delete(int position) {
         this.position = position;
@@ -63,7 +62,7 @@ public class Delete implements Command {
     }
 
     /**
-     *
+     * @return receiver
      */
     public Receiver getReceiver() {
         return this.receiver;

@@ -6,12 +6,12 @@ import interfaces.recorder.Recorder;
 public class Replay implements Command {
 
     /**
-     *
+     * Receiver that takes care of the recording and replaying tasks
      */
     private Recorder recorder;
 
     /**
-     *
+     * executes the action to be performed by the receiver
      */
     @Override
     public void execute() {
@@ -19,7 +19,7 @@ public class Replay implements Command {
     }
 
     /**
-     * @param recorder is the receiver to perform the recording
+     * @param recorder is the receiver to perform the replay
      */
     public void setReceiver(Recorder recorder) {
         // TODO implement here

@@ -2,16 +2,15 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.recorder.Recorder;
 
 /**
- * 
+ * Cut Command
  */
 public class Cut implements Command{
 
 
     /**
-     *
+     * Receiver to perform the action when the command is to be executed
      */
     private Receiver receiver;
 
@@ -22,6 +21,8 @@ public class Cut implements Command{
     }
 
     /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
      */
     public void execute() throws NoSuchMethodException {
         // TODO implement here
@@ -29,7 +30,7 @@ public class Cut implements Command{
     }
 
     /**
-     * @param r 
+     * @param r receiver to perform the action when the command is to be executed
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
@@ -37,7 +38,7 @@ public class Cut implements Command{
     }
 
     /**
-     *
+     * @return receiver
      */
     public Receiver getReceiver() {
         return this.receiver;
