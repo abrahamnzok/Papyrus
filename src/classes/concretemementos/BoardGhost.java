@@ -5,38 +5,54 @@ import classes.components.ClipBoard;
 import classes.components.Ranger;
 import interfaces.memento.Memento;
 
+/**
+ * Immutable Object {@link Memento} of the recordable {@link classes.concretereceiver.BoardReceiver}
+ */
 public class BoardGhost implements Memento {
+    /**
+     * Object {@link Buffer} state
+     */
     private Buffer bufferState;
+    /**
+     * Object {@link Ranger} state
+     */
     private Ranger rangerState;
+    /**
+     * Object {@link ClipBoard} state
+     */
     private ClipBoard clipBoardState;
 
+    /**
+     *
+     * @param bufferState {@link Buffer}
+     * @param rangerState {@link Ranger}
+     * @param clipBoard {@link ClipBoard}
+     */
     public BoardGhost(Buffer bufferState, Ranger rangerState, ClipBoard clipBoard) {
         this.bufferState = bufferState;
         this.rangerState = rangerState;
         this.clipBoardState = clipBoard;
     }
 
-    public Buffer getBufferState() {
-        return bufferState;
+    /**
+     * @return {@link Buffer} state
+     */
+    public Buffer getBufferState()  {
+        return this.bufferState;
     }
 
-    public void setBufferState(Buffer bufferState) {
-        this.bufferState = bufferState;
-    }
-
+    /**
+     * @return {@link Ranger} state
+     */
     public Ranger getRangerState() {
-        return rangerState;
+        return this.rangerState;
     }
 
-    public void setRangerState(Ranger rangerState) {
-        this.rangerState = rangerState;
-    }
-
+    /**
+     * @return {@link ClipBoard} state
+     */
     public ClipBoard getClipBoardState() {
-        return clipBoardState;
+        return this.clipBoardState;
     }
 
-    public void setClipBoardState(ClipBoard clipBoardState) {
-        this.clipBoardState = clipBoardState;
-    }
 }
