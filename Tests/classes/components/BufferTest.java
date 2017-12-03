@@ -15,6 +15,11 @@ public class BufferTest {
         this.buffer = new Buffer();
     }
 
+    /**
+     * {@link Buffer} content must be what we set it to be
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void setText() throws Exception {
         String s = "This is the Buffer";
@@ -22,6 +27,11 @@ public class BufferTest {
         assertEquals(s, this.buffer.getText());
     }
 
+    /**
+     * The {@link Buffer} content must be what we set it to be
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void setTextNotEmpty() throws Exception {
         String o = "Buffer empty";
@@ -29,6 +39,11 @@ public class BufferTest {
         assertFalse("Buffer might be Empty", this.buffer.getText().isEmpty());
     }
 
+    /**
+     * The {@link Buffer} content must be what we set it to be
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void getText() throws Exception {
         String s = "Dummy Test";
@@ -36,6 +51,11 @@ public class BufferTest {
         assertTrue(!Objects.equals(this.buffer.getText(), ""));
     }
 
+    /**
+     * If the {@link Buffer} content is set, when we return it it can never be empty
+     * @result false
+     * @throws Exception
+     */
     @Test
     public void getTextEmpty() throws Exception {
         String s = "Dummy Test";
