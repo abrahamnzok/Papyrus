@@ -31,16 +31,24 @@ public class BoardReceiverTest {
         ((BoardReceiver)this.receiver).setRecorder(new DoUndoEngine(receiver));
     }
 
+    /**
+     * Checking insertion at position 0
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void insert() throws Exception {
         String bufferstate = "";
         this.buffer.setText(bufferstate);
         String toInsert = "I need these test to be succeed a 100%";
         this.receiver.insert(toInsert, 0);
-        //System.out.println(this.buffer.getText() + " /" + this.receiver.getBufferClone().getText());
         assertEquals(toInsert, this.buffer.getText());
     }
 
+    /**
+     * We need to check if we can insert at any position
+     * @throws Exception
+     */
     @Test
     public void insertAtAnyPosition() throws Exception {
         String bufferstate = "Insertion at any position";
@@ -51,6 +59,10 @@ public class BoardReceiverTest {
                 this.buffer.getText().contains(toInsert));
     }
 
+    /**
+     * We need to check if we can insert at any position
+     * @throws Exception
+     */
     @Test
     public void insertAtAnyPositionMultipleTexts() throws Exception {
         String bufferstate = "Insertion at any position with multiple input";
@@ -62,6 +74,10 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     * We cannot break boundaries when inserting
+     * @throws Exception
+     */
     @Test
     public void insertionOutOfBoundaries() throws Exception {
         String bufferstate = "";
@@ -72,6 +88,10 @@ public class BoardReceiverTest {
                 this.buffer.isEmpty());
     }
 
+    /**
+     * We cannot break boundaries when inserting
+     * @throws Exception
+     */
     @Test
     public void insertionOnTheEdge() throws Exception {
         String bufferstate = "I need money";
@@ -83,6 +103,11 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     * Test for handling selection
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeSelection() throws Exception {
         int begin = 5;
@@ -92,6 +117,11 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     * Test to make sure we cannot select nothing
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeNoSelection() throws Exception {
         String bufferState = "Trying to select at 0?";
@@ -102,6 +132,11 @@ public class BoardReceiverTest {
         assertTrue(this.ranger.getSelection().isEmpty());
     }
 
+    /**
+     * Test to make sure we cannot select nothing
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeNoSelection1() throws Exception {
         String bufferState = "Trying to select at 5?";
@@ -112,6 +147,10 @@ public class BoardReceiverTest {
         assertTrue(this.ranger.getSelection().isEmpty());
     }
 
+    /**
+     * Test to handle negative selection
+     * @throws Exception
+     */
     @Test
     public void makeSelectionNegative() throws Exception {
         int start = 10;
@@ -120,6 +159,10 @@ public class BoardReceiverTest {
         assertEquals(start- finish, Math.abs(this.ranger.getSpaceEnd() - this.ranger.getSpaceBegin()));
     }
 
+    /**
+     * Test check we select only what we have
+     * @throws Exception
+     */
     @Test
     public void makeSelectionOutOfBoundaries() throws Exception {
         String bufferState = "I need to copy this and only this";
@@ -131,6 +174,10 @@ public class BoardReceiverTest {
                 bufferState, this.ranger.getSelection());
     }
 
+    /**
+     * Another protection from selecting out of boundaries
+     * @throws Exception
+     */
     @Test
     public void makeSelectionOutOfBoundaries1() throws Exception {
         String bufferState = "I need to copy this and only what is expected";
@@ -143,6 +190,10 @@ public class BoardReceiverTest {
                 result, this.ranger.getSelection());
     }
 
+    /**
+     * A second test to assure us protection from selecting out of boundaries
+     * @throws Exception
+     */
     @Test
     public void makeSelectionOutOfBoundaries2() throws Exception {
         String bufferState = "I need to ";
@@ -155,6 +206,10 @@ public class BoardReceiverTest {
                 expected, this.ranger.getSelection());
     }
 
+    /**
+     * A third test to assure us protection from selecting out of boundaries
+     * @throws Exception
+     */
     @Test
     public void makeSelectionOutOfBoundaries3() throws Exception {
         String bufferState = "I need to change my clothes";
@@ -167,6 +222,11 @@ public class BoardReceiverTest {
                 expected, this.ranger.getSelection());
     }
 
+    /**
+     * Test one for selection
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeFirstSelection() throws Exception {
         String s = "Try to select me";
@@ -179,6 +239,11 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     * Test for selecting from right to left
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeSelectionInverse() throws Exception {
         String s = "Try to select me";
@@ -190,6 +255,11 @@ public class BoardReceiverTest {
         assertEquals(selectedInverse, this.ranger.getSelection());
     }
 
+    /**
+     * Test to avoid selecting empty characters
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeSelectionAvoidEmpty1() throws Exception {
         String bufferState = "I want to try to copy everything except this  ";
@@ -199,6 +269,10 @@ public class BoardReceiverTest {
         assertEquals(selected, this.ranger.getSelection());
     }
 
+    /**
+     * Test to avoid selecting empty characters
+     * @throws Exception
+     */
     @Test
     public void makeSelectionAvoidEmpty2() throws Exception {
         String bufferState = "Testing is great";
@@ -208,6 +282,11 @@ public class BoardReceiverTest {
         assertEquals(selected,this.ranger.getSelection());
     }
 
+    /**
+     * Test to avoid selecting empty characters
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void makeSelectionWithSomeMultipleEmptyChars() throws Exception {
         String bufferState = "Testing  is the   keystone of development";
@@ -217,6 +296,11 @@ public class BoardReceiverTest {
         assertEquals(selected,this.ranger.getSelection());
     }
 
+    /**
+     * Test to avoid selecting empty characters
+     * @result false
+     * @throws Exception
+     */
     @Test
     public void makeSelectionAvoidEmpty3() throws Exception {
         String bufferState = "I want to try to copy everything except this";
@@ -226,6 +310,10 @@ public class BoardReceiverTest {
         assertFalse(this.ranger.getSelection().equals(bufferState));
     }
 
+    /**
+     * Test one for cutting text out of the buffer
+     * @throws Exception
+     */
     @Test
     public void cut() throws Exception {
         String cut = "I need to cut text";
@@ -239,6 +327,11 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     * Test to avoid cutting empty characters
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void cutNothing() throws Exception {
         String cut = "I need to cut text";
@@ -251,6 +344,11 @@ public class BoardReceiverTest {
                         this.ranger.isEmpty());
     }
 
+    /**
+     * Test to avoid cutting out of boundaries
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void cutOutOfBoundaries() throws Exception {
         String cut = "I need to cut text";
@@ -264,6 +362,11 @@ public class BoardReceiverTest {
                         !this.ranger.getSelection().isEmpty());
     }
 
+    /**
+     * Test to check if we can cut everything in the buffer
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void cutEverything() throws Exception {
         String cut = "I need to cut everything";
@@ -274,6 +377,11 @@ public class BoardReceiverTest {
                 this.buffer.getText().isEmpty() && this.clipBoard.getClipboard().contains(cut));
     }
 
+    /**
+     * Test for mutliple cuts
+     * @result  true
+     * @throws Exception
+     */
     @Test
     public void multipleCuts() throws Exception {
         String cut = "cut";
@@ -287,6 +395,11 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     * Test to avoid cutting without selecting
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void cuttingWithoutSelecting() throws Exception {
         String cut = "We need to multiply profits and cut taxes";
@@ -300,6 +413,11 @@ public class BoardReceiverTest {
 
     }
 
+    /**
+     *Test to avoid cutting when we cannot cut
+     * @resutl true
+     * @throws Exception
+     */
     @Test
     public void cutsWithSelects() throws Exception {
         String cut = "We need to multiply profits and cut taxes";
@@ -320,6 +438,11 @@ public class BoardReceiverTest {
     }
 
 
+    /**
+     * Test one for paste action
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void paste() throws Exception {
         String bufferState = "Test for paste";
@@ -331,6 +454,11 @@ public class BoardReceiverTest {
                 this.buffer.getText().contains(clipboard) && this.clipBoard.getClipboard().contains(clipboard));
     }
 
+    /**
+     * Test for multiple pasting action
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void multiplePaste() throws Exception {
         String bufferState = "Test for multiple pastes";
@@ -348,6 +476,11 @@ public class BoardReceiverTest {
                 matches == 2 && this.clipBoard.getClipboard().contains(clipboard));
     }
 
+    /**
+     * Test for multiple pasting action
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void multiplePaste1() throws Exception {
         String bufferState = "Test for multiple pastes";
@@ -362,7 +495,10 @@ public class BoardReceiverTest {
                 lengthResult, this.buffer.length());
     }
 
-
+    /**
+     * Test to avoid pasting when the clipboard is empty
+     * @throws Exception
+     */
     @Test
     public void pasteNothing() throws Exception {
         String bufferState = "Test for paste nothing";
@@ -376,6 +512,11 @@ public class BoardReceiverTest {
                 this.buffer.getText().contains(bufferState) && this.clipBoard.getClipboard().isEmpty());
     }
 
+    /**
+     * Test to check if we can paste when there is a selection going on
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void pasteWhenSelecting() throws Exception {
         String bufferState = "Test for paste when selecting";
@@ -387,6 +528,12 @@ public class BoardReceiverTest {
         assertEquals("We want paste when there is a selection going on",
                 result, this.buffer.getText());
     }
+
+    /**
+     * Test for pasting when clipboard is empty
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void pasteWhenNothingInClipBoard() throws Exception {
         String bufferState = "Test for paste when clipboard is empty";
@@ -396,6 +543,11 @@ public class BoardReceiverTest {
                 bufferState.length(), this.buffer.length());
     }
 
+    /**
+     * Test to avoid pasting when clipboard is empty
+     * @result trie
+     * @throws Exception
+     */
     @Test
     public void pasteOutOfBoundaries() throws Exception {
         String bufferState = "Test for paste when clipboard";
@@ -406,6 +558,11 @@ public class BoardReceiverTest {
                 bufferState, this.buffer.getText());
     }
 
+    /**
+     * Test to avoid pasting out of boundaries
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void pasteOutOfBoundariesTest2() throws Exception {
         String bufferState = "Test for paste when clipboard";
@@ -416,6 +573,11 @@ public class BoardReceiverTest {
                 bufferState, this.buffer.getText());
     }
 
+    /**
+     * Test to check cut and paste at the same time
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void cutNPaste() throws Exception {
         String bufferState = "Test";
@@ -427,6 +589,11 @@ public class BoardReceiverTest {
                 bufferState, this.buffer.getText());
     }
 
+    /**
+     * Test to paste at different positions
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void copyAndCheckClipboardStaste() throws Exception {
         String bufferState = "je";
@@ -441,6 +608,11 @@ public class BoardReceiverTest {
                 "jjeejjee", this.buffer.getText());
     }
 
+    /**
+     * Test the first behaviour of copying
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void copy() throws Exception {
         String bufferState = "I am the one who knocks";
@@ -452,6 +624,11 @@ public class BoardReceiverTest {
                         this.clipBoard.getClipboard().contains(this.ranger.getSelection()));
     }
 
+    /**
+     * Test to check if we can copy when selection is empty
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void copyWhenSelectionIsEmpty() throws Exception {
         String bufferState = "I am the one who knocks";
@@ -461,6 +638,11 @@ public class BoardReceiverTest {
         assertTrue(this.clipBoard.isEmpty());
     }
 
+    /**
+     * Test for multiple copying behaviour
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void copyMultipleTimes() throws Exception {
         String bufferState = "I am the one who knocks";
@@ -476,19 +658,28 @@ public class BoardReceiverTest {
                 result,this.clipBoard.getClipboard());
     }
 
+    /**
+     * Test we cannot copy empty characters
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void copyNothing() throws Exception {
         String bufferState = "I am the one who knocks";
         this.buffer.setText(bufferState);
         this.receiver.select(1, 1);
         this.receiver.copy();
-        System.out.println(this.clipBoard);
-        /*String result = this.ranger.getSelection();
+        String result = this.ranger.getSelection();
         assertEquals("Since we cannot select an empty string or character, let's try to copy nothing",
                 result,this.clipBoard.getClipboard());
-                */
+
     }
 
+    /**
+     * Test to check cut, copy and paste at work at the same tile
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void copyCutMultiplePastes() throws Exception {
         String bufferState = "I am the one who knocks";
@@ -510,6 +701,10 @@ public class BoardReceiverTest {
                         this.clipBoard.getClipboard().contains(clipboard));
     }
 
+    /**
+     * Test for deletion
+     * @throws Exception
+     */
     @Test
     public void delete() throws Exception {
         String bufferState = "I need we need to delete that s";
@@ -521,6 +716,12 @@ public class BoardReceiverTest {
                         !this.receiver.getBufferClone().getText().contains("s"));
 
     }
+
+    /**
+     * Test to check we cannot delete when buffer is empty
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void deleteNothing() throws Exception {
         String bufferState = "";
@@ -530,6 +731,12 @@ public class BoardReceiverTest {
         assertTrue("We cannot allow deletion if buffer is empty",
                 this.receiver.getBufferClone().getText().isEmpty());
     }
+
+    /**
+     * Test to check we can delete everything in the buffer
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void deleteEverything() throws Exception {
         String bufferState = "Moi";
@@ -543,6 +750,12 @@ public class BoardReceiverTest {
         assertTrue("We want to check if we can delete the whole text in the buffer",
                 this.buffer.getText().isEmpty());
     }
+
+    /**
+     * Test to check we cannot delete out of boundaries
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void deleteButPositionTooHigh() throws Exception {
         String bufferState = "We need to check consecutive delete and we need to see if the buffer is empty at the end";
@@ -553,6 +766,11 @@ public class BoardReceiverTest {
                 this.buffer.getText().equals(bufferState));
     }
 
+    /**
+     * Test to check if we can delete at multiple positions
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void deleteAtAnyPosition() throws Exception {
         String bufferState = "I need we need to delete this s";
@@ -564,6 +782,11 @@ public class BoardReceiverTest {
                 lengthBeforeDelete, this.buffer.getText().length());
     }
 
+    /**
+     * Test to check we can delete at position 0
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void deleteCorrectPosition0() throws Exception {
         String bufferState = "I need we need to delete this s";
@@ -572,6 +795,11 @@ public class BoardReceiverTest {
         assertTrue("Make sure we do not delete at 0!!", !this.buffer.getText().contains("I"));
     }
 
+    /**
+     * Test 2 to check we cannot delete out of boundaries
+     * @result true
+     * @throws Exception
+     */
     @Test
     public void deleteOutOfBoundaries() throws Exception {
         String bufferState = "I love this";
@@ -589,7 +817,20 @@ public class BoardReceiverTest {
     public void save() throws Exception{
         this.buffer.setText("Hello");
         Memento m = ((BoardReceiver)this.receiver).save();
-        assertEquals("This buffer + memento's buffer should be the same", this.buffer.getText() ,((BoardGhost)m).getBufferState().getText());
+        assertEquals("This buffer + memento's buffer should be the same",
+                this.buffer.getText() ,((BoardGhost)m).getBufferState().getText());
+    }
+
+    /**
+     * Test 2 to save the state of the BoardReceiver with a buffer change
+     * @throws Exception
+     */
+    @Test
+    public void saveBoardReceiverState2() throws Exception{
+        this.receiver.insert("I need to check that too", 0);
+        Memento m = ((BoardReceiver)this.receiver).save();
+        assertEquals("This buffer + memento's buffer should be the same",
+                "I need to check that too" ,((BoardGhost)m).getBufferState().getText());
     }
 
     /**
