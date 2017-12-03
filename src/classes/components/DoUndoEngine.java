@@ -54,7 +54,7 @@ public class DoUndoEngine implements Recorder, Cloneable{
         if(forward.size() > 0){
             Memento b = this.forward.pop();
             this.backward.push(b);
-            ((BoardReceiver) boardReceiver).restore(b);
+            ((BoardReceiver) this.boardReceiver).restore(b);
         }
     }
 
@@ -65,7 +65,7 @@ public class DoUndoEngine implements Recorder, Cloneable{
         if(backward.size() > 0){
             Memento b = this.backward.pop();
             this.forward.push(b);
-            ((BoardReceiver) boardReceiver).restore(b);
+            ((BoardReceiver) this.boardReceiver).restore(b);
         }
     }
 
@@ -75,7 +75,7 @@ public class DoUndoEngine implements Recorder, Cloneable{
      * @throws CloneNotSupportedException
      */
     public Stack getForwardClone() throws CloneNotSupportedException{
-        return (Stack) forward.clone();
+        return (Stack) this.forward.clone();
     }
 
     /**
@@ -84,6 +84,6 @@ public class DoUndoEngine implements Recorder, Cloneable{
      * @throws CloneNotSupportedException
      */
     public Stack getBackwardClone() throws CloneNotSupportedException {
-        return (Stack) backward.clone();
+        return (Stack) this.backward.clone();
     }
 }
