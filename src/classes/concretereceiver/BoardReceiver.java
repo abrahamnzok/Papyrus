@@ -236,6 +236,10 @@ public class BoardReceiver implements Receiver, Recordable {
         this.ranger= b.getRangerState();
     }
 
+    /**
+     *
+     * @param recorder
+     */
     public void setRecorder(Recorder recorder) {
         this.recorder = recorder;
     }

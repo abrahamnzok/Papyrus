@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Immutable object also called caretaker.
- * It knows how, why and when to store and restore the originators
+ * It knows how, why and when to store and restore these originators
  * {@link classes.recordablecommands.CopyRecordable}, {@link classes.recordablecommands.CutRecordable}
  * {@link classes.recordablecommands.SelectionRecordable}, {@link classes.recordablecommands.PasteRecordable}
  * {@link classes.recordablecommands.DeleteRecordable}, {@link classes.recordablecommands.InsertRecordable}
