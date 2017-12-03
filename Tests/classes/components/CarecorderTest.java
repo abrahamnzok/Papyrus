@@ -432,5 +432,5 @@ public class CarecorderTest {
         assertEquals("We try to delete at different positions and buffer is not empty at the beginning",
                 "idea", this.receiver.getBufferClone().getText());
     }
-    
+
 }
