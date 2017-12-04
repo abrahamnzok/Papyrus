@@ -10,11 +10,11 @@ public interface Recordable {
     /**
      * @return Specific Memento for the specific Recordable
      */
-    public Memento save();
+    Memento save() throws CloneNotSupportedException;
 
     /**
-     * @param m
+     * @param m {@link Memento} to restore
      */
-    public void restore(Memento m);
+    void restore(Memento m) throws NoSuchMethodException;
 
 }

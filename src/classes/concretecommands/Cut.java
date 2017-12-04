@@ -2,17 +2,15 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 
 /**
- * 
+ * Cut Command
  */
-public class Cut implements Command, Recordable {
+public class Cut implements Command{
 
 
     /**
-     *
+     * {@link Receiver}  to perform the action when the command is to be executed
      */
     private Receiver receiver;
 
@@ -22,16 +20,17 @@ public class Cut implements Command, Recordable {
     public Cut() {
     }
 
-
     /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.cut();
     }
 
     /**
-     * @param r 
+     * @param r receiver to perform the action when the command is to be executed
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
@@ -39,18 +38,10 @@ public class Cut implements Command, Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
+     * @return receiver
      */
-    @Override
-    public Memento save() {
-        return null;
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
-    /**
-     * @param m
-     */
-    @Override
-    public void restore(Memento m) {
-
-    }
 }

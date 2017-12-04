@@ -10,45 +10,51 @@ import classes.components.Ranger;
 public interface Receiver {
 
     /**
-     * @param text
-     * @param position
+     * @param text the text to insert
+     * @param position the position where to insert the text
      */
-    public void insert(String text, int position);
+    void insert(String text, int position);
 
     /**
      * @param start which the starting point of the selection
      * @param end which is the ending point of the selection
      */
-    public void select(int start, int end);
+    void select(int start, int end);
 
     /**
+     * handles the action of copying the selection to the clipboard.
      */
-    public void copy();
+    void copy();
 
     /**
+     * handles the action of cutting the selection from the buffer and copying it to the clipboard
      */
-    public void cut();
+    void cut();
 
     /**
+     * @param position position where the content of the clipboard is to be put in the buffer
      */
-    public void paste(int position);
+    void paste(int position);
 
     /**
      * @param position of character to delete
     */
-    public void delete(int position);
+    void delete(int position);
 
     /**
+     * @return a Buffer's clone.
      */
-    public Buffer getBufferClone() throws CloneNotSupportedException;
+    Buffer getBufferClone() throws CloneNotSupportedException;
 
     /**
+     * @return a Ranger's clone
      */
-    public Ranger getRangerClone() throws CloneNotSupportedException;
+    Ranger getRangerClone() throws CloneNotSupportedException;
 
     /**
+     * @return a Clipboard's clone
      */
-    public ClipBoard getClipboardClone() throws CloneNotSupportedException;
+    ClipBoard getClipboardClone() throws CloneNotSupportedException;
 
 
 }

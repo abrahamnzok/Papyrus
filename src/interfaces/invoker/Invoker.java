@@ -8,9 +8,8 @@ import interfaces.command.Command;
 public interface Invoker {
 
     /**
-     * @param cmd
-     * @return
+     * @param cmd {@link Command} to execute
      */
-    public void setCommand(Command cmd );
+    void setCommand(Command cmd ) throws NoSuchMethodException;
 
 }

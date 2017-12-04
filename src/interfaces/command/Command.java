@@ -6,8 +6,8 @@ package interfaces.command;
 public interface Command {
 
     /**
-     * @return
+     * action to perform when executing the command
      */
-    public void execute();
+    void execute() throws NoSuchMethodException;
 
 }

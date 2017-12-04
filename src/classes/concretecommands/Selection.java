@@ -1,25 +1,26 @@
 package classes.concretecommands;
 
-import classes.concretemementos.SelectGhost;
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
+import interfaces.recorder.Recorder;
 
-public class Selection implements Command, Recordable {
+/**
+ * Record Command
+ */
+public class Selection implements Command {
 
     /**
-     *
+     * {@link Recorder} to perform the action when the command is to be executed
      */
     private Receiver receiver;
 
     /**
-     *
+     * {@code int} hold the value of the starting point of selection
      */
     private int start;
 
     /**
-     *
+     * {@code int} hold the value of the ending point of selection
      */
     private int end;
 
@@ -42,8 +43,10 @@ public class Selection implements Command, Recordable {
     }
 
     /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.select(this.start, this.end);
     }
@@ -57,49 +60,39 @@ public class Selection implements Command, Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
+     * setting start of selection
+     * @param  start starting point of the selection
      */
-    @Override
-    public Memento save() {
-        return new SelectGhost(this.start, this.end);
-    }
-
-    /**
-     * @param m from which we will retrieve savedState
-     */
-    @Override
-    public void restore(Memento m) {
-        if(m != null && SelectGhost.class.isInstance(m)) {
-            this.start = ((SelectGhost) m).getStartState();
-            this.end = ((SelectGhost) m).getEndState();
-        }
-    }
-
-    /*
-    * setting start of selection from configurator
-    */
-    protected void setStart(int start){
+    public void setStart(int start){
         this.start = start;
     }
 
-    /*
-     * setting end of selection from the configurator
+    /**
+     * setting end of selection
+     * @param end ending point of the selection
      */
-    protected void setEnd(int end){
+    public void setEnd(int end){
         this.end = end;
     }
 
-    /*
-     * @return start of selection from configurator
+    /**
+     * @return start of selection
      */
     public int getStart(){
         return this.start;
     }
 
-    /*
-     * @return end of selection from the configurator
+    /**
+     * @return end of selection
      */
     public int getEnd(){
         return this.end;
+    }
+
+    /**
+     * @return receiver
+     */
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 }

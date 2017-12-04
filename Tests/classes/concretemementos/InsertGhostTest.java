@@ -1,5 +1,7 @@
 package classes.concretemementos;
 
+import classes.concretereceiver.BoardReceiver;
+import interfaces.Receiver.Receiver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,9 +9,11 @@ import static org.junit.Assert.*;
 
 public class InsertGhostTest {
     private InsertGhost insertGhost;
+    private Receiver receiver;
     @Before
     public void setUp() throws Exception {
-        this.insertGhost = new InsertGhost("Testing", 10);
+        this.receiver = new BoardReceiver();
+        this.insertGhost = new InsertGhost(this.receiver, "Testing", 10);
     }
 
     @Test
@@ -19,7 +23,7 @@ public class InsertGhostTest {
 
     @Test
     public void getPositionState() throws Exception {
-        assertEquals("Testing", this.insertGhost.getTextState());
+        assertEquals("Testing", this.insertGhost.getInputState());
     }
 
 }

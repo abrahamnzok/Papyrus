@@ -1,37 +1,32 @@
 package classes.concretecommands;
 
+import classes.components.Carecorder;
 import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
 /**
- * 
+ * Stop Command
  */
 public class Stop implements Command {
 
     /**
-     *
+     * {@link Recorder} that takes care of the recording and replaying tasks
      */
     private Recorder recorder;
 
-
     /**
-     * Default constructor
+     * executes the action to be performed by the receiver
      */
-    public Stop() {
-    }
-
-    /**
-     * @return
-     */
+    @Override
     public void execute() {
-        // TODO implement here
+        ((Carecorder) this.recorder).stoprecording();
     }
 
     /**
-     * @param c 
+     * @param recorder is the receiver to perform the recording
      */
-    public void setReceiver(Recorder carecorder) {
+    public void setReceiver(Recorder recorder) {
         // TODO implement here
+        this.recorder = recorder;
     }
-
 }

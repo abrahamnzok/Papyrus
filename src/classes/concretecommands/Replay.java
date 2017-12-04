@@ -1,39 +1,28 @@
 package classes.concretecommands;
 
-
+import classes.components.Carecorder;
 import interfaces.command.Command;
 import interfaces.recorder.Recorder;
 
-/**
- * 
- */
 public class Replay implements Command {
 
     /**
-     *
+     * {@link Recorder} that takes care of the recording and replaying tasks
      */
     private Recorder recorder;
 
     /**
-     * Default constructor
+     * executes the action to be performed by the receiver
      */
-    public Replay() {
-    }
-
-    /**
-     *
-     */
+    @Override
     public void execute() {
-        // TODO implement here
-        this.recorder.replayCommands();
+        ((Carecorder) this.recorder).replay();
     }
 
     /**
-     * @param c  
+     * @param recorder is the receiver to perform the replay
      */
-    public void setReceiver(Recorder carecorder) {
-        // TODO implement here
-        this.recorder = carecorder;
+    public void setReceiver(Recorder recorder) {
+        this.recorder = recorder;
     }
-
 }

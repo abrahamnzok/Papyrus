@@ -1,55 +1,60 @@
 package classes.concretemementos;
 
+import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 
 /**
- * 
+ * Immutable {@link Memento} of the recordable command {@link classes.recordablecommands.InsertRecordable}
  */
 public class InsertGhost implements Memento {
 
     /**
-     *
+     *{@code String} to hold state of the input
      */
-    public String textState;
+    private String inputState;
+
+    /**
+     *{@code int} to hold state of the position
+     */
+    private int positionState;
+
+    /**
+     *{@link Receiver} to hold the state of the receiver
+     */
+    private Receiver receiverState;
 
     /**
      *
+     * @param receiverState {@link Receiver} state
+     * @param inputState input state
+     * @param positionState position state
      */
-    public int positionState;
-
-    /**
-     * Default constructor
-     */
-    public InsertGhost() {
-    }
-
-    /**
-     * Preferred constructor
-     */
-    public InsertGhost(String textState, int positionState) {
-        this.textState = textState;
+    public InsertGhost(Receiver receiverState, String inputState, int positionState) {
+        this.receiverState  =receiverState;
+        this.inputState = inputState;
         this.positionState = positionState;
     }
 
     /**
-     *
-     */
-    public void setTextState(String state){
-        this.textState = state;
-    }
-
-    /**
-     *
+     * @return position' state
      */
     public int getPositionState(){
         return this.positionState;
     }
 
     /**
-     *
+     * @return input' state
      */
-    public String getTextState(){
-        return this.textState;
+    public String getInputState(){
+        return this.inputState;
+    }
+
+    /**
+     * @return receiver' state
+     */
+
+    public Receiver getReceiver(){
+        return this.receiverState;
     }
 
 

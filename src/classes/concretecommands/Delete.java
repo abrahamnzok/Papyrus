@@ -2,20 +2,21 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 
 /**
- *
+ * Delete Command
  */
-public class Delete implements Command, Recordable {
+public class Delete implements Command {
 
-
-    private int position;
     /**
-     *
+     * {@link Receiver} to perform the action when the command is to be executed
      */
     private Receiver receiver;
+
+    /**
+     *{@code int} position where to delete.
+     */
+    private int position;
 
     /**
      * Default constructor
@@ -25,21 +26,24 @@ public class Delete implements Command, Recordable {
     }
 
     /**
-     * Preferred constructor
+     * Preferred Constructor
+     * @param position position of the character to delete
      */
     public Delete(int position) {
         this.position = position;
     }
 
     /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.delete(this.position);
     }
 
     /**
-     * @param r Receiver which will execute the task
+     * @param r {@link Receiver} which will execute the task
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
@@ -47,25 +51,9 @@ public class Delete implements Command, Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
-     */
-    @Override
-    public Memento save() {
-        return null;
-    }
-
-    /**
-     * @param m from Which we will retrieve savedStates
-     */
-    @Override
-    public void restore(Memento m) {
-
-    }
-
-    /**
      * @param position of the character to delete
      */
-    protected void setPosition(int position){
+    public void setPosition(int position){
         this.position = position;
     }
 
@@ -74,6 +62,13 @@ public class Delete implements Command, Recordable {
      */
     public int getPosition(){
         return this.position;
+    }
+
+    /**
+     * @return receiver
+     */
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
 }

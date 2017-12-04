@@ -2,13 +2,14 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 
-public class Copy implements Command, Recordable {
+/**
+ * Copy command
+ */
+public class Copy implements Command{
 
     /**
-     *
+     * {@link Receiver} to perform the action when the command is to be executed
      */
     private Receiver receiver;
 
@@ -18,16 +19,16 @@ public class Copy implements Command, Recordable {
     public Copy() {
     }
 
-
     /**
+     * executes the action to be performed by the receiver
      */
-    public void execute() {
+    public void execute() throws NoSuchMethodException {
         // TODO implement here
         this.receiver.copy();
     }
 
     /**
-     * @param r
+     * @param r receiver to perform the action when the command is to be executed
      */
     public void setReceiver(Receiver r) {
         // TODO implement here
@@ -35,18 +36,10 @@ public class Copy implements Command, Recordable {
     }
 
     /**
-     * @return Specific Memento for the specific Recordable
+     * @return receiver
      */
-    @Override
-    public Memento save() {
-        return null;
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
-    /**
-     * @param m
-     */
-    @Override
-    public void restore(Memento m) {
-
-    }
 }

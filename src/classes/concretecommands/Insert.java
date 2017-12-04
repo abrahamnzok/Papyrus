@@ -2,37 +2,55 @@ package classes.concretecommands;
 
 import interfaces.command.Command;
 import interfaces.Receiver.Receiver;
-import interfaces.memento.Memento;
-import interfaces.recordable.Recordable;
 
 /**
- * 
+ * Insert Command
  */
-public class Insert implements Command, Recordable {
+public class Insert implements Command {
 
+    /**
+     * {@link Receiver} to perform the action when the command is to be executed
+     */
     private Receiver receiver;
-    private String textToInsert;
+
+    /**
+     *{@code String} input
+     */
+    private String textinput;
+    /**
+     * {@code int} position where to insert
+     */
     private int position;
 
     /**
      * Default constructor
      */
     public Insert() {
-        this.textToInsert = "";
+        this.textinput = "";
         this.position = 0;
     }
 
+    /**
+     *
+     * @param textToInsert input to insert inside the buffer
+     * @param position where to insert
+     */
     public Insert(String textToInsert, int position){
         this.setPosition(position);
-        this.textToInsert = textToInsert;
+        this.textinput = textToInsert;
         this.position = this.getPosition() ;
     }
 
-    public void execute() {
-        this.receiver.insert(this.textToInsert, this.position);
+    /**
+     * executes the action to be performed by the receiver
+     * @throws NoSuchMethodException
+     */
+    public void execute() throws NoSuchMethodException {
+        this.receiver.insert(this.textinput, this.position);
     }
 
     /**
+     * Sets the {@link Receiver} 
      * @param r Receiver which will execute the task
      */
     public void setReceiver(Receiver r) {
@@ -40,28 +58,28 @@ public class Insert implements Command, Recordable {
     }
 
     /**
-     * @return textToInsert
+     * @return textinput
      */
-    public String getTextToInsert() {
-        return this.textToInsert;
+    public String getTextinput() {
+        return this.textinput;
     }
 
     /**
-     * @param textToInsert text that we need to insert
-     * @return
+     * @param textinput text that we need to insert
      */
-    public void setTextToInsert(String textToInsert) {
-        this.textToInsert = textToInsert;
+    public void setTextinput(String textinput) {
+        this.textinput = textinput;
     }
 
     /**
-     * @return the position of where to insert
+     * @return the position where to insert
      */
     public int getPosition() {
         return this.position;
     }
 
     /**
+     * sets the position where the input is to be inserted
      * @param position where to insert a text
      */
     public void setPosition(int position) {
@@ -71,26 +89,17 @@ public class Insert implements Command, Recordable {
     }
 
     /**
-     * @return boolean
+     * @return boolean true if position is negative, false otherwise
      */
     public boolean isNegative(){
         return this.position < 0;
     }
 
-
     /**
-     * @return Specific Memento for the specific Recordable
+     * @return receiver
      */
-    @Override
-    public Memento save() {
-        return null;
+    public Receiver getReceiver() {
+        return this.receiver;
     }
 
-    /**
-     * @param m from which we will retrieve savedState
-     */
-    @Override
-    public void restore(Memento m) {
-
-    }
 }
