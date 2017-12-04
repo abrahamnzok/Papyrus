@@ -10,8 +10,8 @@ import interfaces.recorder.Recorder;
 /**
  * Object of type Receiver
  * Handles all the actions executed by the concrete commands
- * {@link classes.concretecommands.Insert}, {@link classes.concretecommands.Selection}
- * {@link classes.concretecommands.Paste}, {@link classes.concretecommands.Delete}
+ * {@link classes.concretecommands.Insert}, {@link classes.concretecommands.Selection},
+ * {@link classes.concretecommands.Paste}, {@link classes.concretecommands.Delete},
  * {@link classes.concretecommands.Cut}, {@link classes.concretecommands.Copy}
  */
 public class BoardReceiver implements Receiver, Recordable {
@@ -84,7 +84,7 @@ public class BoardReceiver implements Receiver, Recordable {
     }
 
     /**
-     * @param start which the starting point of the selection
+     * @param start which is the starting point of the selection
      * @param end which is the ending point of the selection
      * if the selection is set out of boundaries then selection is made on the whole content
      */
