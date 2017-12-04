@@ -16,21 +16,21 @@ import java.util.List;
 public class Carecorder implements Recorder,Cloneable {
 
     /**
-     * Internal object inside which we store {@link Memento} objects
-     * This object is never to be accessed from external objects
+     * Internal object inside which we store {@link Memento} objects.
+     * This object is never to be accessed from external objects.
      */
     private List<Pair<Memento,Recordable>> container;
 
     /**
-     * {@code boolean} controls whether the recording is on or not
+     * {@code boolean} controls whether the recording is on or not.
      */
     private boolean recordingState;
 
     /**
-     * Instanciate an internal object that will store the Memento
-     * A list in this case {@link List}
-     * A the creation of the caretaker the recording state must be off {@param recordingState}
-     * Preferred Constructor
+     * Instanciate an internal object that will store the Memento.
+     * A list in this case {@link List} .
+     * A the creation of the caretaker the recording state must be off {@param recordingState} .
+     * Preferred Constructor .
      */
     public Carecorder(){
         this.container = new ArrayList<>();
@@ -38,11 +38,11 @@ public class Carecorder implements Recorder,Cloneable {
     }
 
     /**
-     * When storing mementos, the caretaker puts them in a immutable object {@link Pair}
-     * The key of the pair is a Memento
-     * The value of the pair is a Recordable
-     * @param memento stored by the caretaker
-     * @param recordable the originator associated with the memento
+     * When storing mementos, the caretaker puts them in a immutable object {@link Pair} .
+     * The key of the pair is a Memento .
+     * The value of the pair is a Recordable .
+     * @param memento stored by the caretaker .
+     * @param recordable the originator associated with the memento .
      * @throws NoSuchMethodException
      */
     public void record(Memento memento, Recordable recordable) throws NoSuchMethodException {
@@ -50,9 +50,9 @@ public class Carecorder implements Recorder,Cloneable {
     }
 
     /**
-     * Sets On the action of replaying
-     * At this point, we restore the mementos to their originators
-     * replay cannot execute while recording
+     * Sets On the action of replaying.
+     * At this point, we restore the mementos to their originators.
+     * replay cannot execute while recording.
      */
     public void replay() {
         if(!this.isRecording() && !this.container.isEmpty()){
@@ -70,9 +70,9 @@ public class Carecorder implements Recorder,Cloneable {
     }
 
     /**
-     * Sets the action of recording on
-     * The container of mementos must be cleared each time a recording session starts
-     * Otherwise we would play past recordings
+     * Sets the action of recording on.
+     * The container of mementos must be cleared each time a recording session starts.
+     * Otherwise we would play past recordings.
      */
     public void setrecording() {
         this.container.clear();
@@ -81,14 +81,14 @@ public class Carecorder implements Recorder,Cloneable {
     }
 
     /**
-     * @return boolean true if the recording state is on, false otherwise
+     * @return boolean true if the recording state is on, false otherwise.
      */
     private boolean isRecording() {
         return this.recordingState;
     }
 
     /**
-     * Stops the action of recording by modifying to false the boolean
+     * Stops the action of recording by modifying to false the boolean.
      * that controls the recording state.
      */
     public void stoprecording() {
@@ -98,7 +98,7 @@ public class Carecorder implements Recorder,Cloneable {
 
     /**
      * This object is mainly used for testing purposes.
-     * @return a shallow copy of the object that contains the mementos
+     * @return a shallow copy of the object that contains the mementos.
      * @throws CloneNotSupportedException
      */
     public List careclone() throws CloneNotSupportedException{

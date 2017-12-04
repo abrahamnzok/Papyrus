@@ -1,36 +1,36 @@
 package classes.components;
 
 /**
- * Buffer object
- * Its main use is to keep track of the changes made by the commands
- * Inside a string {@param text} that holds the text
+ * Buffer object.
+ * Its main use is to keep track of the changes made by the commands.
+ * Inside a string {@param text} that holds the text.
  * 
  */
 public class Buffer implements Cloneable {
 
     /**
      * Default constructor
-     * Internal object is an empty {@link String}
+     * Internal object is an empty {@link String} .
      */
     public Buffer() {
         this.text = "";
     }
 
     /**
-     * Object inside which the user's input is stored
+     * Object inside which the user's input is stored .
      */
     private String text;
 
     /**
-     * @param text the user's input
-     * Which we then store inside our immutable object {@link String} {@param text}
+     * @param text the user's input .
+     * Which we then store inside our immutable object {@link String} {@param text} .
      */
     public void setText(String text) {
         this.text = text;
     }
 
     /**
-     * @return the content of the buffer if not empty
+     * @return the content of the buffer if not empty .
      */
     public String getText() {
         // TODO implement here
@@ -54,7 +54,7 @@ public class Buffer implements Cloneable {
     }
 
     /**
-     * @return a shallow copy of this {@link Buffer}
+     * @return a shallow copy of this {@link Buffer} .
      */
     @Override
     public Object clone()throws CloneNotSupportedException{

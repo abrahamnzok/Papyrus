@@ -51,6 +51,10 @@ public class CarecorderTest {
         this.delete.setRecorder(this.recorder);
     }
 
+    /**
+     * Is the object containing the mementos incremented when we are not recording
+     * @throws Exception
+     */
     @Test
     public void recordTest() throws Exception {
         this.recorder.record(this.insert.save(), this.insert);
@@ -60,6 +64,10 @@ public class CarecorderTest {
                 0, this.recorder.careclone().size());
     }
 
+    /**
+     * We check if the object containing the mementos is not incremented
+     * @throws Exception
+     */
     @Test
     public void recordTest1() throws Exception {
         this.insert.execute();
@@ -69,6 +77,10 @@ public class CarecorderTest {
                 0, this.recorder.careclone().size());
     }
 
+    /**
+     * We check if the object containing the mementos is incremented
+     * @throws Exception
+     */
     @Test
     public void recordTest2() throws Exception {
         this.startrecording.execute();
@@ -80,6 +92,10 @@ public class CarecorderTest {
                 3, this.recorder.careclone().size());
     }
 
+    /**
+     * We cannot record without starting the recording action
+     * @throws Exception
+     */
     @Test
     public void recordTest3() throws Exception {
         this.insert.setTextinput("We try to do testing before coding");
@@ -93,6 +109,10 @@ public class CarecorderTest {
                 true, this.recorder.careclone().isEmpty());
     }
 
+    /**
+     * We cannot record when recording is not on
+     * @throws Exception
+     */
     @Test
     public void recordTest4() throws Exception {
         this.startrecording.execute();
@@ -105,6 +125,10 @@ public class CarecorderTest {
 
     }
 
+    /**
+     * Check if buffers contains insert object text
+     * @throws Exception
+     */
     @Test
     public void recordTest5() throws Exception {
         this.insert.setTextinput("First lesson on testing a software ");
@@ -121,6 +145,10 @@ public class CarecorderTest {
                 2, this.recorder.careclone().size());
     }
 
+    /**
+     * We can record other commands when insert wasn't recorded before
+     * @throws Exception
+     */
     @Test
     public void recordTest6() throws Exception {
         this.selection.setStart(10);
@@ -135,6 +163,10 @@ public class CarecorderTest {
                 1, this.recorder.careclone().size());
     }
 
+    /**
+     * We can record when insert was not recorded before
+     * @throws Exception
+     */
     @Test
     public void recordTest7() throws Exception {
         this.selection.setStart(10);
@@ -151,6 +183,10 @@ public class CarecorderTest {
                 2, this.recorder.careclone().size());
     }
 
+    /**
+     * We can record insert after recording has started
+     * @throws Exception
+     */
     @Test
     public void recordTest8() throws Exception {
         this.selection.setStart(10);
@@ -168,6 +204,10 @@ public class CarecorderTest {
                 3, this.recorder.careclone().size());
     }
 
+    /**
+     * Once we have stopped recording they are no way to go back from the last recording
+     * @throws Exception
+     */
     @Test
     public void recordTest9() throws Exception {
         this.selection.setStart(10);
@@ -190,6 +230,10 @@ public class CarecorderTest {
                 2, this.recorder.careclone().size());
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void recordTest10() throws Exception{
         this.startrecording.setReceiver(this.recorder);
@@ -224,6 +268,10 @@ public class CarecorderTest {
         assertEquals(false, this.recorder.careclone().isEmpty());
     }
 
+    /**
+     * We cannot replay while recording and we should retrieve the last insert after replaying
+     * @throws Exception
+     */
     @Test
     public void replayTest1() throws Exception{
         this.insert.setTextinput("I think it is a good idea ");
@@ -284,6 +332,10 @@ public class CarecorderTest {
                 "wishing", this.receiver.getClipboardClone().getClipboard());
     }
 
+    /**
+     * We want to check the state of the buffer and clipboard
+     * @throws Exception
+     */
     @Test
     public void replayTest4() throws Exception{
         this.insert.setTextinput("I think it is the ideal thing to do");
@@ -307,6 +359,10 @@ public class CarecorderTest {
                 "allow", this.receiver.getClipboardClone().getClipboard());
     }
 
+    /**
+     * In case we record insert, the buffer changes state after replay
+     * @throws Exception
+     */
     @Test
     public void replayTest5() throws Exception{
         this.insert.setTextinput("I think it is the ideal thing to do");
@@ -330,9 +386,14 @@ public class CarecorderTest {
         this.insert.execute();
         this.stoprecording.execute();
         this.replay.execute();
-        assertEquals("In case we record insert , the buffer changes state after replay",
+        assertEquals("In case we record insert, the buffer changes state after replay",
                 "I allow this to happen", this.receiver.getBufferClone().getText());
     }
+
+    /**
+     * We cannot replay while recording and we should retrieve the last insert after replaying
+     * @throws Exception
+     */
     @Test
     public void replayTest6() throws Exception{
         this.insert.setTextinput("I think it is a good idea ");
@@ -353,6 +414,10 @@ public class CarecorderTest {
                         && this.receiver.getBufferClone().getText().isEmpty());
     }
 
+    /**
+     * We try to delete as the buffer changes its length and replay the commands
+     * @throws Exception
+     */
     @Test
     public void replayTest7() throws Exception{
         this.insert.setTextinput("I think it is a good idea");
@@ -377,6 +442,10 @@ public class CarecorderTest {
                 "I think it is a good " , this.receiver.getBufferClone().getText());
     }
 
+    /**
+     * We try to delete at different positions as the buffer length changes
+     * @throws Exception
+     */
     @Test
     public void replayTest8() throws Exception{
         this.insert.setTextinput("good");
@@ -404,6 +473,10 @@ public class CarecorderTest {
                 true, this.receiver.getBufferClone().isEmpty());
     }
 
+    /**
+     * We try to delete at different positions and buffer is not empty at the beginning
+     * @throws Exception
+     */
     @Test
     public void replayTest9() throws Exception{
         this.insert.setTextinput("idea");

@@ -1,17 +1,17 @@
 package classes.components;
 
 /**
- * Object that deals with the storage of temporary content from the Buffer
+ * Object that deals with the storage of temporary content from the Buffer .
  */
 public class ClipBoard implements Cloneable {
 
     /**
-     * Internal object where a content is stored
+     * Internal object where a content is stored.
      */
     private String clipboard;
 
     /**
-     * Default constructor
+     * Default constructor .
      */
     public ClipBoard() {
         this.clipboard = "";
@@ -20,7 +20,7 @@ public class ClipBoard implements Cloneable {
 
 
     /**
-     * @param text to store in the clipboard
+     * @param text to store in the clipboard .
      */
     public void setClipboard(String text) {
         // TODO implement here
@@ -28,14 +28,14 @@ public class ClipBoard implements Cloneable {
     }
 
     /**
-     * @return text stored in clipboard
+     * @return text stored in clipboard .
      */
     public String getClipboard() {
         return this.clipboard;
     }
 
     /**
-     * @return true if clipboard is empty, false otherwise
+     * @return true if clipboard is empty, false otherwise .
      */
     public boolean isEmpty(){
         return this.getClipboard().isEmpty();
@@ -43,7 +43,7 @@ public class ClipBoard implements Cloneable {
 
     /**
      *
-     * @return a shallow copy of {@link ClipBoard}
+     * @return a shallow copy of {@link ClipBoard} .
      * @throws CloneNotSupportedException
      */
     @Override

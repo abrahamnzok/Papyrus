@@ -4,8 +4,8 @@ import classes.concretereceiver.BoardReceiver;
 import interfaces.Receiver.Receiver;
 import interfaces.memento.Memento;
 import interfaces.recorder.Recorder;
-
 import java.util.Stack;
+
 
 /**
  * Immutable object also called caretaker.
@@ -25,8 +25,6 @@ public class DoUndoEngine implements Recorder, Cloneable{
      * Object {@link Receiver}
      */
     private Receiver boardReceiver;
-
-
     /**
      * @param boardReceiver the receiver of the memento engine
      */
@@ -35,11 +33,9 @@ public class DoUndoEngine implements Recorder, Cloneable{
         this.forward = new Stack<>();
         this.backward = new Stack<>();
     }
-
     /**
      * Record the memento in the backward stack and empty the forward stack for new changes.
      * It empties the forward stack when a new Command is called
-
      * @param memento to store
      */
     public void record(Memento memento) throws NoSuchMethodException, CloneNotSupportedException {
@@ -57,7 +53,6 @@ public class DoUndoEngine implements Recorder, Cloneable{
             ((BoardReceiver) this.boardReceiver).restore(b);
         }
     }
-
     /**
      * Go backward in the action history
      */
@@ -68,7 +63,6 @@ public class DoUndoEngine implements Recorder, Cloneable{
             ((BoardReceiver) this.boardReceiver).restore(b);
         }
     }
-
     /**
      *
      * @return
@@ -77,7 +71,6 @@ public class DoUndoEngine implements Recorder, Cloneable{
     public Stack getForwardClone() throws CloneNotSupportedException{
         return (Stack) this.forward.clone();
     }
-
     /**
      *
      * @return
