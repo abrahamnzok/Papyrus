@@ -8,7 +8,6 @@ import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
 import interfaces.command.Command;
-import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
