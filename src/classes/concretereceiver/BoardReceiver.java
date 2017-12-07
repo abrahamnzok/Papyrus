@@ -230,10 +230,12 @@ public class BoardReceiver implements Receiver, Recordable {
      */
     @Override
     public void restore(Memento m) throws NoSuchMethodException {
-        BoardGhost b = (BoardGhost) m;
-        this.buffer = b.getBufferState();
-        this.clipboard= b.getClipBoardState();
-        this.ranger= b.getRangerState();
+        if(m != null && BoardGhost.class.isInstance(m)) {
+            BoardGhost b = (BoardGhost) m;
+            this.buffer = b.getBufferState();
+            this.clipboard = b.getClipBoardState();
+            this.ranger = b.getRangerState();
+        }
     }
 
     /**
