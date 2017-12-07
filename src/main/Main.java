@@ -8,7 +8,6 @@ import classes.concretereceiver.BoardReceiver;
 import classes.recordablecommands.*;
 import interfaces.Receiver.Receiver;
 import interfaces.command.Command;
-import interfaces.recordable.Recordable;
 import interfaces.recorder.Recorder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -89,7 +88,7 @@ public class Main extends Application {
         controller.setCommandMap(commands);
         controller.setEngine(engine);
 
-        //Show the IHM
+        //Show the User Interface
         Scene s = new Scene(root, 1080, 720);
         s.getStylesheets().add(getClass().getResource("/views/add.css").toExternalForm());
         primaryStage.getIcons().add(new Image(getClass().getResource("/resources/logosmall.png").toExternalForm()));

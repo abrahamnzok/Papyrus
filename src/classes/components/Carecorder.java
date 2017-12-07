@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * Immutable object also called caretaker.
  * It knows how, why and when to store and restore these originators
- * {@link classes.recordablecommands.CopyRecordable}, {@link classes.recordablecommands.CutRecordable}
- * {@link classes.recordablecommands.SelectionRecordable}, {@link classes.recordablecommands.PasteRecordable}
+ * {@link classes.recordablecommands.CopyRecordable}, {@link classes.recordablecommands.CutRecordable},
+ * {@link classes.recordablecommands.SelectionRecordable}, {@link classes.recordablecommands.PasteRecordable},
  * {@link classes.recordablecommands.DeleteRecordable}, {@link classes.recordablecommands.InsertRecordable}
  */
 public class Carecorder implements Recorder,Cloneable {
-
     /**
      * Internal object inside which we store {@link Memento} objects.
      * This object is never to be accessed from external objects.
