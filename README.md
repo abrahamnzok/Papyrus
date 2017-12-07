@@ -8,6 +8,8 @@ The project takes the form of a text editor declined in 3 versions.
 
 We made the UI with JavaFX.
 
+This project Require Mockito test library and Java8.
+
 What it does :
 - Insert, Select, Copy, Paste and Cut characters
 - Register a sequence of Commands as a Macro and replay it in the same order.
