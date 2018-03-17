@@ -6,23 +6,23 @@ import interfaces.recorder.Recorder;
 
 public class Redo implements Command {
 
-    /**
-     *
-     */
-    private Recorder recorder;
+  /**
+   *
+   */
+  private Recorder recorder;
 
-    /**
-     * Calls the engine's method goBackward()
-     */
-    @Override
-    public void execute() throws NoSuchMethodException {
-        ((DoUndoEngine) this.recorder).goForward();
-    }
+  /**
+   * Calls the engine's method goBackward()
+   */
+  @Override
+  public void execute() throws NoSuchMethodException {
+    ((DoUndoEngine) this.recorder).goForward();
+  }
 
-    /**
-     * @param recorder is the receiver to perform the recording
-     */
-    public void setReceiver(Recorder recorder) {
-        this.recorder = recorder;
-    }
+  /**
+   * @param recorder is the receiver to perform the recording
+   */
+  public void setReceiver(Recorder recorder) {
+    this.recorder = recorder;
+  }
 }

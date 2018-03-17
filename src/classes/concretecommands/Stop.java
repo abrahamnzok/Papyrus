@@ -9,24 +9,24 @@ import interfaces.recorder.Recorder;
  */
 public class Stop implements Command {
 
-    /**
-     * {@link Recorder} that takes care of the recording and replaying tasks
-     */
-    private Recorder recorder;
+  /**
+   * {@link Recorder} that takes care of the recording and replaying tasks
+   */
+  private Recorder recorder;
 
-    /**
-     * executes the action to be performed by the receiver
-     */
-    @Override
-    public void execute() {
-        ((Carecorder) this.recorder).stoprecording();
-    }
+  /**
+   * executes the action to be performed by the receiver
+   */
+  @Override
+  public void execute() {
+    ((Carecorder) this.recorder).stoprecording();
+  }
 
-    /**
-     * @param recorder is the receiver to perform the recording
-     */
-    public void setReceiver(Recorder recorder) {
-        // TODO implement here
-        this.recorder = recorder;
-    }
+  /**
+   * @param recorder is the receiver to perform the recording
+   */
+  public void setReceiver(Recorder recorder) {
+    // TODO implement here
+    this.recorder = recorder;
+  }
 }
