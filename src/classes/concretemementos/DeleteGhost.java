@@ -8,39 +8,38 @@ import interfaces.memento.Memento;
  */
 public class DeleteGhost implements Memento {
 
-    /**
-     *{@code int} to hold state of the position
-     */
-    private int positionState;
+  /**
+   * {@code int} to hold state of the position
+   */
+  private int positionState;
 
-    /**
-     *{@link Receiver} to hold the state of the receiver
-     */
-    private Receiver receiver;
+  /**
+   * {@link Receiver} to hold the state of the receiver
+   */
+  private Receiver receiver;
 
-    /**
-     *
-     * @param receiver {@link Receiver}
-     * @param positionState position state
-     */
-    public DeleteGhost(Receiver receiver, int positionState) {
-        this.receiver = receiver;
-        this.positionState = positionState;
-    }
+  /**
+   * @param receiver {@link Receiver}
+   * @param positionState position state
+   */
+  public DeleteGhost(Receiver receiver, int positionState) {
+    this.receiver = receiver;
+    this.positionState = positionState;
+  }
 
-    /**
-     * @return position's state
-     */
-    public int getPositionState(){
-        return this.positionState;
-    }
+  /**
+   * @return position's state
+   */
+  public int getPositionState() {
+    return this.positionState;
+  }
 
-    /**
-     * @return receiver's state
-     */
-    public Receiver getReceiver(){
-        return this.receiver;
-    }
+  /**
+   * @return receiver's state
+   */
+  public Receiver getReceiver() {
+    return this.receiver;
+  }
 
 
 }

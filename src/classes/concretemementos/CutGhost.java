@@ -8,23 +8,23 @@ import interfaces.memento.Memento;
  */
 public class CutGhost implements Memento {
 
-    /**
-     *{@link Receiver} state
-     */
-    private Receiver receiver;
+  /**
+   * {@link Receiver} state
+   */
+  private Receiver receiver;
 
-    /**
-     * @param receiver {@link Receiver} state
-     */
-    public CutGhost(Receiver receiver) {
-        this.receiver = receiver;
-    }
+  /**
+   * @param receiver {@link Receiver} state
+   */
+  public CutGhost(Receiver receiver) {
+    this.receiver = receiver;
+  }
 
-    /**
-     * @return the state of the receiver
-     */
-    public Receiver getReceiver(){
-        return this.receiver;
-    }
+  /**
+   * @return the state of the receiver
+   */
+  public Receiver getReceiver() {
+    return this.receiver;
+  }
 
 }
